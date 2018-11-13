@@ -1,0 +1,110 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+
+</head>
+
+<body>
+  <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+  <nav>
+    <a href="#intro">intro</a>
+    <a href="#projects">projects</a>
+    <a href="#contact">contact</a>
+  </nav>
+  <!-- Add your site or application content here -->
+  <div class="puzzle_container">
+    <section class="active" id="intro">
+      <div id="text_container">
+        <div class="text_loader"></div>
+      </div>
+      <p class="text_note">
+        I'm a passion driven front-end developer building eye satisfying websites & user-friendly experiences
+        <!--... ze ja pierdole-->
+      </p>
+
+      <div class="intro_btn_container">
+        <div class="intro_btn">
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+        <div class="intro_btn">
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </section>
+    <section id="projects">
+      <div class="container">
+        <div class="project-wrapper">
+          <project-component
+          v-for="item in projects"
+          v-bind:project="item"
+          v-bind:key="item.id">
+          </project-component>
+        </div>
+      </div>
+    </section>
+    <section id="contact">
+      <div class="container">
+      </div>
+    </section>
+  </div>
+  <script src="js/vendor/modernizr-3.6.0.min.js"></script>
+  <script src="js/vendor/vue.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+  <script src="js/palette.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+  <script src="js/main.js"></script>
+  <script type="text/x-template" id="project-template">
+    <div class='project-container'>
+      <div class='project-box'>
+        <div class='project-hover'>
+          <h5>{{ project.name }}</h5>
+          <div @click='resizeProject($event.target.parentNode.parentNode)' class="btn" :class='{ expanded: isOpen }'>
+            <p>collapse</p>
+            <transition name='fade'>
+              <p key='1' v-if='isOpen'>collapse</p>
+              <p key='2' v-else> expand </p>
+            </transition>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">Slide 1</div>
+              <div class="swiper-slide">Slide 2</div>
+              <div class="swiper-slide">Slide 3</div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+</script>
+</body>
+
+</html>
