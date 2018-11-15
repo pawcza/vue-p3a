@@ -11,7 +11,8 @@ function init() {
         el: '#intro',
        data: {
            // seq: palette('cb-Greys', 9),
-           seq: ['#f0f','#0ff','#2F2F2F'],
+           width: [5, 75, 120],
+           seq: ['#404040','#f00','#00f', '#0f0'],
            text: 'Pawel Czarniecki',
            counter: 0,
            completed: false,
@@ -50,8 +51,7 @@ function init() {
                 var textContainer = this.$refs.text;
                 for (var x = 0; x < this.text.length; ++x) {
                    var children = textContainer.children[x + 1].children;
-                    console.log(-(((e.clientX / window.outerWidth) - .5) * 10), -(((e.clientY / window.outerHeight) - .5) * 10));
-
+                    // console.log(-(((e.clientX / window.outerWidth) - .5) * 10), -(((e.clientY / window.outerHeight) - .5) * 10));
                     for (var y = 0; y < children.length; ++y) {
                        children[y].style.transform = 'translate(' + (((e.clientX / window.outerWidth) - .5) * 10) * (y + 3) + 'px,' + (((e.clientY / window.outerHeight) - .5) * 10) * (y + 3) + 'px)';
                    }
@@ -62,7 +62,6 @@ function init() {
             this.play();
         }
     });
-
 
     Vue.component('project-component', {
         data: function() {
@@ -178,8 +177,6 @@ function init() {
                         height: boxes[x].offsetHeight
                     };
                     positions.push(bounding);
-                    console.log(bounding);
-
                 }
                 this.initProjects(positions);
             },
@@ -197,18 +194,10 @@ function init() {
     });
 
     document.addEventListener('click', function(e){
-       if(e.target.classList.contains('intro_btn_container')){
-           goSection('#projects');
-       }
        if(e.target.tagName === 'A' && e.target.getAttribute('href')[0] === '#'){
            e.preventDefault();
            goSection(e.target.getAttribute('href'));
        }
-    });
-
-    document.addEventListener('wheel', function(e){
-        (e.deltaY > 0) ? nextSection() : '';
-        (e.deltaY < 0) ? prevSection() : '';
     });
 
     document.addEventListener('keydown', function(e){
@@ -216,40 +205,63 @@ function init() {
        (e.key === 'ArrowRight') ? nextSection() : '';
     });
 
-    var sectionParent =  document.querySelectorAll('.puzzle_container')[0], playing = false, getBoxes = true;
-    function goSection(target){
-        if(playing === false){
-            playing = true;
-            if(typeof target === 'string'){
-                var targetSection = document.querySelectorAll(target)[0];
-            } else {
-                var targetSection = target;
-            }
-            if(typeof targetSection !== 'undefined'){
-                sectionParent.querySelectorAll('.active')[0].classList.remove('active');
-                targetSection.classList.add('active');
-                var index = Array.prototype.indexOf.call(sectionParent.children, targetSection),
-                    transform = (index / sectionParent.children.length) * 100;
-                sectionParent.style.transform = 'translateY(-' + transform + '%)';
-            }
-            setTimeout(function(){
-                playing = false;
-                if(targetSection.id === 'projects'){
-                    projectVue.getBoxValues();
+    var puzzleVue = new Vue({
+        el: '.puzzle_container',
+        data:{
+            playing: false,
+            active: this.$el.$refs
+        },
+        methods:{
+            goSection(section){
+                if(this.playing === false){
+                    this.playing = true;
+                    if(typeof section === 'string'){
+                        section = document.querySelectorAll(section)[0];
+                    }
+                    if(typeof section !== 'undefined'){
+                        console.log(section, this.active.classList);
+                        this.active.classList.remove('active');
+                        section.classList.add('active');
+                        let index = Array.prototype.indexOf.call(this.$el.children, section),
+                            transform = (index / this.$el.children.length) * 100;
+                        this.container.style.transform = 'translateY(-' + transform + '%)';
+                    }
+                    let that = this,
+                        target = section;
+                    setTimeout(function(){
+                        that.playing = false;
+                        if(target.id === 'projects'){
+                            projectVue.getBoxValues();
+                        }
+                    }, 340);
                 }
-            }, 340);
+            },
+            nextSection: function(){
+
+                console.log(this.active);
+                let target = this.active.nextElementSibling;
+                if(target !== null){
+                    this.goSection(target);
+                }
+            },
+            prevSection: function(){
+                let target = this.active.previousElementSibling;
+                if(target !== null){
+                    this.goSection(target);
+                }
+            },
+            wheel: function(e){
+                (e.deltaY > 0) ? this.nextSection() : '';
+                (e.deltaY < 0) ? this.prevSection() : '';
+            }
+        },
+        mounted(){
+            this.$set(this.data, 'active', this.$el.children);
         }
-    }
-    function nextSection(){
-        var target = sectionParent.querySelectorAll('.active')[0].nextElementSibling;
-        if(target !== null){
-            goSection(sectionParent.querySelectorAll('.active')[0].nextElementSibling);
-        }
-    }
-    function prevSection(){
-        var target = sectionParent.querySelectorAll('.active')[0].previousElementSibling;
-        if(target !== null){
-            goSection(sectionParent.querySelectorAll('.active')[0].previousElementSibling);
-        }
-    }
+    });
+
+    var navVue = new Vue({
+        el: 'nav',
+
+    })
 }

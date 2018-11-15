@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Open Sans");
 @import url("https://fonts.googleapis.com/css?family=Share Tech Mono");
 @import url("https://fonts.googleapis.com/css?family=Teko:700");
-@import url("https://fonts.googleapis.com/css?family=Montserrat:300,700");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700");
 nav {
   position: fixed;
   left: 50%;
@@ -34,13 +34,13 @@ body, html {
   0% {
     transform: translate(0); }
   20% {
-    transform: translate(-5px, 5px); }
+    transform: translate(-2px, 2px); }
   40% {
-    transform: translate(-5px, -5px); }
+    transform: translate(-2px, -2px); }
   60% {
-    transform: translate(5px, 5px); }
+    transform: translate(2px, 2px); }
   80% {
-    transform: translate(5px, -5px); }
+    transform: translate(2px, -2px); }
   to {
     transform: translate(0); } }
 section {
@@ -73,7 +73,6 @@ section {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background: #f7f7f7;
   height: 100vh;
   overflow: hidden;
   animation: gradient 3s ease-in-out infinite alternate; }
@@ -82,27 +81,26 @@ section {
     max-width: 1280px;
     position: relative;
     text-align: center;
-    font-weight: 700; }
+    color: #222;
+    font-weight: 400; }
     #intro .text_note:before, #intro .text_note:after {
       position: absolute;
       content: attr(data-note);
+      opacity: .25;
       top: 0;
       left: 0;
-      color: #f0f;
+      color: #00f;
       z-index: -2;
-      transform: translate(-1.5px, 0.725px); }
+      transform: translate(2.5px, 2.5px); }
     #intro .text_note:before {
-      transform: translate(-1.7px, 0.9px);
+      transform: translate(-2.7px, -2.1px);
       z-index: -3;
-      color: #0ff;
-      animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite; }
-    #intro .text_note:after {
-      animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite; }
+      color: #52fc59; }
   #intro #text_container {
     display: flex;
     height: 110px;
     position: relative;
-    font-weight: 00;
+    font-weight: 300;
     font-size: 4.2em;
     padding-bottom: 20px; }
     #intro #text_container .text_loader {
@@ -124,16 +122,25 @@ section {
         text-align: center;
         width: 50px;
         position: absolute;
-        color: #222;
+        color: #404040;
         box-sizing: border-box; }
         #intro #text_container .letter_container p:first-of-type {
-          transform: translate(-10px, 5px); }
+          transform: translate(-10px, 5px);
+          z-index: 5; }
         #intro #text_container .letter_container p:nth-of-type(2) {
-          transform: translate(-15px, 7.25px); }
+          transform: translate(-15px, 7.25px);
+          z-index: 4;
+          opacity: .75; }
+        #intro #text_container .letter_container p:nth-of-type(3) {
+          transform: translate(-15px, 7.25px);
+          z-index: 3;
+          opacity: .75; }
         #intro #text_container .letter_container p:last-of-type {
-          transform: translate(-17px, 9px); }
+          transform: translate(-17px, 9px);
+          z-index: 2;
+          opacity: .75; }
         #intro #text_container .letter_container p.matched {
-          color: #222;
+          color: #404040;
           background: transparent;
           animation: none; }
   #intro .intro_btn_container {

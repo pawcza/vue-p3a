@@ -29,19 +29,19 @@
     <a href="#contact">contact</a>
   </nav>
   <!-- Add your site or application content here -->
-  <div class="puzzle_container">
-    <section class="active" id="intro" @mousemove="move($event);">
+  <div class="puzzle_container" @mousewheel="wheel($event);">
+    <section class="active" id="intro" @mousemove="move($event);" ref="section">
       <div id="text_container" ref="text">
         <div class="text_loader"></div>
         <div v-for="letter in text" class="letter_container">
-          <p v-for="color in seq" v-bind:style="{color:color}">x</p>
+          <p v-for="(color, index) in seq" :key="index" :style="{color:color}">x</p>
         </div>
       </div>
       <p class="text_note" data-note="I'm a passion driven front-end developer building eye satisfying websites & user-friendly experiences">
         I'm a passion driven front-end developer building eye satisfying websites & user-friendly experiences
       </p>
 
-      <div class="intro_btn_container">
+      <div class="intro_btn_container" @click="goSection('#projects')">
         <div class="intro_btn">
           <div class="line"></div>
           <div class="line"></div>
@@ -52,7 +52,7 @@
         </div>
       </div>
     </section>
-    <section id="projects">
+    <section id="projects" ref="section">
       <div class="container">
         <div class="project-wrapper">
           <project-component
@@ -63,7 +63,7 @@
         </div>
       </div>
     </section>
-    <section id="contact">
+    <section id="contact" ref="section">
       <div class="container">
       </div>
     </section>
