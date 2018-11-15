@@ -5,61 +5,64 @@ window.onload = function () {
 // import VueAwesomeSwiper from 'node_modules/vue-awesome-swiper/dist/vue-awesome-swiper';
 
 function init() {
-    var container = document.getElementById('intro'),
-        textContainer = document.getElementById('text_container'),
-        text = 'Pawel Czarniecki';
-    var seq = palette('cb-Greys', 9);
-    var chars = text + '#!£$&1234567890<>/';
+    // document.querySelectorAll('.text_loader')[0].style.width = (document.querySelectorAll('.matched').length / (text.length) * 100) + '%';
 
-    for (var c = 0; c < text.length; ++c) {
-        var elem = document.createElement('div');
-        // elem.style.width = (.35 * window.outerWidth) / text.length + 'px';
-        elem.classList.add('letter_container');
-        // for (var s = 0; s < seq.length; ++s) {
-        //     var letterElem = document.createElement('p');
-        //     letterElem.style.color = '#' + seq[s];
-        //     elem.appendChild(letterElem);
-        // }
-        var letterElem = document.createElement('p');
-        elem.appendChild(letterElem);
-        letterElem.innerHTML = 'x';
-        textContainer.appendChild(elem);
-    }
+    var letterVue = new Vue({
+        el: '#intro',
+       data: {
+           // seq: palette('cb-Greys', 9),
+           seq: ['#f0f','#0ff','#2F2F2F'],
+           text: 'Pawel Czarniecki',
+           counter: 0,
+           completed: false,
+           computed: 0
+       },
+        methods: {
+            play: function(){
+               let chars = this.text + '#!£$&1234567890<>/',
+                   that = this,
+                   textContainer = that.$refs.text,
+                   matched = 0;
+                let letterInterval = setInterval(function (e) {
+                   for (let x = 0; x < that.text.length; ++x) {
+                       let random = Math.floor(Math.random() * chars.length),
+                           target = textContainer.children[x + 1];
+                       for (let c = 0; c < target.childNodes.length; ++c) {
+                           if (target.childNodes[c].innerHTML === that.text[x]) {
+                               if(!target.childNodes[c].classList.contains('matched')){
+                                   matched++;
+                               }
+                               target.childNodes[c].classList.add('matched');
+                           } else {
+                               target.childNodes[c].innerHTML = chars.substring(random, random + 1);
+                               // target.childNodes[c].style.background = '#' +  seq[Math.floor(Math.random() * Math.floor(seq.length))];
+                           }
+                           // target.style.transform = 'translate(' + (((e.clientX / window.outerWidth) - .5) * 10) * (c + 3) + 'px,' + (((e.clientY / window.outerHeight) - .5) * 10) * (c + 3) + 'px)';
+                       }
+                       if(that.$el.children[0].innerText.replace(/\r?\n/g, "") === that.text.replace(' ', '')){
+                           clearInterval(letterInterval);
+                       }
+                       // document.querySelectorAll('.text_loader')[0].style.width = ((matched + 1) / that.text.length) * 100 + '%';
+                   }
+                }, 50);
+            },
+            move: function(e){
+                var textContainer = this.$refs.text;
+                for (var x = 0; x < this.text.length; ++x) {
+                   var children = textContainer.children[x + 1].children;
+                    console.log(-(((e.clientX / window.outerWidth) - .5) * 10), -(((e.clientY / window.outerHeight) - .5) * 10));
 
-    var counter = 0,
-        completed = false,
-        computed = 0;
-    var letterInterval = setInterval(function () {
-        for (var x = 0; x < text.length; ++x) {
-            var random = Math.floor(Math.random() * chars.length),
-                target = document.querySelectorAll('.letter_container')[x];
-            for (var c = 0; c < target.childNodes.length; ++c) {
-                if (target.childNodes[c].innerHTML === text[x]) {
-                    target.childNodes[c].classList.add('matched');
-                    // target.childNodes[c].style.color = seq[c];
-                } else {
-                    target.childNodes[c].innerHTML = chars.substring(random, random + 1);
-                    // target.childNodes[c].style.background = '#' +  seq[Math.floor(Math.random() * Math.floor(seq.length))];
-                    counter++;
-                }
+                    for (var y = 0; y < children.length; ++y) {
+                       children[y].style.transform = 'translate(' + (((e.clientX / window.outerWidth) - .5) * 10) * (y + 3) + 'px,' + (((e.clientY / window.outerHeight) - .5) * 10) * (y + 3) + 'px)';
+                   }
+               }
             }
-            if(document.querySelectorAll('.matched').length >= text.length * seq.length){
-                clearInterval(letterInterval);
-                completed = true;
-            }
-            document.querySelectorAll('.text_loader')[0].style.width = (document.querySelectorAll('.matched').length / (text.length) * 100) + '%';
+        },
+        mounted(){
+            this.play();
         }
-    }, 50);
+    });
 
-    // var letters = document.querySelectorAll('.letter_container');
-    // document.querySelectorAll('#intro')[0].addEventListener('mousemove', function (e) {
-    //     for (var x = 0; x < text.length; ++x) {
-    //         var children = letters[x].querySelectorAll('p');
-    //         for (var y = 0; y < children.length; ++y) {
-    //             children[y].style.transform = 'translate(' + (((e.clientX / ( window.outerWidth / 2) - 1) * 2.5) * (-children.length + y) * -1) + 'px,' + (((e.clientY / (window.outerHeight / 2) - 1) * 2.5) * (-children.length + y) * -1) + 'px)';
-    //         }
-    //     }
-    // });
 
     Vue.component('project-component', {
         data: function() {
@@ -71,7 +74,12 @@ function init() {
         template: "#project-template",
         methods: {
             toggleButton: function(){
-              this.isOpen = !this.isOpen
+                if(!this.isOpen){
+                    this.isOpen = !this.isOpen
+                } else {
+                    let box = this;
+                    setTimeout(function(){box.isOpen = !box.isOpen}, 300);
+                }
             },
             spawnContent: function(box){
                 var boxSwiper = new Swiper('.swiper-container', {
@@ -107,7 +115,6 @@ function init() {
                             boxes[x].style.transform = 'translateX(0)';
                         }
                     }
-                    target.parentNode.classList.add('active');
                     var size = big;
                     if(rowIndex > 0 && leftovers.length === 0){
                         for (var x = 0; x<boxes.length; ++x){

@@ -30,13 +30,15 @@
   </nav>
   <!-- Add your site or application content here -->
   <div class="puzzle_container">
-    <section class="active" id="intro">
-      <div id="text_container">
+    <section class="active" id="intro" @mousemove="move($event);">
+      <div id="text_container" ref="text">
         <div class="text_loader"></div>
+        <div v-for="letter in text" class="letter_container">
+          <p v-for="color in seq" v-bind:style="{color:color}">x</p>
+        </div>
       </div>
-      <p class="text_note">
+      <p class="text_note" data-note="I'm a passion driven front-end developer building eye satisfying websites & user-friendly experiences">
         I'm a passion driven front-end developer building eye satisfying websites & user-friendly experiences
-        <!--... ze ja pierdole-->
       </p>
 
       <div class="intro_btn_container">
@@ -80,11 +82,11 @@
   <script src="https://www.google-analytics.com/analytics.js" async defer></script>
   <script src="js/main.js"></script>
   <script type="text/x-template" id="project-template">
-    <div class='project-container'>
-      <div class='project-box'>
+    <div class='project-container' :class='{ active: isOpen }'>
+      <div class='project-box' @click='resizeProject($event.target.parentNode)'>
         <div class='project-hover'>
           <h5>{{ project.name }}</h5>
-          <div @click='resizeProject($event.target.parentNode.parentNode)' class="btn" :class='{ expanded: isOpen }'>
+          <div class="btn">
             <p>collapse</p>
             <transition name='fade'>
               <p key='1' v-if='isOpen'>collapse</p>
