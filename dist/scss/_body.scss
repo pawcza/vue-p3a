@@ -2,6 +2,34 @@ body,html{
   overflow: hidden;
   font-family: 'Montserrat';
 }
+@keyframes swap{
+  0%{
+    transform: rotateY(0deg);
+  }
+  100%{
+    transform: rotateY(180deg);
+  }
+}
+@keyframes glitch {
+  0% {
+    transform: translate(0)
+  }
+  20% {
+    transform: translate(-5px, 5px)
+  }
+  40% {
+    transform: translate(-5px, -5px)
+  }
+  60% {
+    transform: translate(5px, 5px)
+  }
+  80% {
+    transform: translate(5px, -5px)
+  }
+  to {
+    transform: translate(0)
+  }
+}
 section{
   height: 100vh;
   width: 100vw;
@@ -27,26 +55,46 @@ section{
   opacity: 0;
 }
 #intro{
-  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  background: #f7f7f7;
   //background: linear-gradient(45deg, #fdfbfb, #ebedee);
-  background: white;
   height: 100vh;
   overflow: hidden;
   animation: gradient 3s ease-in-out infinite alternate;
   .text_note{
     font-size: 2.5em;
+    max-width: 1280px;
+    position: relative;
     text-align: center;
+    font-weight: 700;
+    &:before, &:after{
+      position: absolute;
+      content: attr(data-note);
+      top: 0;
+      left: 0;
+      color: #f0f;
+      z-index: -2;
+      transform: translate(-1.5px, .725px);
+    }
+    &:before{
+      transform: translate(-1.7px, .9px);
+      z-index: -3;
+      color: #0ff;
+      animation: glitch .3s cubic-bezier(.25, .46, .45, .94) both infinite
+    }
+    &:after {
+      animation: glitch .3s cubic-bezier(.25, .46, .45, .94) reverse both infinite
+    }
   }
   #text_container{
     display: flex;
     height: 110px;
     position: relative;
-    font-weight: 300;
+    font-weight: 700;
     font-size: 4.2em;
     padding-bottom: 20px;
     .text_loader{
@@ -59,36 +107,33 @@ section{
       transition: 230ms width cubic-bezier(0.75, 0, 0, 1);
       background: #222222;
     }
-    &:after{
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      content: 'p3a';
-      font-size: 7em;
-      background: white;
-      opacity: 0;
-      transition: .2s ease-out;
-      text-align: center;
-    }
     .letter_container{
       position: relative;
       margin: 0 5px;
+      width: 50px;
       p{
         height: 100%;
         margin: 0;
         text-align: center;
         width: 50px;
-        transition: .05s ease-out;
+        position: absolute;
         color: #222;
         box-sizing:border-box;
+        //animation: swap .05s ease-out infinite alternate;
         &:first-of-type{
+          transform: translate(-10px, 5px);
+        }
+        &:nth-of-type(2){
+          transform: translate(-15px, 7.25px);
+        }
+        &:last-of-type{
+          transform: translate(-17px, 9px);
         }
         &.matched{
           //transition: .5s ease-in;
           color: #222;
           background: transparent;
+          animation: none;
         }
       }
     }
@@ -171,12 +216,11 @@ section{
       will-change: transform, opacity, width, height;
       transition: width 340ms cubic-bezier(0.62, 0.02, 0.34, 1), height 340ms cubic-bezier(0.62, 0.02, 0.34, 1), transform 340ms cubic-bezier(0.62, 0.02, 0.34, 1), left 340ms cubic-bezier(0.62, 0.02, 0.34, 1), top 340ms cubic-bezier(0.62, 0.02, 0.34, 1);
       .project-box{
-        background: white;
+        background: white url('https://picsum.photos/410/370') no-repeat top left 0;
         cursor: pointer;
         position: relative;
-        background-image: url('https://picsum.photos/410/370');
         width: 100%;
-        background-size: cover;
+        background-size: auto;
         border: 1px solid #ececec;
         border-radius: 0;
         box-shadow: 0px 0px 20px -5px rgba(27, 94, 119, 0.15);
