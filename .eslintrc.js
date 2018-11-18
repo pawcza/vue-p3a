@@ -1,26 +1,15 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "mocha": true
+    parserOptions: {
+        parser: 'babel-eslint'
     },
-    "plugins": ["mocha"],
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "sourceType": "module"
+    extends: [
+        'plugin:vue/recommended',
+        'standard'
+    ],
+    rules:{
+        "indent": "off"
     },
-    "rules": {
-        "indent": [
-            "error",
-            2
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
-    }
-};
+    plugins: [
+        'vue'
+    ]
+}
