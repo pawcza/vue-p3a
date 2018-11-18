@@ -3,7 +3,8 @@
         <div class="container">
             <div class="project-wrapper" :class="{initial: initial}">
                 <project-component
-                        v-for="project in projects"
+                        v-for="(project, index) in projects"
+                        :key="index"
                         :project="project">
                 </project-component>
             </div>
