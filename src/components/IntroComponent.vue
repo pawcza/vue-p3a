@@ -15,8 +15,6 @@
             IntroTextComponent,
             IntroCopyComponent
         },
-        props: {
-        },
         methods:{
             moveText(e){
               this.$emit('mousemove', e);

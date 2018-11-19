@@ -32,7 +32,8 @@
                 small: null,
                 big: null,
                 active: false,
-                rowSize: null
+                rowSize: null,
+                playing: false
             }
         },
         template: "#project-template",
@@ -56,7 +57,10 @@
                 if(this.active){
                     target.project.classy = [];
                     for(let x=0; x<this.projects.length; ++x){
-                        (index !== x) ? this.projects[x].style = this.positions[x] : '';
+                        if(index !== x){
+                            this.projects[x].style = this.positions[x];
+                            this.projects[x].active = false;
+                        }
                     }
                 }
             },
@@ -71,7 +75,7 @@
                         })
                     }, 340);
                 } else {
-                    this.active = true;
+                    this.active = target.project;
                     target.project.active = true;
                     target.project.classy.push('active');
                 }
@@ -84,17 +88,21 @@
                 }
             },
             transform(index){
-                if(Math.floor(index / this.rowSize) > 0 && this.active){
-                    for(let x = 0; x < this.projects.length; ++x){
-                        (x !== index) ? this.projects[x].classy = ['transformUp'] : '';
+                for (let x = 0; x < this.projects.length; ++x) {
+                    if (Math.floor(index / this.rowSize) > 0 && this.active && x !== index) {
+                        this.projects[x].classy = ['transformUp'];
+                    } else if (this.active && x !== index) {
+                        this.projects[x].classy = ['transformDown'];
+                    } else if(x !== index){
+                        this.projects[x].classy = [''];
                     }
-                } else if (this.active){
-                    for(let x = 0; x < this.projects.length; ++x){
-                        (x !== index) ? this.projects[x].classy = ['transformDown'] : '';
-                    }
-                } else {
-                    for(let x = 0; x < this.projects.length; ++x){
-                        (x !== index) ? this.projects[x].classy = [''] : '';
+                    if(Math.floor(index / this.rowSize) === Math.floor(x / this.rowSize) && x !== index && this.active){
+                        if(Math.floor(index % this.rowSize) === 1){
+                            (x > index) ? this.projects[x].classy.push('transformRight') : this.projects[x].classy.push('transformLeft');
+                        } else {
+                            (x > index) ? this.projects[x].classy.push('transformRight double') : this.projects[x].classy.push('transformLeft double');
+
+                        }
                     }
                 }
             }
@@ -108,7 +116,7 @@
             this.$data.small = this.$el.querySelectorAll('.project-container')[0].getBoundingClientRect();
             this.$data.big = {
                 width: this.$el.querySelectorAll('.project-wrapper')[0].offsetWidth + 'px',
-                height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight + 'px',
+                height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight + 2 + 'px',
                 left: 0,
                 top: 0,
                 position: 'absolute'

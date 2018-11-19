@@ -30,9 +30,7 @@
             goSection(target){
                 if(this.playing === false){
                     this.playing = true;
-                    if(typeof target === 'string'){
-                        target = document.querySelectorAll(target)[0];
-                    }
+                    (typeof target === 'string') ? target = document.querySelectorAll(target)[0] : '';
                     if(typeof target !== 'undefined'){
                         this.active.classList.remove('active');
                         this.active = target;
@@ -70,6 +68,19 @@
         },
         mounted() {
             this.$data.active = this.$el.querySelectorAll('section.active')[0];
+
+            window.addEventListener('keydown', function(e){
+                let target = this.document.querySelectorAll('.project-container.active')[0];
+                if(target !== undefined){
+                    if(e.key === 'ArrowRight'){
+                        (target.nextElementSibling !== null) ? target.nextElementSibling.__vue__.resizeProject() : '';
+                    }
+                    if(e.key === 'ArrowLeft'){
+                        (target.previousElementSibling !== null) ? target.previousElementSibling.__vue__.resizeProject() : '';
+                    }
+                }
+
+            });
         }
     }
 </script>
