@@ -7,7 +7,6 @@
       <change beforePath="$PROJECT_DIR$/src/components/ProjectComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProjectComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ProjectsComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProjectsComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scss/_body.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/_body.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scss/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/main.scss" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,17 +29,17 @@
           <entry key="html" value="69" />
           <entry key="js" value="164" />
           <entry key="scss" value="1695" />
-          <entry key="txt" value="782" />
-          <entry key="vue" value="4225" />
+          <entry key="txt" value="936" />
+          <entry key="vue" value="4405" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="69" />
           <entry key="JavaScript" value="164" />
-          <entry key="PLAIN_TEXT" value="782" />
+          <entry key="PLAIN_TEXT" value="936" />
           <entry key="SCSS" value="1695" />
-          <entry key="Vue.js" value="4225" />
+          <entry key="Vue.js" value="4405" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -93,8 +92,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/scss/_body.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="327" column="21" lean-forward="true" selection-start-line="327" selection-start-column="21" selection-end-line="327" selection-end-column="21" />
+            <state relative-caret-position="200">
+              <caret line="322" column="9" lean-forward="true" selection-start-line="322" selection-start-column="9" selection-end-line="322" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -111,8 +110,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/ProjectsComponent.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="34" column="77" lean-forward="true" selection-start-line="34" selection-start-column="77" selection-end-line="34" selection-end-column="77" />
+            <state relative-caret-position="186">
+              <caret line="37" column="30" lean-forward="true" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -120,8 +119,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/ProjectComponent.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+            <state relative-caret-position="160">
+              <caret line="10" column="33" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -185,6 +184,7 @@
       <find>this.active</find>
       <find>btn</find>
       <find>date</find>
+      <find>40%</find>
     </findStrings>
     <replaceStrings>
       <replace>let</replace>
@@ -224,8 +224,8 @@
         <option value="$PROJECT_DIR$/build/webpack.config.dev.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/scss/main.scss" />
-        <option value="$PROJECT_DIR$/src/scss/_body.scss" />
         <option value="$PROJECT_DIR$/src/components/ProjectComponent.vue" />
+        <option value="$PROJECT_DIR$/src/scss/_body.scss" />
         <option value="$PROJECT_DIR$/src/components/ProjectsComponent.vue" />
       </list>
     </option>
@@ -296,6 +296,7 @@
   <component name="PropertiesComponent">
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="E:/jestem" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
@@ -348,7 +349,7 @@
       <workItem from="1542549394512" duration="1063000" />
       <workItem from="1542617521896" duration="60000" />
       <workItem from="1542620978123" duration="20705000" />
-      <workItem from="1542646044954" duration="11350000" />
+      <workItem from="1542646044954" duration="13912000" />
     </task>
     <task id="LOCAL-00001" summary="* Added webpack with babel scss html compiling&#10;* Added development node.js server&#10;* Re-wrote vue components to be in different files&#10;* Looked around app structure&#10;* Added scss reset&#10;* Changed project resize function">
       <created>1542504303719</created>
@@ -371,11 +372,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542644876263</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="* Played around button functionality and styling&#10;* Starting work on project content&#10;* Added sample project content to component data">
+      <created>1542723392275</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1542723392275</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69929000" />
+    <option name="totallyTimeSpent" value="72491000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -389,7 +397,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24946696" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24946696" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Gulp" order="3" side_tool="true" />
@@ -405,7 +413,7 @@
       <window_info anchor="bottom" id="TODO" order="8" weight="0.329718" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.20065077" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.38069415" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.32907802" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -424,7 +432,8 @@
     <MESSAGE value="* Added webpack with babel scss html compiling&#10;* Added development node.js server&#10;* Re-wrote vue components to be in different files&#10;* Looked around app structure&#10;* Added scss reset&#10;* Changed project resize function" />
     <MESSAGE value="* Added key to project component v-for&#10;* Removed unused .css files" />
     <MESSAGE value="* Removed unused props from IntroComponent&#10;* Fixed text-loader for IntroComponent&#10;* Added NavComponent (not included in the build yet)&#10;* Removed unused passed const $event from resizeProject call in ProjectComponent&#10;* Commented out swiper HTML for now&#10;* Added missing playing boolean to ProjectsComponent&#10;* Added horizontal transforms for other elements on project resize (YAY!!!)&#10;* Small fix for uneven pixel layouts (added 2 pixels to big size height)&#10;* Styles unified&#10;* Added _include-media.scss to support inline scss media queries&#10;* Some functions cleanup&#10;* Added ArrowLeft &amp; ArrowRight controls for Projects&#10;* Active state is now correctly handled for leftovers &amp; keypress controls" />
-    <option name="LAST_COMMIT_MESSAGE" value="* Removed unused props from IntroComponent&#10;* Fixed text-loader for IntroComponent&#10;* Added NavComponent (not included in the build yet)&#10;* Removed unused passed const $event from resizeProject call in ProjectComponent&#10;* Commented out swiper HTML for now&#10;* Added missing playing boolean to ProjectsComponent&#10;* Added horizontal transforms for other elements on project resize (YAY!!!)&#10;* Small fix for uneven pixel layouts (added 2 pixels to big size height)&#10;* Styles unified&#10;* Added _include-media.scss to support inline scss media queries&#10;* Some functions cleanup&#10;* Added ArrowLeft &amp; ArrowRight controls for Projects&#10;* Active state is now correctly handled for leftovers &amp; keypress controls" />
+    <MESSAGE value="* Played around button functionality and styling&#10;* Starting work on project content&#10;* Added sample project content to component data" />
+    <option name="LAST_COMMIT_MESSAGE" value="* Played around button functionality and styling&#10;* Starting work on project content&#10;* Added sample project content to component data" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/dist/js/vendor/vue.min.js" />
@@ -613,24 +622,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scss/_body.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/ProjectComponent.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="327" column="21" lean-forward="true" selection-start-line="327" selection-start-column="21" selection-end-line="327" selection-end-column="21" />
+        <state relative-caret-position="160">
+          <caret line="10" column="33" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ProjectComponent.vue">
+    <entry file="file://$PROJECT_DIR$/src/scss/_body.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+        <state relative-caret-position="200">
+          <caret line="322" column="9" lean-forward="true" selection-start-line="322" selection-start-column="9" selection-end-line="322" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/ProjectsComponent.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="34" column="77" lean-forward="true" selection-start-line="34" selection-start-column="77" selection-end-line="34" selection-end-column="77" />
+        <state relative-caret-position="186">
+          <caret line="37" column="30" lean-forward="true" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
         </state>
       </provider>
     </entry>

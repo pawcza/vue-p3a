@@ -11,7 +11,7 @@
                     </transition>
                 </div>
             </div>
-            <transition-group name="fadeUp" tag="ul" class="project-content">
+            <transition-group name="fadeUp" tag="ul" class="project-content" :style="project.width">
                 <li v-for="(content, index) in project.content" :key="index" v-if="project.active" :class="index">
                     {{content}}
                 </li>
