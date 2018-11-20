@@ -21,7 +21,14 @@
             return {
                 initial: false,
                 projects: [
-                    {name: 'Project 1', style: {}, classy:[], active: false},
+                    {
+                        name: 'Project 1', style: {}, classy:[], active: false,
+                        content: {
+                            date: '2018',
+                            tech: 'Laravel 5.2, Vue.js, jQuery, vanilla js, PHP 7, SCSS, isotope.js',
+                            desc: 'This is a dummy text for one of the projects. Something more interesting is very very likely to appear here in the future. I reckon 3 sentences is a good grasp of what it is.'
+                        }
+                    },
                     {name: 'Project 2', style: {}, classy:[], active: false},
                     {name: 'Project 3', style: {}, classy:[], active: false},
                     {name: 'Project 4', style: {}, classy:[], active: false},

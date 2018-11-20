@@ -6,21 +6,16 @@
                 <div class="btn">
                     <p>collapse</p>
                     <transition name='fade'>
-                        <p key='1' v-if='project.active'>collapse</p>
-                        <p key='2' v-else> expand </p>
+                        <p key='1' v-if='project.active'>Collapse</p>
+                        <p key='2' v-else>Expand</p>
                     </transition>
                 </div>
             </div>
-            <div class="project-content">
-                <!--<div class="swiper-container">-->
-                    <!--<div class="swiper-wrapper">-->
-                        <!--<div class="swiper-slide">Slide 1</div>-->
-                        <!--<div class="swiper-slide">Slide 2</div>-->
-                        <!--<div class="swiper-slide">Slide 3</div>-->
-                    <!--</div>-->
-                    <!--<div class="swiper-pagination"></div>-->
-                <!--</div>-->
-            </div>
+            <transition-group name="fadeUp" tag="ul" class="project-content">
+                <li v-for="(content, index) in project.content" :key="index" v-if="project.active" :class="index">
+                    {{content}}
+                </li>
+            </transition-group>
         </div>
     </div>
 </template>
