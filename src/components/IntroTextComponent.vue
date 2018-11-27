@@ -10,7 +10,7 @@
     export default{
         data(){
             return{
-                text: 'Pawel Czarniecki',
+                text: 'I sell chicken nuggets',
                 seq: ['#404040','#f00','#00f', '#0f0']
             }
         },
