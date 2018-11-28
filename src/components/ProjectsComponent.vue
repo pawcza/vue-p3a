@@ -13,6 +13,8 @@
 </template>
 <script>
     import ProjectComponent from './ProjectComponent.vue'
+    import Velocity from 'velocity-animate'
+    import 'velocity-animate/velocity.ui.min.js'
     export default{
         components: {
             ProjectComponent
@@ -91,28 +93,53 @@
             },
             resize(target, index, size){
                 if(size === 'small'){
-                    target.project.style = this.positions[index];
+                    let _this = this;
+                    Velocity(
+                        target.$el,
+                        this.positions[index],
+                        {duration: 340, easing: 'easeOutQuart', complete: function(){
+                            target.project.style = _this.positions[index];
+                        }}
+                    );
                 } else {
-                    target.project.style = this.$data.big
+                    let _this = this;
+                    Velocity(
+                        target.$el,
+                        _this.$data.big,
+                        {duration: 340, easing: 'easeOutQuart',complete: function(){
+                            target.project.style = _this.$data.big
+                        }}
+                    );
+//                    target.project.style = this.$data.big
                 }
             },
-            transform(index){
-                for (let x = 0; x < this.projects.length; ++x) {
+            transform(index, boxes){
+                for(let x = 0; x < boxes.length; ++x){
+                    let transform = [], forcefeed = boxes[x].style.transform, tx = 0, ty = 0;
                     if (Math.floor(index / this.rowSize) > 0 && this.active && x !== index) {
-                        this.projects[x].classy = ['transformUp'];
+                        ty = 1;
                     } else if (this.active && x !== index) {
-                        this.projects[x].classy = ['transformDown'];
+                        ty = -1;
                     } else if(x !== index){
-                        this.projects[x].classy = [''];
+                        ty = 0;
                     }
                     if(Math.floor(index / this.rowSize) === Math.floor(x / this.rowSize) && x !== index && this.active){
                         if(Math.floor(index % this.rowSize) === 1){
-                            (x > index) ? this.projects[x].classy.push('transformRight') : this.projects[x].classy.push('transformLeft');
+                            (x > index) ? tx = 1 : tx = -1;
                         } else {
-                            (x > index) ? this.projects[x].classy.push('transformRight double') : this.projects[x].classy.push('transformLeft double');
-
+                            (x > index) ? tx = 2 : tx = -2;
                         }
                     }
+                    if (forcefeed === ''){
+                        forcefeed = 'translate(0%, 0%)'
+                    }
+                    transform = ['translate(' + tx * 100 + '%, ' + ty * 100 + '%)', forcefeed];
+                    console.log(transform);
+                    Velocity(
+                        boxes[x],
+                        {transform: transform},
+                        {duration: 340, easing: 'easeOutQuart'}
+                    )
                 }
             }
         },

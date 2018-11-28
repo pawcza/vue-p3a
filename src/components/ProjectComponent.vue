@@ -43,7 +43,7 @@
                     this.$parent.leftovers(this, targetIndex);
                 }
                 this.$parent.toggleActive(this);
-                this.$parent.transform(targetIndex);
+                this.$parent.transform(targetIndex, boxes);
             },
             prevProject(e){
                 e.stopPropagation();
@@ -58,20 +58,30 @@
             },
             enter: function (el, done) {
                 let delay = el.dataset.index * 150;
+                if(el.dataset.index === '0'){
+                    Velocity(
+                        el.parentNode,
+                        { transform: ['translateX(0)', 'translateX(-100%)']},
+                        { duration: 340, easing: 'easeOutQuad'}
+                    );
+                }
                 setTimeout(function () {
                     Velocity(
                         el,
                         { opacity: [1,0], transform: ['translateX(0)', 'translateX(-50px)']},
-                        { duration: 200, easing: 'easeOutQuad', complete: done, delay: 350}
+                        { duration: 200, easing: 'easeOutQuad', complete: done, delay: 240}
                     )
                 }, delay)
             },
             leave: function (el, done) {
-                Velocity(
-                    el,
-                    { opacity: 0, transform: ['translateX(-50px)', 'translateX(0)']},
-                    { duration: 50, complete: done }
-                );
+                if(el.dataset.index === '0'){
+                    Velocity(
+                        el.parentNode,
+                        { transform: ['translateX(-100%)', 'translateX(-0%)']},
+                        { duration: 340, easing: 'easeInQuad'}
+                    );
+                }
+
             }
         }
     }
