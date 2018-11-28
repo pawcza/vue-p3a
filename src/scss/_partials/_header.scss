@@ -7,12 +7,12 @@ nav{
   justify-content: center;
   z-index: 1;
   padding: 0 10px;
-  border: 1px solid #222;
   a{
     margin: 0;
     color: #222;
     padding: 10px;
     position: relative;
+    text-transform: capitalize;
     transition: .2s ease-out;
     text-decoration: none;
     &:before{
@@ -29,7 +29,6 @@ nav{
     }
     &:after{
       transition: .2s ease-out;
-      background: #222;
       position: absolute;
       color: #fff;
       content: attr(data-text);
@@ -45,12 +44,14 @@ nav{
       }
     }
     &.active{
+      font-weight: 700;
       &:before{
         transform: rotateX(180deg);
       }
       &:after{
         transform: rotateX(0deg);
         z-index: 4;
+        background: #222;
       }
     }
   }

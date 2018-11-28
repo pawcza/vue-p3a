@@ -2,6 +2,9 @@ body,html{
   overflow: hidden;
   font-family: 'Montserrat';
   font-size: 1em;
+  @include media('<phone'){
+    font-size: 14px;
+  }
 }
 @keyframes swap{
   0%{
@@ -43,19 +46,11 @@ section{
   width: 100%;
 }
 .puzzle_container{
-  transition: 340ms transform cubic-bezier(0.7, 0.3, 0, 1), 340ms -webkit-transform cubic-bezier(0.7, 0.3, 0, 1);
   will-change: transform;
   display: flex;
   height: 300%;
   flex-direction: column;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-
 .intro_btn_container{
   position: absolute;
   width: 50px;
@@ -126,6 +121,8 @@ section{
   animation: gradient 3s ease-in-out infinite alternate;
   .text_note{
     font-size: 2em;
+    padding: 10px 15px;
+    line-height: 1.33em;
     max-width: 900px;
     position: relative;
     text-align: center;
@@ -155,6 +152,7 @@ section{
     font-weight: 300;
     font-size: 3.5em;
     justify-content: center;
+    flex-wrap: wrap;
     padding-bottom: 40px;
     margin-bottom: 40px;
     .text_loader{
@@ -171,6 +169,7 @@ section{
       position: relative;
       margin: 0 5px;
       width: 50px;
+
       p{
         height: 100%;
         margin: 0;
@@ -201,10 +200,28 @@ section{
           opacity: .75;
         }
         &.matched{
-          //transition: .5s ease-in;
           color: #404040;
           background: transparent;
           animation: none;
+        }
+      }
+    }
+  }
+  @include media('<phone'){
+    .text_note{
+      //font-size: 1.5em;
+    }
+    #text_container{
+      //font-size: 1.75em;
+      .letter_container{
+        &.break{
+          width: 100%;
+          height: 0;
+          opacity: 0;
+        }
+        width: 20px;
+        p{
+          width: 20px;
         }
       }
     }
@@ -228,9 +245,8 @@ section{
       flex-basis: 33.3%;
       opacity: 1;
       box-sizing:border-box;
-      transition-delay: 0ms!important;
-      //will-change: transform, opacity, width, height;
-      //transition: width 340ms cubic-bezier(0.62, 0.02, 0.34, 1), height 340ms cubic-bezier(0.62, 0.02, 0.34, 1), transform 500ms cubic-bezier(0.62, 0.02, 0.34, 1), left 340ms cubic-bezier(0.62, 0.02, 0.34, 1), top 340ms cubic-bezier(0.62, 0.02, 0.34, 1);
+      transform: translateX(0) translateY(0);
+      will-change: transform, opacity, width, height;
       .project-box{
         background: white url('https://picsum.photos/1920/1080') no-repeat top right 0;
         overflow: hidden;
@@ -239,9 +255,7 @@ section{
         width: 100%;
         background-size: cover;
         border-radius: 0;
-        //box-shadow: 0 0 20px -5px rgba(27, 94, 119, 0.15);
         height: 100%;
-        transition: box-shadow 200ms ease-out;
         .project-hover{
           position: absolute;
           width: 100%;
@@ -332,9 +346,9 @@ section{
           position: relative;
           height: 100%;
           opacity: 0;
-          transform: translateX(-50%);
-          z-index: 2;
           will-change: transform;
+          transform: translateX(-100%);
+          z-index: 2;
           background: rgba(255,255,255,1);
           //-webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
           //clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
@@ -403,7 +417,7 @@ section{
             &:before{
               content: '\2190';
             }
-            &:last-of-type{
+            &.next{
               &:before{
                 display: none;
               }
@@ -435,8 +449,6 @@ section{
         }
         .project-content{
           opacity: 1;
-          //transition-delay: 250ms;
-          //transform: translateX(0);
         }
         .project-controls{
           opacity: 1;
@@ -476,38 +488,6 @@ section{
           }
         }
       }
-      &.transformDown{
-        transition: 340ms transform cubic-bezier(0.7, 0.3, 0, 1);
-        transform: translateY(100%);
-        &.transformLeft{
-          transform: translate(-100%, 100%);
-          &.double{
-            transform: translate(-200%, 100%);
-          }
-        }
-        &.transformRight{
-          transform: translate(100%, 100%);
-          &.double{
-            transform: translate(200%, 100%);
-          }
-        }
-      }
-      &.transformUp{
-        transition: 340ms transform cubic-bezier(0.7, 0.3, 0, 1);
-        transform: translateY(-100%);
-        &.transformLeft{
-          transform: translate(-100%, -100%);
-          &.double{
-            transform: translate(-200%, -100%);
-          }
-        }
-        &.transformRight{
-          transform: translate(100%, -100%);
-          &.double{
-            transform: translate(200%, -100%);
-          }
-        }
-      }
     }
     &.initial{
       .project-container{
@@ -521,7 +501,11 @@ section{
     @include media('<tablet'){
       .project-container{
         flex-basis: 50%;
+        padding: 0;
       }
+    }
+    @include media('<phone'){
+      max-height: 90vh;
     }
   }
 }

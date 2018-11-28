@@ -24,6 +24,15 @@
                 initial: false,
                 projects: [
                     {
+                        name: 'Project 1', style: {}, classy:[], active: false, width: null, index: 'first',
+                        content: {
+                            date: '2018',
+                            tech: 'Laravel 5.2, Vue.js, jQuery, vanilla js, PHP 7, SCSS, isotope.js',
+                            desc: 'This is a dummy text for one of the projects. Something more interesting is very very likely to appear here in the future. I reckon 3 sentences is a good grasp of what it is.',
+                            btn: "<a target='_blank' href='http://google.com'>See it online</a>"
+                        }
+                    },
+                    {
                         name: 'Project 1', style: {}, classy:[], active: false, width: null,
                         content: {
                             date: '2018',
@@ -32,11 +41,42 @@
                             btn: "<a target='_blank' href='http://google.com'>See it online</a>"
                         }
                     },
-                    {name: 'Project 2', style: {}, classy:[], active: false},
-                    {name: 'Project 3', style: {}, classy:[], active: false},
-                    {name: 'Project 4', style: {}, classy:[], active: false},
-                    {name: 'Project 5', style: {}, classy:[], active: false},
-                    {name: 'Project 6', style: {}, classy:[], active: false}
+                    {
+                        name: 'Project 1', style: {}, classy:[], active: false, width: null,
+                        content: {
+                            date: '2018',
+                            tech: 'Laravel 5.2, Vue.js, jQuery, vanilla js, PHP 7, SCSS, isotope.js',
+                            desc: 'This is a dummy text for one of the projects. Something more interesting is very very likely to appear here in the future. I reckon 3 sentences is a good grasp of what it is.',
+                            btn: "<a target='_blank' href='http://google.com'>See it online</a>"
+                        }
+                    },
+                    {
+                        name: 'Project 1', style: {}, classy:[], active: false, width: null,
+                        content: {
+                            date: '2018',
+                            tech: 'Laravel 5.2, Vue.js, jQuery, vanilla js, PHP 7, SCSS, isotope.js',
+                            desc: 'This is a dummy text for one of the projects. Something more interesting is very very likely to appear here in the future. I reckon 3 sentences is a good grasp of what it is.',
+                            btn: "<a target='_blank' href='http://google.com'>See it online</a>"
+                        }
+                    },
+                    {
+                        name: 'Project 1', style: {}, classy:[], active: false, width: null,
+                        content: {
+                            date: '2018',
+                            tech: 'Laravel 5.2, Vue.js, jQuery, vanilla js, PHP 7, SCSS, isotope.js',
+                            desc: 'This is a dummy text for one of the projects. Something more interesting is very very likely to appear here in the future. I reckon 3 sentences is a good grasp of what it is.',
+                            btn: "<a target='_blank' href='http://google.com'>See it online</a>"
+                        }
+                    },
+                    {
+                        name: 'Project 1', style: {}, classy:[], active: false, width: null, index: 'last',
+                        content: {
+                            date: '2018',
+                            tech: 'Laravel 5.2, Vue.js, jQuery, vanilla js, PHP 7, SCSS, isotope.js',
+                            desc: 'This is a dummy text for one of the projects. Something more interesting is very very likely to appear here in the future. I reckon 3 sentences is a good grasp of what it is.',
+                            btn: "<a target='_blank' href='http://google.com'>See it online</a>"
+                        }
+                    }
                 ],
                 positions: [],
                 small: null,
@@ -64,15 +104,24 @@
                 }
                 this.initial = false;
             },
-            leftovers(target, index){
-                if(this.active){
-                    target.project.classy = [];
-                    for(let x=0; x<this.projects.length; ++x){
-                        if(index !== x){
-                            this.projects[x].style = this.positions[x];
-                            this.projects[x].active = false;
+            leftovers(target, index, boxes){
+                let activeIndex = Array.from(boxes).findIndex(box => box.classList.contains('active')), _this = this;
+                if(activeIndex !== index && this.active){
+                    Velocity(
+                        boxes[activeIndex],
+                        this.positions[activeIndex],
+                        {
+                            duration: 340,
+                            easing: 'easeOutQuart',
+                            complete: function(){
+                                setTimeout(function(){
+                                    _this.projects[activeIndex].classy = [];
+                                }, 340);
+                            }
                         }
-                    }
+                    );
+                    _this.projects[activeIndex].active = false;
+                    this.active = !this.active;
                 }
             },
             toggleActive(target){
@@ -91,54 +140,70 @@
                     target.project.classy.push('active');
                 }
             },
-            resize(target, index, size){
+            resize(target, index, size, boxes = ''){
+                this.playing = true;
+                let values, style, _this = this, easing;
                 if(size === 'small'){
-                    let _this = this;
-                    Velocity(
-                        target.$el,
-                        this.positions[index],
-                        {duration: 340, easing: 'easeOutQuart', complete: function(){
-                            target.project.style = _this.positions[index];
-                        }}
-                    );
+                    style = this.positions[index];
+                    values = {
+                        left: [this.positions[index].left, target.$el.style.left],
+                        top: [this.positions[index].top, target.$el.style.top],
+                        width: [this.positions[index].width, target.$el.style.width],
+                        height: [this.positions[index].height, target.$el.style.height]
+                    };
+                    easing = 'easeOutQuad';
                 } else {
-                    let _this = this;
-                    Velocity(
-                        target.$el,
-                        _this.$data.big,
-                        {duration: 340, easing: 'easeOutQuart',complete: function(){
-                            target.project.style = _this.$data.big
-                        }}
-                    );
-//                    target.project.style = this.$data.big
+                    style = this.positions[index];
+                    values = {
+                        left: [this.$data.big.left, target.$el.style.left],
+                        top: [this.$data.big.top, target.$el.style.top],
+                        width: [this.$data.big.width, target.$el.style.width],
+                        height: [this.$data.big.height, target.$el.style.height]
+                    };
+                    easing = 'easeInQuad';
                 }
+                Velocity(
+                    target.$el,
+                    values,
+                    {
+                        duration: 340,
+                        easing: easing,
+                        complete: function(){
+                            _this.playing = false;
+                            target.project.style = style;
+                        }
+                    }
+                );
             },
             transform(index, boxes){
                 for(let x = 0; x < boxes.length; ++x){
-                    let transform = [], forcefeed = boxes[x].style.transform, tx = 0, ty = 0;
+                    let forcefeed = boxes[x].style.transform, tx = 0, ty = 0, easing = 'easeInQuad';
                     if (Math.floor(index / this.rowSize) > 0 && this.active && x !== index) {
-                        ty = 1;
-                    } else if (this.active && x !== index) {
                         ty = -1;
+                    } else if (this.active && x !== index) {
+                        ty = 1;
                     } else if(x !== index){
+                        easing = 'easeOutQuad';
                         ty = 0;
                     }
                     if(Math.floor(index / this.rowSize) === Math.floor(x / this.rowSize) && x !== index && this.active){
+                        ty = 0;
                         if(Math.floor(index % this.rowSize) === 1){
                             (x > index) ? tx = 1 : tx = -1;
                         } else {
                             (x > index) ? tx = 2 : tx = -2;
                         }
                     }
-                    if (forcefeed === ''){
-                        forcefeed = 'translate(0%, 0%)'
-                    }
-                    transform = ['translate(' + tx * 100 + '%, ' + ty * 100 + '%)', forcefeed];
-                    console.log(transform);
+
+                    (forcefeed === '') ? forcefeed = 'translateX(0%) translateY(0%)' : '';
+
                     Velocity(
                         boxes[x],
-                        {transform: transform},
-                        {duration: 340, easing: 'easeOutQuart'}
+                        {
+                            translateX: [tx * 100 + '%', forcefeed.split(' ')[0].split('(')[1].split(')')[0]],
+                            translateY: [ty * 100 + '%', forcefeed.split(' ')[1].split('(')[1].split(')')[0]]
+                        },
+                        {duration: 340, easing: easing}
                     )
                 }
             }

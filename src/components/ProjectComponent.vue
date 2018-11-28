@@ -17,8 +17,8 @@
                 </li>
             </transition-group>
             <div class="project-controls">
-                <span @click="prevProject($event)"> Previous</span>
-                <span @click="nextProject($event)">Next </span>
+                <span class="prev" v-if="project.index !== 'first'" @click="prevProject($event)"> Previous</span>
+                <span class="next" v-if="project.index !== 'last'" @click="nextProject($event)">Next </span>
             </div>
         </div>
     </div>
@@ -34,16 +34,18 @@
         props: ['project'],
         methods: {
             resizeProject(){
-                let boxes = this.$el.parentNode.children,
-                    targetIndex = Array.prototype.indexOf.call(boxes, this.$el);
-                if(this.$el.classList.contains('active')){
-                    this.$parent.resize(this, targetIndex, 'small');
-                } else {
-                    this.$parent.resize(this, targetIndex, 'big');
-                    this.$parent.leftovers(this, targetIndex);
+                if(!this.$parent.playing){
+                    let boxes = this.$el.parentNode.children,
+                        targetIndex = Array.prototype.indexOf.call(boxes, this.$el);
+                    this.$parent.leftovers(this, targetIndex, boxes);
+                    if(this.$parent.active){
+                        this.$parent.resize(this, targetIndex, 'small');
+                    } else {
+                        this.$parent.resize(this, targetIndex, 'big', boxes);
+                    }
+                    this.$parent.toggleActive(this);
+                    this.$parent.transform(targetIndex, boxes);
                 }
-                this.$parent.toggleActive(this);
-                this.$parent.transform(targetIndex, boxes);
             },
             prevProject(e){
                 e.stopPropagation();
@@ -61,24 +63,25 @@
                 if(el.dataset.index === '0'){
                     Velocity(
                         el.parentNode,
-                        { transform: ['translateX(0)', 'translateX(-100%)']},
-                        { duration: 340, easing: 'easeOutQuad'}
+                        { translateX: [0, '-100%']},
+                        { duration: 340, easing: 'easeOutQuad', delay: 240}
                     );
                 }
                 setTimeout(function () {
                     Velocity(
                         el,
-                        { opacity: [1,0], transform: ['translateX(0)', 'translateX(-50px)']},
+                        { opacity: [1,0], translateX: [0, '-50px']},
                         { duration: 200, easing: 'easeOutQuad', complete: done, delay: 240}
                     )
                 }, delay)
             },
             leave: function (el, done) {
+                console.log('cos sie dzieje');
                 if(el.dataset.index === '0'){
                     Velocity(
                         el.parentNode,
-                        { transform: ['translateX(-100%)', 'translateX(-0%)']},
-                        { duration: 340, easing: 'easeInQuad'}
+                        { translateX: ['-100%', 0]},
+                        { duration: 250, easing: 'easeInQuad'}
                     );
                 }
 

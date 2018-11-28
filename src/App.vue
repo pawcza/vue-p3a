@@ -9,6 +9,8 @@
     import IntroComponent from './components/IntroComponent.vue'
     import ProjectsComponent from './components/ProjectsComponent.vue'
     import ContactComponent from './components/ContactComponent.vue'
+    import Velocity from 'velocity-animate'
+    import 'velocity-animate/velocity.ui.min.js'
     export default {
         components: {
             IntroComponent,
@@ -17,36 +19,35 @@
         },
         data: function() {
             return {
-                sections: [
-                    {name: 'intro'},
-                    {name: 'projects'},
-                    {name: 'contact'}
-                ],
                 playing: false,
                 active: null
             }
         },
         methods: {
             goSection(target){
-                if(this.playing === false){
+                let _this = this, _target = target;
+                (typeof target === 'string') ? target = document.querySelectorAll(target)[0] : '';
+                if(!this.playing && target !== this.active){
+                    this.active.classList.remove('active');
+                    target.classList.add('active');
                     this.playing = true;
-                    (typeof target === 'string') ? target = document.querySelectorAll(target)[0] : '';
-                    if(typeof target !== 'undefined'){
-                        this.active.classList.remove('active');
-                        this.active = target;
-                        target.classList.add('active');
-                        let index = Array.prototype.indexOf.call(this.$el.children, target),
-                            transform = (index / this.$el.children.length) * 100;
-                        this.$el.style.transform = 'translateY(-' + transform + '%)';
-                    }
-                    let that = this,
-                        _target = target;
-                    setTimeout(function(){
-                        that.playing = false;
-                        if(_target.id === 'projects'){
-                            that.$children[1].setBoxValues();
+                    Velocity(
+                        document.body, 'scroll',
+                        {
+                            offset: target.offsetTop,
+                            easing: 'easeOutExpo',
+                            duration: 500,
+                            begin: function(){
+                                if(_target.id === 'projects'){
+                                    _this.$children[1].setBoxValues();
+                                }
+                            },
+                            complete: function(){
+                                _this.active = target;
+                                _this.playing = false;
+                            }
                         }
-                    }, 340);
+                    )
                 }
             },
             nextSection: function(){
