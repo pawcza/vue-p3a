@@ -3,15 +3,11 @@
         <div class='project-box' @click='resizeProject()'>
             <div class='project-hover'>
                 <h5>{{ project.name }}</h5>
-                <div class="btn">
-                    <p>collapse</p>
-                    <transition name='fade'>
-                        <p key='1' v-if='project.active'>Collapse</p>
-                        <p key='2' v-else>Expand</p>
-                    </transition>
+                <div class="full-screen-btn">
+                    <span></span><span></span><span></span><span></span>
                 </div>
             </div>
-            <transition-group name="staggered-fade" tag="ul" class="project-content" :style="project.width" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+            <transition-group name="staggered-fade" tag="ul" class="project-content" :style="project.width" @click.prevent="" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                 <li v-for="(content, index) in project.content" :key="index" v-html="content" v-if="project.active" :class="index" :data-index="Object.keys(project.content).indexOf(index)">
                     {{content}}
                 </li>
@@ -33,6 +29,10 @@
         },
         props: ['project'],
         methods: {
+            preventClicks(e){
+              console.log(e, this);
+              e.stopPropagation();
+            },
             resizeProject(){
                 if(!this.$parent.playing){
                     let boxes = this.$el.parentNode.children,
@@ -64,14 +64,14 @@
                     Velocity(
                         el.parentNode,
                         { translateX: [0, '-100%']},
-                        { duration: 340, easing: 'easeOutQuad', delay: 240}
+                        { duration: 350, easing: 'easeOutQuad', delay: 400}
                     );
                 }
                 setTimeout(function () {
                     Velocity(
                         el,
                         { opacity: [1,0], translateX: [0, '-50px']},
-                        { duration: 200, easing: 'easeOutQuad', complete: done, delay: 240}
+                        { duration: 200, easing: 'easeOutQuad', complete: done, delay: 400}
                     )
                 }, delay)
             },
@@ -81,7 +81,7 @@
                     Velocity(
                         el.parentNode,
                         { translateX: ['-100%', 0]},
-                        { duration: 250, easing: 'easeInQuad'}
+                        { duration: 200, easing: 'easeOutQuad'}
                     );
                 }
 

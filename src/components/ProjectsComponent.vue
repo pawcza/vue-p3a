@@ -90,6 +90,7 @@
         methods: {
             setBoxValues(){
                 this.initial = true;
+                this.positions = [];
                 let boxes = this.$el.querySelectorAll('.project-container');
                 for (let x = 0; x<boxes.length; ++x){
                     this.projects[x].style = {
@@ -111,12 +112,13 @@
                         boxes[activeIndex],
                         this.positions[activeIndex],
                         {
-                            duration: 340,
+                            duration: 420,
                             easing: 'easeOutQuart',
+                            queue: false,
                             complete: function(){
                                 setTimeout(function(){
                                     _this.projects[activeIndex].classy = [];
-                                }, 340);
+                                }, 420);
                             }
                         }
                     );
@@ -151,7 +153,7 @@
                         width: [this.positions[index].width, target.$el.style.width],
                         height: [this.positions[index].height, target.$el.style.height]
                     };
-                    easing = 'easeOutQuad';
+                    easing = 'easeOutQuart';
                 } else {
                     style = this.positions[index];
                     values = {
@@ -160,14 +162,15 @@
                         width: [this.$data.big.width, target.$el.style.width],
                         height: [this.$data.big.height, target.$el.style.height]
                     };
-                    easing = 'easeInQuad';
+                    easing = 'easeOutQuart';
                 }
                 Velocity(
                     target.$el,
                     values,
                     {
-                        duration: 340,
+                        duration: 420,
                         easing: easing,
+                        queue: false,
                         complete: function(){
                             _this.playing = false;
                             target.project.style = style;
@@ -177,13 +180,13 @@
             },
             transform(index, boxes){
                 for(let x = 0; x < boxes.length; ++x){
-                    let forcefeed = boxes[x].style.transform, tx = 0, ty = 0, easing = 'easeInQuad';
+                    let forcefeed = boxes[x].style.transform, tx = 0, ty = 0, easing = 'easeOutQuart';
                     if (Math.floor(index / this.rowSize) > 0 && this.active && x !== index) {
                         ty = -1;
                     } else if (this.active && x !== index) {
                         ty = 1;
                     } else if(x !== index){
-                        easing = 'easeOutQuad';
+                        easing = 'easeOutQuart';
                         ty = 0;
                     }
                     if(Math.floor(index / this.rowSize) === Math.floor(x / this.rowSize) && x !== index && this.active){
@@ -203,12 +206,15 @@
                             translateX: [tx * 100 + '%', forcefeed.split(' ')[0].split('(')[1].split(')')[0]],
                             translateY: [ty * 100 + '%', forcefeed.split(' ')[1].split('(')[1].split(')')[0]]
                         },
-                        {duration: 340, easing: easing}
+                        {duration: 420, easing: easing}
                     )
                 }
             }
         },
         mounted(){
+            this.setBoxValues();
+
+            let _this = this, doit;
             if(window.innerWidth < 768){
                 this.$data.rowSize = 2;
             } else {
@@ -221,7 +227,16 @@
                 left: 0,
                 top: 0,
                 position: 'absolute'
+            };
+
+            function resizedw(){
+                _this.setBoxValues();
             }
+
+            window.onresize = function(){
+                clearTimeout(doit);
+                doit = setTimeout(resizedw, 100);
+            };
         }
     }
 </script>

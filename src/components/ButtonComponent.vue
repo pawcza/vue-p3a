@@ -16,7 +16,7 @@
         },
         methods:{
             goSection: function(target){
-                this.$emit('goSection');
+                this.$emit('goSection', target);
             }
         }
     }

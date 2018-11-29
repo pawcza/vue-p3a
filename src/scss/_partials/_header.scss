@@ -13,46 +13,19 @@ nav{
     padding: 10px;
     position: relative;
     text-transform: capitalize;
-    transition: .2s ease-out;
+    background: white;
     text-decoration: none;
-    &:before{
-      transition: .2s ease-out;
-      background: #fff;
+    overflow: hidden;
+    font-weight: 700;
+    .nav-shadow{
+      background: #222;
       position: absolute;
-      color: #222;
-      content: attr(data-text);
+      color: white;
       z-index: 2;
       left: 0;
-      padding: 10px;
+      opacity: 1;
       top: 0;
-      transform: rotateX(0deg);
-    }
-    &:after{
-      transition: .2s ease-out;
-      position: absolute;
-      color: #fff;
-      content: attr(data-text);
-      left: 0;
       padding: 10px;
-      top: 0;
-      z-index: 1;
-      transform: rotateX(180deg);
-    }
-    &:hover{
-      &:before{
-        background: #D4D4D4;
-      }
-    }
-    &.active{
-      font-weight: 700;
-      &:before{
-        transform: rotateX(180deg);
-      }
-      &:after{
-        transform: rotateX(0deg);
-        z-index: 4;
-        background: #222;
-      }
     }
   }
 }
