@@ -105,7 +105,7 @@
                 }
                 this.initial = false;
             },
-            leftovers(target, index, boxes){
+            leftovers(target, index, boxes = this.$el.children){
                 let activeIndex = Array.from(boxes).findIndex(box => box.classList.contains('active')), _this = this;
                 if(activeIndex !== index && this.active){
                     Velocity(

@@ -36,17 +36,16 @@
         methods: {
 
             goSection(target, index = ''){
-                let _this = this, _target = target;
+                let _this = this, _target = target, prevSection = _this.active;
                 // If target is a string then select it's element based on ID from target
                 (typeof target === 'string') ? target = document.querySelectorAll(target)[0] : '';
                 (index === '') ? index = Array.prototype.slice.call(document.querySelectorAll('section')).indexOf(target) : '';
                 // If animation is not playing and target is not currently active then start playing
                 if(!this.playing && target !== this.active){
-
                     // Disable active state on all navigation elements
                     for(let x=0; x<this.sections.length; ++x){
                         this.sections[x].isActive = false;
-                    };
+                    }
                     // Handle active toggle for sections
                     this.active.classList.remove('active');
                     target.classList.add('active');
@@ -58,9 +57,9 @@
                             easing: 'easeOutExpo',
                             duration: 500,
                             begin: function(){
-                                if(_target.id === 'projects'){
-                                    _this.$children[2].setBoxValues();
-                                }
+                                // if(prevSection.id === 'projects'){
+                                //     _this.$children[2].leftovers();
+                                // }
                                 _this.sections[index].isActive = true;
 
                             },
@@ -90,9 +89,6 @@
             wheel: function(e){
                 (e.deltaY > 0) ? this.nextSection() : '';
                 (e.deltaY < 0) ? this.prevSection() : '';
-            },
-            setActiveNav(){
-
             }
         },
         mounted() {
@@ -111,7 +107,8 @@
 
             });
 
-            this.setActiveNav();
+            // Set active section in case of page being loaded with id in the slug
+            (window.location.hash != '') ? this.goSection(window.location.hash) : '';
 
         }
     }

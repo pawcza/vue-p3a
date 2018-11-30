@@ -76,7 +76,6 @@
                 }, delay)
             },
             leave: function (el, done) {
-                console.log('cos sie dzieje');
                 if(el.dataset.index === '0'){
                     Velocity(
                         el.parentNode,

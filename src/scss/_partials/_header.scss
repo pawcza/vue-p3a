@@ -18,6 +18,7 @@ nav{
     overflow: hidden;
     font-weight: 700;
     .nav-shadow{
+      will-change: left;
       background: #222;
       position: absolute;
       color: white;
