@@ -34,6 +34,7 @@
             }
         },
         methods: {
+
             goSection(target, index = ''){
                 let _this = this, _target = target;
                 // If target is a string then select it's element based on ID from target
@@ -68,6 +69,7 @@
                                 _this.playing = false;
                                 // Set location hash to target ID
                                 window.location.hash = target.id;
+                                document.title = 'Pawel Czarniecki - ' + target.id.charAt(0).toUpperCase() + target.id.slice(1);
                             }
                         }
                     )

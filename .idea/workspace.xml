@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5c8935ca-e8b7-451d-871e-fc7987acfed9" name="Default" comment="Animations revamp&#10;* Rolled back to velocity@1.5.2 (2.0.2 didn't support scrollTop, ^2.0.2 didn't support easing, will have to upgrade later when more stable versions are published)&#10;* Added flashrogers font to master&#10;* Added a line-break for intro text for mobile devices&#10;* Only launches mousemove tracking for devices 1024px+&#10;* Little work on project-controls ('Previous' won't show on first project)&#10;* Changed how transform, resize &amp; leftovers are being handled (now uses Velocity with forcefeeding)&#10;* Changed some animation durations (just a little tweak)&#10;* Added dummy content to other projects&#10;* Added skeletal mobile support&#10;* Changed section swapping to also use Velocity animations instead of changing in-line css styles&#10;* Get this navigation together ...">
+    <list default="true" id="5c8935ca-e8b7-451d-871e-fc7987acfed9" name="Default" comment="More work on animations / navigation added as a component&#10;* setBoxValues now run on page load&#10;* goSection function properly sets active navigation item&#10;* added navigation as a component with fancy transitions&#10;* removed collapse / expand text and changed it to a button&#10;* repositioned prev/next buttons and styled them so they look like a keyboard button&#10;* some more work on easing and timings for resize / transform / leftovers&#10;* leftovers now skip the velocity queue&#10;* positions array now resets upon calling setBoxValues again&#10;* figure out why it won't getBoxValues on resize&#10;* changing section now changes location.navigation.hash as well">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ButtonComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ButtonComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProjectComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProjectComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProjectsComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProjectsComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scss/_body.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/_body.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scss/_partials/_header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/_partials/_header.scss" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,43 +16,43 @@
     <session id="-1390017305">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.0" value="2" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="2" />
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.opened" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="73" />
+          <entry key="html" value="105" />
           <entry key="js" value="209" />
           <entry key="json" value="17" />
           <entry key="scss" value="5203" />
-          <entry key="txt" value="1951" />
-          <entry key="vue" value="14434" />
+          <entry key="txt" value="2725" />
+          <entry key="vue" value="14559" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="73" />
+          <entry key="HTML" value="105" />
           <entry key="JSON" value="17" />
           <entry key="JavaScript" value="209" />
-          <entry key="PLAIN_TEXT" value="1951" />
+          <entry key="PLAIN_TEXT" value="2725" />
           <entry key="SCSS" value="5203" />
-          <entry key="Vue.js" value="14434" />
+          <entry key="Vue.js" value="14559" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="1" />
           <entry key="gitignore" value="1" />
-          <entry key="html" value="3" />
-          <entry key="js" value="9" />
+          <entry key="html" value="4" />
+          <entry key="js" value="10" />
           <entry key="md" value="1" />
           <entry key="scss" value="15" />
           <entry key="ts" value="1" />
@@ -69,8 +62,8 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="1" />
-          <entry key="HTML" value="3" />
-          <entry key="JavaScript" value="9" />
+          <entry key="HTML" value="4" />
+          <entry key="JavaScript" value="10" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="SCSS" value="15" />
@@ -93,35 +86,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/IntroCopyComponent.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="4" column="11" lean-forward="true" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/scss/_body.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="396" selection-start-line="396" selection-end-line="396" />
-              <folding>
-                <element signature="e#7766#9346#0" />
-                <element signature="e#10692#12079#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/NavComponent.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="144">
-              <caret line="9" column="61" lean-forward="true" selection-start-line="9" selection-start-column="61" selection-end-line="9" selection-end-column="61" />
-              <folding>
-                <element signature="e#250#289#0" expanded="true" />
-              </folding>
+              <caret line="9" column="61" selection-start-line="9" selection-start-column="61" selection-end-line="9" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -129,8 +97,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/ProjectsComponent.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="227" column="23" lean-forward="true" selection-start-line="227" selection-start-column="23" selection-end-line="227" selection-end-column="23" />
+            <state relative-caret-position="3600">
+              <caret line="227" column="23" selection-start-line="227" selection-start-column="23" selection-end-line="227" selection-end-column="23" />
               <folding>
                 <element signature="e#415#468#0" expanded="true" />
               </folding>
@@ -151,7 +119,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/ButtonComponent.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="17" column="40" lean-forward="true" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+              <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -159,8 +127,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/ProjectComponent.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
-              <caret line="75" column="25" lean-forward="true" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="25" />
+            <state relative-caret-position="1184">
+              <caret line="75" column="25" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -189,11 +157,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="92" selection-start-line="92" selection-end-line="92" />
-              <folding>
-                <element signature="e#305#333#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="357">
+              <caret line="60" column="62" lean-forward="true" selection-start-line="60" selection-start-column="62" selection-end-line="60" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
         </entry>
@@ -266,13 +249,13 @@
         <option value="$PROJECT_DIR$/src/scss/_partials/_fonts.scss" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/components/IntroTextComponent.vue" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/src/components/ButtonComponent.vue" />
         <option value="$PROJECT_DIR$/src/scss/_body.scss" />
         <option value="$PROJECT_DIR$/src/components/ProjectComponent.vue" />
         <option value="$PROJECT_DIR$/src/components/ProjectsComponent.vue" />
         <option value="$PROJECT_DIR$/src/scss/_partials/_header.scss" />
         <option value="$PROJECT_DIR$/src/components/NavComponent.vue" />
+        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/src/App.vue" />
       </list>
     </option>
@@ -425,7 +408,8 @@
       <workItem from="1542657596957" duration="1444000" />
       <workItem from="1543349786393" duration="16848000" />
       <workItem from="1543400204159" duration="24031000" />
-      <workItem from="1543486653584" duration="21266000" />
+      <workItem from="1543486653584" duration="21549000" />
+      <workItem from="1543579881488" duration="1131000" />
     </task>
     <task id="LOCAL-00001" summary="* Added webpack with babel scss html compiling&#10;* Added development node.js server&#10;* Re-wrote vue components to be in different files&#10;* Looked around app structure&#10;* Added scss reset&#10;* Changed project resize function">
       <created>1542504303719</created>
@@ -441,11 +425,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542504816169</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="More work on animations / navigation added as a component&#10;* setBoxValues now run on page load&#10;* goSection function properly sets active navigation item&#10;* added navigation as a component with fancy transitions&#10;* removed collapse / expand text and changed it to a button&#10;* repositioned prev/next buttons and styled them so they look like a keyboard button&#10;* some more work on easing and timings for resize / transform / leftovers&#10;* leftovers now skip the velocity queue&#10;* positions array now resets upon calling setBoxValues again&#10;* figure out why it won't getBoxValues on resize&#10;* changing section now changes location.navigation.hash as well">
+      <created>1543513772941</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1543513772941</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121648000" />
+    <option name="totallyTimeSpent" value="123062000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -458,8 +449,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19936034" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20149253" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Gulp" order="3" side_tool="true" />
@@ -497,7 +489,8 @@
     <MESSAGE value="* Played around button functionality and styling&#10;* Starting work on project content&#10;* Added sample project content to component data" />
     <MESSAGE value="* Added style to dynamically resize content and prevent text wrapping" />
     <MESSAGE value="Animations revamp&#10;* Rolled back to velocity@1.5.2 (2.0.2 didn't support scrollTop, ^2.0.2 didn't support easing, will have to upgrade later when more stable versions are published)&#10;* Added flashrogers font to master&#10;* Added a line-break for intro text for mobile devices&#10;* Only launches mousemove tracking for devices 1024px+&#10;* Little work on project-controls ('Previous' won't show on first project)&#10;* Changed how transform, resize &amp; leftovers are being handled (now uses Velocity with forcefeeding)&#10;* Changed some animation durations (just a little tweak)&#10;* Added dummy content to other projects&#10;* Added skeletal mobile support&#10;* Changed section swapping to also use Velocity animations instead of changing in-line css styles&#10;* Get this navigation together ..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Animations revamp&#10;* Rolled back to velocity@1.5.2 (2.0.2 didn't support scrollTop, ^2.0.2 didn't support easing, will have to upgrade later when more stable versions are published)&#10;* Added flashrogers font to master&#10;* Added a line-break for intro text for mobile devices&#10;* Only launches mousemove tracking for devices 1024px+&#10;* Little work on project-controls ('Previous' won't show on first project)&#10;* Changed how transform, resize &amp; leftovers are being handled (now uses Velocity with forcefeeding)&#10;* Changed some animation durations (just a little tweak)&#10;* Added dummy content to other projects&#10;* Added skeletal mobile support&#10;* Changed section swapping to also use Velocity animations instead of changing in-line css styles&#10;* Get this navigation together ..." />
+    <MESSAGE value="More work on animations / navigation added as a component&#10;* setBoxValues now run on page load&#10;* goSection function properly sets active navigation item&#10;* added navigation as a component with fancy transitions&#10;* removed collapse / expand text and changed it to a button&#10;* repositioned prev/next buttons and styled them so they look like a keyboard button&#10;* some more work on easing and timings for resize / transform / leftovers&#10;* leftovers now skip the velocity queue&#10;* positions array now resets upon calling setBoxValues again&#10;* figure out why it won't getBoxValues on resize&#10;* changing section now changes location.navigation.hash as well" />
+    <option name="LAST_COMMIT_MESSAGE" value="More work on animations / navigation added as a component&#10;* setBoxValues now run on page load&#10;* goSection function properly sets active navigation item&#10;* added navigation as a component with fancy transitions&#10;* removed collapse / expand text and changed it to a button&#10;* repositioned prev/next buttons and styled them so they look like a keyboard button&#10;* some more work on easing and timings for resize / transform / leftovers&#10;* leftovers now skip the velocity queue&#10;* positions array now resets upon calling setBoxValues again&#10;* figure out why it won't getBoxValues on resize&#10;* changing section now changes location.navigation.hash as well" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/dist/js/vendor/vue.min.js" />
@@ -609,6 +602,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/IntroCopyComponent.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scss/_body.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6336">
+          <caret line="396" selection-start-line="396" selection-end-line="396" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/NavComponent.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="9" column="61" selection-start-line="9" selection-start-column="61" selection-end-line="9" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ProjectsComponent.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3600">
+          <caret line="227" column="23" selection-start-line="227" selection-start-column="23" selection-end-line="227" selection-end-column="23" />
+          <folding>
+            <element signature="e#415#468#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scss/_partials/_header.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ButtonComponent.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ProjectComponent.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1184">
+          <caret line="75" column="25" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/IntroTextComponent.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="3" column="91" selection-start-line="3" selection-start-column="91" selection-end-line="3" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -623,31 +675,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/IntroCopyComponent.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="11" lean-forward="true" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scss/_body.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="396" selection-start-line="396" selection-end-line="396" />
-          <folding>
-            <element signature="e#7766#9346#0" />
-            <element signature="e#10692#12079#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/IntroTextComponent.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="91" selection-start-line="3" selection-start-column="91" selection-end-line="3" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/IntroComponent.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -658,54 +685,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scss/_partials/_header.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ProjectsComponent.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="227" column="23" lean-forward="true" selection-start-line="227" selection-start-column="23" selection-end-line="227" selection-end-column="23" />
-          <folding>
-            <element signature="e#415#468#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ButtonComponent.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="40" lean-forward="true" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ProjectComponent.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="75" column="25" lean-forward="true" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/NavComponent.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="9" column="61" lean-forward="true" selection-start-line="9" selection-start-column="61" selection-end-line="9" selection-end-column="61" />
-          <folding>
-            <element signature="e#250#289#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
-          <folding>
-            <element signature="e#305#333#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="357">
+          <caret line="60" column="62" lean-forward="true" selection-start-line="60" selection-start-column="62" selection-end-line="60" selection-end-column="62" />
         </state>
       </provider>
     </entry>
