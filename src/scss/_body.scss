@@ -1,5 +1,6 @@
 body,html{
   overflow: hidden;
+  color: #222;
   font-family: 'Montserrat';
   font-size: 1em;
   @include media('<phone'){
@@ -223,11 +224,23 @@ section{
 }
 #projects{
   //background: linear-gradient(45deg, #13547a, #80d0c7);
-  background: white;
+  .container{
+    display: flex;
+    flex-direction: column;
+    top: 10vh;
+    position: relative;
+    max-height: 80vh;
+    justify-content: space-around;
+  }
+  h2{
+    width: 100%;
+    font-size: 2em;
+    padding: 0 0 15px 10px;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
   .project-wrapper{
     position: relative;
-    top: 10vh;
-    max-height: 80vh;
     height: 100%;
     width: 100%;
     display: flex;
@@ -508,5 +521,4 @@ section{
 }
 #contact{
   //background: linear-gradient(90deg, #48c6ef, #6f86d6);
-  background: white;
 }

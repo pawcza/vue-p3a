@@ -1,6 +1,7 @@
 <template>
     <section>
         <div class="container">
+            <h2>Projects</h2>
             <div class="project-wrapper" :class="{initial: initial}">
                 <project-component
                         v-for="(project, index) in projects"
@@ -21,6 +22,7 @@
         },
         data: function() {
             return {
+                sectionActive : false,
                 initial: false,
                 projects: [
                     {

@@ -83,7 +83,6 @@
                         { duration: 200, easing: 'easeOutQuad'}
                     );
                 }
-
             }
         }
     }
