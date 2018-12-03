@@ -7,51 +7,26 @@ nav{
   justify-content: center;
   z-index: 1;
   padding: 0 10px;
-  border: 1px solid #222;
   a{
     margin: 0;
     color: #222;
     padding: 10px;
     position: relative;
-    transition: .2s ease-out;
+    text-transform: capitalize;
+    background: white;
     text-decoration: none;
-    &:before{
-      transition: .2s ease-out;
-      background: #fff;
-      position: absolute;
-      color: #222;
-      content: attr(data-text);
-      z-index: 2;
-      left: 0;
-      padding: 10px;
-      top: 0;
-      transform: rotateX(0deg);
-    }
-    &:after{
-      transition: .2s ease-out;
+    overflow: hidden;
+    font-weight: 700;
+    .nav-shadow{
+      will-change: left;
       background: #222;
       position: absolute;
-      color: #fff;
-      content: attr(data-text);
+      color: white;
+      z-index: 2;
       left: 0;
-      padding: 10px;
+      opacity: 1;
       top: 0;
-      z-index: 1;
-      transform: rotateX(180deg);
-    }
-    &:hover{
-      &:before{
-        background: #D4D4D4;
-      }
-    }
-    &.active{
-      &:before{
-        transform: rotateX(180deg);
-      }
-      &:after{
-        transform: rotateX(0deg);
-        z-index: 4;
-      }
+      padding: 10px;
     }
   }
 }

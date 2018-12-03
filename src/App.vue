@@ -1,16 +1,23 @@
 <template>
-    <div class="puzzle_container" @mousewheel="wheel($event)">
-        <intro-component class="active" id="intro"></intro-component>
-        <projects-component id="projects"></projects-component>
-        <contact-component id="contact"></contact-component>
+    <div class="app_container">
+        <nav-component :sections="sections" @goSection="goSection"></nav-component>
+        <div class="puzzle_container" @mousewheel="wheel($event)">
+            <intro-component class="active" id="intro"></intro-component>
+            <projects-component id="projects"></projects-component>
+            <contact-component id="contact"></contact-component>
+        </div>
     </div>
 </template>
 <script>
+    import NavComponent from './components/NavComponent.vue'
     import IntroComponent from './components/IntroComponent.vue'
     import ProjectsComponent from './components/ProjectsComponent.vue'
     import ContactComponent from './components/ContactComponent.vue'
+    import Velocity from 'velocity-animate'
+    import 'velocity-animate/velocity.ui.min.js'
     export default {
         components: {
+            NavComponent,
             IntroComponent,
             ProjectsComponent,
             ContactComponent
@@ -18,35 +25,53 @@
         data: function() {
             return {
                 sections: [
-                    {name: 'intro'},
-                    {name: 'projects'},
-                    {name: 'contact'}
+                    {name: 'intro', isActive: true},
+                    {name: 'projects', isActive: false},
+                    {name: 'contact', isActive: false}
                 ],
                 playing: false,
                 active: null
             }
         },
         methods: {
-            goSection(target){
-                if(this.playing === false){
-                    this.playing = true;
-                    (typeof target === 'string') ? target = document.querySelectorAll(target)[0] : '';
-                    if(typeof target !== 'undefined'){
-                        this.active.classList.remove('active');
-                        this.active = target;
-                        target.classList.add('active');
-                        let index = Array.prototype.indexOf.call(this.$el.children, target),
-                            transform = (index / this.$el.children.length) * 100;
-                        this.$el.style.transform = 'translateY(-' + transform + '%)';
+
+            goSection(target, index = ''){
+                let _this = this, _target = target, prevSection = _this.active;
+                // If target is a string then select it's element based on ID from target
+                (typeof target === 'string') ? target = document.querySelectorAll(target)[0] : '';
+                (index === '') ? index = Array.prototype.slice.call(document.querySelectorAll('section')).indexOf(target) : '';
+                // If animation is not playing and target is not currently active then start playing
+                if(!this.playing && target !== this.active){
+                    // Disable active state on all navigation elements
+                    for(let x=0; x<this.sections.length; ++x){
+                        this.sections[x].isActive = false;
                     }
-                    let that = this,
-                        _target = target;
-                    setTimeout(function(){
-                        that.playing = false;
-                        if(_target.id === 'projects'){
-                            that.$children[1].setBoxValues();
+                    // Handle active toggle for sections
+                    this.active.classList.remove('active');
+                    target.classList.add('active');
+                    this.playing = true;
+                    Velocity(
+                        document.body, 'scroll',
+                        {
+                            offset: target.offsetTop,
+                            easing: 'easeOutExpo',
+                            duration: 500,
+                            begin: function(){
+                                // if(prevSection.id === 'projects'){
+                                //     _this.$children[2].leftovers();
+                                // }
+                                _this.sections[index].isActive = true;
+
+                            },
+                            complete: function(){
+                                _this.active = target;
+                                _this.playing = false;
+                                // Set location hash to target ID
+                                window.location.hash = target.id;
+                                document.title = 'Pawel Czarniecki - ' + target.id.charAt(0).toUpperCase() + target.id.slice(1);
+                            }
                         }
-                    }, 340);
+                    )
                 }
             },
             nextSection: function(){
@@ -57,7 +82,7 @@
             },
             prevSection: function(){
                 let target = this.active.previousElementSibling;
-                if(target !== null){
+                if(target !== null && target.tagName !== 'NAV'){
                     this.goSection(target);
                 }
             },
@@ -81,6 +106,10 @@
                 }
 
             });
+
+            // Set active section in case of page being loaded with id in the slug
+            (window.location.hash != '') ? this.goSection(window.location.hash) : '';
+
         }
     }
 </script>

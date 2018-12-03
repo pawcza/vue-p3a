@@ -1,7 +1,7 @@
 <template>
     <div id="text_container" ref="text">
         <div class="text_loader" ref="loader"></div>
-        <div v-for="letter in text" class="letter_container">
+        <div v-for="letter in text" class="letter_container" :class="{break : letter === ' '}">
             <p v-for="(color, index) in seq" :key="index" :style="{color:color}">x</p>
         </div>
     </div>
@@ -10,7 +10,7 @@
     export default{
         data(){
             return{
-                text: 'I sell chicken nuggets',
+                text: 'Pawel Czarniecki',
                 seq: ['#404040','#f00','#00f', '#0f0']
             }
         },
@@ -49,7 +49,9 @@
         },
         mounted(){
             this.playText();
-            this.$parent.$on('mousemove', this.moveText);
+            if(window.innerWidth > 1024){
+                this.$parent.$on('mousemove', this.moveText);
+            }
         }
     }
 </script>

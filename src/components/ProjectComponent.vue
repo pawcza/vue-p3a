@@ -3,22 +3,18 @@
         <div class='project-box' @click='resizeProject()'>
             <div class='project-hover'>
                 <h5>{{ project.name }}</h5>
-                <div class="btn">
-                    <p>collapse</p>
-                    <transition name='fade'>
-                        <p key='1' v-if='project.active'>Collapse</p>
-                        <p key='2' v-else>Expand</p>
-                    </transition>
+                <div class="full-screen-btn">
+                    <span></span><span></span><span></span><span></span>
                 </div>
             </div>
-            <transition-group name="staggered-fade" tag="ul" class="project-content" :style="project.width" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+            <transition-group name="staggered-fade" tag="ul" class="project-content" :style="project.width" @click.prevent="" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                 <li v-for="(content, index) in project.content" :key="index" v-html="content" v-if="project.active" :class="index" :data-index="Object.keys(project.content).indexOf(index)">
                     {{content}}
                 </li>
             </transition-group>
             <div class="project-controls">
-                <span @click="prevProject($event)"> Previous</span>
-                <span @click="nextProject($event)">Next </span>
+                <span class="prev" v-if="project.index !== 'first'" @click="prevProject($event)"> Previous</span>
+                <span class="next" v-if="project.index !== 'last'" @click="nextProject($event)">Next </span>
             </div>
         </div>
     </div>
@@ -33,17 +29,23 @@
         },
         props: ['project'],
         methods: {
+            preventClicks(e){
+              console.log(e, this);
+              e.stopPropagation();
+            },
             resizeProject(){
-                let boxes = this.$el.parentNode.children,
-                    targetIndex = Array.prototype.indexOf.call(boxes, this.$el);
-                if(this.$el.classList.contains('active')){
-                    this.$parent.resize(this, targetIndex, 'small');
-                } else {
-                    this.$parent.resize(this, targetIndex, 'big');
-                    this.$parent.leftovers(this, targetIndex);
+                if(!this.$parent.playing){
+                    let boxes = this.$el.parentNode.children,
+                        targetIndex = Array.prototype.indexOf.call(boxes, this.$el);
+                    this.$parent.leftovers(this, targetIndex, boxes);
+                    if(this.$parent.active){
+                        this.$parent.resize(this, targetIndex, 'small');
+                    } else {
+                        this.$parent.resize(this, targetIndex, 'big', boxes);
+                    }
+                    this.$parent.toggleActive(this);
+                    this.$parent.transform(targetIndex, boxes);
                 }
-                this.$parent.toggleActive(this);
-                this.$parent.transform(targetIndex, boxes);
             },
             prevProject(e){
                 e.stopPropagation();
@@ -61,15 +63,15 @@
                 if(el.dataset.index === '0'){
                     Velocity(
                         el.parentNode,
-                        { transform: ['translateX(0)', 'translateX(-100%)']},
-                        { duration: 340, easing: 'easeOutQuad'}
+                        { translateX: [0, '-100%']},
+                        { duration: 350, easing: 'easeOutQuad', delay: 400}
                     );
                 }
                 setTimeout(function () {
                     Velocity(
                         el,
-                        { opacity: [1,0], transform: ['translateX(0)', 'translateX(-50px)']},
-                        { duration: 200, easing: 'easeOutQuad', complete: done, delay: 240}
+                        { opacity: [1,0], translateX: [0, '-50px']},
+                        { duration: 200, easing: 'easeOutQuad', complete: done, delay: 400}
                     )
                 }, delay)
             },
@@ -77,8 +79,8 @@
                 if(el.dataset.index === '0'){
                     Velocity(
                         el.parentNode,
-                        { transform: ['translateX(-100%)', 'translateX(-0%)']},
-                        { duration: 340, easing: 'easeInQuad'}
+                        { translateX: ['-100%', 0]},
+                        { duration: 200, easing: 'easeOutQuad'}
                     );
                 }
 
