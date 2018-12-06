@@ -22,7 +22,6 @@
         },
         data: function() {
             return {
-                sectionActive : false,
                 initial: false,
                 projects: [
                     {
@@ -90,6 +89,13 @@
         },
         template: "#project-template",
         methods: {
+            enterAnim(){
+                Velocity(
+                    this.$el.children,
+                    'transition.slideDownIn',
+                    {stagger: 100, display: 'flex'}
+                )
+            },
             setBoxValues(){
                 this.initial = true;
                 this.positions = [];

@@ -56,10 +56,10 @@ section{
   height: 50px;
   overflow: hidden;
   cursor: pointer;
-  transform: translateX(-50%) rotate(45deg);
+  transform: translate(-50%);
   left: 50%;
   bottom: 50px;
-  transition: .2s ease-out;
+  opacity: 0;
   .intro_btn{
     background: transparent;
     width: 100%;
@@ -115,12 +115,13 @@ section{
   align-items: center;
   height: 100vh;
   .text_note{
-    font-size: 2em;
+    font-size: 1.5em;
     padding: 10px 15px;
     line-height: 1.33em;
     max-width: 900px;
     position: relative;
     text-align: center;
+    opacity: 0;
     color: #222;
     font-weight: 300;
     //&:before, &:after{
@@ -145,11 +146,12 @@ section{
     height: 75px;
     position: relative;
     font-weight: 300;
-    font-size: 3.5em;
+    font-size: 3em;
     justify-content: center;
     flex-wrap: wrap;
     padding-bottom: 40px;
     margin-bottom: 40px;
+    opacity: 0;
     .text_loader{
       position: absolute;
       bottom: .5rem;
@@ -520,5 +522,104 @@ section{
   }
 }
 #contact{
-  //background: linear-gradient(90deg, #48c6ef, #6f86d6);
+  .container{
+    display: flex;
+    flex-direction: column;
+    top: 10vh;
+    position: relative;
+    max-height: 80vh;
+    justify-content: space-between;
+    .contact-wrapper{
+      display: flex;
+      >article{
+        flex-basis: 33.3%;
+        padding: 10px 15px;
+        img{
+          max-width: 300px;
+          height: auto;
+        }
+        p{
+          margin-top: 10px;
+
+        }
+        span{
+          line-height: 1.25em;
+          &:first-of-type{
+            color: #bbbbbb;
+            display: block;
+            font-weight: 700;
+            font-size: 1em;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ebebeb;
+          }
+          a{
+            text-decoration: none;
+            color: #222;
+            border-bottom: 1px dotted;
+            transition: .2s ease-out;
+            &:hover{
+              border-bottom-style: solid;
+            }
+          }
+        }
+        &:first-of-type{
+          span{
+            border: none;
+          }
+        }
+      }
+    }
+    .social-wrapper{
+      display: flex;
+      justify-content: center;
+      a{
+        position: relative;
+        width: 32px;
+        height: 32px;
+        margin: 3px;
+        opacity: 0;
+        transition: .2s ease-out;
+        border-radius: 50%;
+        &.github{
+          background-image: url('../assets/img/github_icon.png');
+        }
+        &.linkedin{
+          background-image: url('../assets/img/linkedin_icon.png');
+        }
+        &:before{
+          content: attr(data-cta);
+          position: absolute;
+          top: -10px;
+          left: 50%;
+          transition: opacity .25s ease-out, transform .5s ease-in;
+          width: max-content;
+          transform: translate(-50%, -10px);
+          padding: 10px;
+          font-family: 'Montserrat';
+          color: white;
+          font-size: .85em;
+          background: #222;
+          opacity: 0;
+          border-radius: 3px;
+          pointer-events: none;
+        }
+        &:hover{
+          &:before{
+            transition: .25s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: translate(-50%, -30px);
+            opacity: 1;
+            pointer-events: all;
+          }
+        }
+      }
+    }
+  }
+  h2{
+    width: 100%;
+    font-size: 2em;
+    padding: 0 0 15px 10px;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
 }

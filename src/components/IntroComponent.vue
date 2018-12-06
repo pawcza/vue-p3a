@@ -10,12 +10,23 @@
     import IntroTextComponent from './IntroTextComponent.vue'
     import IntroCopyComponent from './IntroCopyComponent.vue'
     export default {
+        data(){
+            return{
+            }
+        },
         components: {
             ButtonComponent,
             IntroTextComponent,
             IntroCopyComponent
         },
         methods:{
+            enterAnim(){
+                Velocity(
+                    this.$el.children,
+                    'transition.slideDownIn',
+                    {stagger: 100, display: 'flex', delay: 150}
+                )
+            },
             moveText(e){
               this.$emit('mousemove', e);
             },

@@ -48,24 +48,21 @@
                     }
                     // Handle active toggle for sections
                     this.active.classList.remove('active');
-                    target.classList.add('active');
                     this.playing = true;
                     Velocity(
                         document.body, 'scroll',
                         {
                             offset: target.offsetTop,
-                            easing: 'easeOutExpo',
+                            easing: 'easeInOutExpo',
                             duration: 500,
                             begin: function(){
-                                // if(prevSection.id === 'projects'){
-                                //     _this.$children[2].leftovers();
-                                // }
                                 _this.sections[index].isActive = true;
-
+                                _this.active = target;
+                                _this.active.__vue__.enterAnim();
                             },
                             complete: function(){
-                                _this.active = target;
                                 _this.playing = false;
+                                target.classList.add('active');
                                 // Set location hash to target ID
                                 window.location.hash = target.id;
                                 document.title = 'Pawel Czarniecki - ' + target.id.charAt(0).toUpperCase() + target.id.slice(1);
@@ -93,7 +90,7 @@
         },
         mounted() {
             this.$data.active = this.$el.querySelectorAll('section.active')[0];
-
+            this.$children[1].enterAnim();
             window.addEventListener('keydown', function(e){
                 let target = this.document.querySelectorAll('.project-container.active')[0];
                 if(target !== undefined){
