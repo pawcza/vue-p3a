@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="container">
-            <h2 class="contact-animateable">Get in touch</h2>
+            <h2 class="contact-animateable" data-title="Get in touch">Get in touch</h2>
             <div class="contact-wrapper">
                 <article class="contact-animateable" v-for="block in info">
                     <span v-if="block.quest">{{block.quest}}</span>
@@ -29,7 +29,7 @@
                     },
                     {
                         quest: 'How much does a chicken nugget cost?',
-                        ans: "According to the newest independent study conducted by the moon people it would be around the half of the distance from here to Saturn"
+                        ans: "According to the newest independent study conducted by the moon people it would be around the half of the distance from here to Saturn. Gofrow ile tylko chcesz!!!"
                     }
                 ],
                 socials: [
@@ -53,7 +53,7 @@
                 Velocity(
                     document.querySelectorAll('.contact-animateable'),
                     'transition.slideLeftIn',
-                    {stagger: 200}
+                    {stagger: 200, easing: [500, 20]}
                 )
             },
         }

@@ -7,12 +7,80 @@ body,html{
     font-size: 14px;
   }
 }
-@keyframes swap{
+@keyframes textShadow {
+  0% {
+    text-shadow: 0.4389924193300864px 0 1px rgba(0,30,255,0.2), -0.4389924193300864px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  5% {
+    text-shadow: 2.7928974010788217px 0 1px rgba(0,30,255,0.2), -2.7928974010788217px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  10% {
+    text-shadow: 0.02956275843481219px 0 1px rgba(0,30,255,0.2), -0.02956275843481219px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  15% {
+    text-shadow: 0.40218538552878136px 0 1px rgba(0,30,255,0.2), -0.40218538552878136px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  20% {
+    text-shadow: 3.4794037899852017px 0 1px rgba(0,30,255,0.2), -3.4794037899852017px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  25% {
+    text-shadow: 1.6125630401149584px 0 1px rgba(0,30,255,0.2), -1.6125630401149584px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  30% {
+    text-shadow: 0.7015590085143956px 0 1px rgba(0,30,255,0.2), -0.7015590085143956px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  35% {
+    text-shadow: 3.896914047650351px 0 1px rgba(0,30,255,0.2), -3.896914047650351px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  40% {
+    text-shadow: 3.870905614848819px 0 1px rgba(0,30,255,0.2), -3.870905614848819px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  45% {
+    text-shadow: 2.231056963361899px 0 1px rgba(0,30,255,0.2), -2.231056963361899px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  50% {
+    text-shadow: 0.08084290417898504px 0 1px rgba(0,30,255,0.2), -0.08084290417898504px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  55% {
+    text-shadow: 2.3758461067427543px 0 1px rgba(0,30,255,0.2), -2.3758461067427543px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  60% {
+    text-shadow: 2.202193051050636px 0 1px rgba(0,30,255,0.2), -2.202193051050636px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  65% {
+    text-shadow: 2.8638780614874975px 0 1px rgba(0,30,255,0.2), -2.8638780614874975px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  70% {
+    text-shadow: 0.48874025155497314px 0 1px rgba(0,30,255,0.2), -0.48874025155497314px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  75% {
+    text-shadow: 1.8948491305757957px 0 1px rgba(0,30,255,0.2), -1.8948491305757957px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  80% {
+    text-shadow: 0.0833037308038857px 0 1px rgba(0,30,255,0.2), -0.0833037308038857px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  85% {
+    text-shadow: 0.09769827255241735px 0 1px rgba(0,30,255,0.2), -0.09769827255241735px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  90% {
+    text-shadow: 3.443339761481782px 0 1px rgba(0,30,255,0.2), -3.443339761481782px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  95% {
+    text-shadow: 2.1841838852799786px 0 1px rgba(0,30,255,0.2), -2.1841838852799786px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+  100% {
+    text-shadow: 2.6208764473832513px 0 1px rgba(0,30,255,0.2), -2.6208764473832513px 0 1px rgba(255,0,80,0.1), 0 0 3px;
+  }
+}
+.crt {
+  animation: textShadow 1.6s infinite;
+}
+@keyframes spin{
   0%{
-    transform: rotateY(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   100%{
-    transform: rotateY(180deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 @keyframes glitch {
@@ -33,6 +101,40 @@ body,html{
   }
   to {
     transform: translate(0)
+  }
+}
+.app_container{
+  position: relative;
+  &:before, &:after{
+    content: '';
+    transition: .2s ease-out;
+  }
+  &:before{
+    position: fixed;
+    z-index: 9;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background: white;
+  }
+  &:after{
+    width: 64px;
+    height: 64px;
+    position: fixed;
+    left: 50%;
+    z-index: 10;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-top: 2px solid #222;
+    border-radius: 50%;
+    animation: spin 1s ease-in-out infinite;
+  }
+  &.loaded{
+    &:before, &:after{
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 }
 section{
@@ -124,25 +226,9 @@ section{
     opacity: 0;
     color: #222;
     font-weight: 300;
-    //&:before, &:after{
-    //  position: absolute;
-    //  content: attr(data-note);
-    //  opacity: .25;
-    //  top: 0;
-    //  left: 0;
-    //  color: #00f;
-    //  z-index: -2;
-    //  transform: translate(2.5px, 2.5px);
-    //}
-    //&:before{
-    //  transform: translate(-2.7px, -2.1px);
-    //  z-index: -3;
-    //  color: #52fc59;
-    //}
   }
   #text_container{
     display: flex;
-    //font-family: 'flashrogers';
     height: 75px;
     position: relative;
     font-weight: 300;
@@ -166,38 +252,38 @@ section{
       position: relative;
       margin: 0 5px;
       width: 50px;
-
+      transform-origin: 0 25%;
       p{
         height: 100%;
         margin: 0;
         text-align: center;
         width: 50px;
+        opacity: .5;
         position: absolute;
-        color: #404040;
+        //color: #404040;
         left: 25%;
         box-sizing:border-box;
+        filter: blur(1px);
         //animation: swap .05s ease-out infinite alternate;
         &:first-of-type{
           transform: translate(-10px, 5px);
           z-index: 5;
+          filter: blur(0px);
         }
         &:nth-of-type(2){
           transform: translate(-15px, 7.25px);
           z-index: 4;
-          opacity: .75;
         }
         &:nth-of-type(3){
           transform: translate(-15px, 7.25px);
           z-index: 3;
-          opacity: .75;
         }
         &:last-of-type{
           transform: translate(-17px, 9px);
           z-index: 2;
-          opacity: .75;
         }
         &.matched{
-          color: #404040;
+          //color: #404040;
           background: transparent;
           animation: none;
         }
@@ -224,6 +310,15 @@ section{
     }
   }
 }
+h2{
+  width: 100%;
+  font-size: 2em;
+  padding: 0 0 15px 10px;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #222;
+  position: relative;
+}
 #projects{
   //background: linear-gradient(45deg, #13547a, #80d0c7);
   .container{
@@ -233,13 +328,6 @@ section{
     position: relative;
     max-height: 80vh;
     justify-content: space-around;
-  }
-  h2{
-    width: 100%;
-    font-size: 2em;
-    padding: 0 0 15px 10px;
-    margin-bottom: 15px;
-    font-weight: 700;
   }
   .project-wrapper{
     position: relative;
@@ -536,6 +624,7 @@ section{
         padding: 10px 15px;
         img{
           max-width: 300px;
+          border-radius: 50%;
           height: auto;
         }
         p{
@@ -614,12 +703,5 @@ section{
         }
       }
     }
-  }
-  h2{
-    width: 100%;
-    font-size: 2em;
-    padding: 0 0 15px 10px;
-    margin-bottom: 15px;
-    font-weight: 700;
   }
 }

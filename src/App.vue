@@ -89,8 +89,8 @@
             }
         },
         mounted() {
+            let _this = this;
             this.$data.active = this.$el.querySelectorAll('section.active')[0];
-            this.$children[1].enterAnim();
             window.addEventListener('keydown', function(e){
                 let target = this.document.querySelectorAll('.project-container.active')[0];
                 if(target !== undefined){
@@ -102,6 +102,12 @@
                     }
                 }
 
+            });
+
+            window.addEventListener('load', function(){
+                document.querySelectorAll('.app_container')[0].classList.add('loaded');
+                _this.$children[0].enterAnim();
+                _this.$children[1].enterAnim();
             });
 
             // Set active section in case of page being loaded with id in the slug

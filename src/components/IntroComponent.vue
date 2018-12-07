@@ -12,6 +12,7 @@
     export default {
         data(){
             return{
+                done: false
             }
         },
         components: {
@@ -21,6 +22,10 @@
         },
         methods:{
             enterAnim(){
+                if (!this.done){
+                    this.$children[0].playText();
+                    this.done = true;
+                }
                 Velocity(
                     this.$el.children,
                     'transition.slideDownIn',

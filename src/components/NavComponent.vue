@@ -22,6 +22,13 @@
         },
         props: ['sections'],
         methods: {
+            enterAnim(){
+                Velocity(
+                    this.$el.childNodes,
+                    'transition.bounceDownIn',
+                    {stagger: 30, display: 'flex'}
+                )
+            },
             goSection(target, index){
                 this.$emit('goSection', target, index);
             },
