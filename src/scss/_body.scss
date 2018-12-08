@@ -326,6 +326,7 @@ h2{
     flex-direction: column;
     top: 10vh;
     position: relative;
+    position: relative;
     max-height: 80vh;
     justify-content: space-around;
   }
@@ -345,14 +346,23 @@ h2{
       transform: translateX(0) translateY(0);
       will-change: transform, opacity, width, height;
       .project-box{
-        background: white url('https://picsum.photos/1920/1080') no-repeat top right 0;
         overflow: hidden;
         cursor: pointer;
         position: relative;
         width: 100%;
         background-size: cover;
-        border-radius: 0;
+        background-position: center;
+        border-radius: 5px;
         height: 100%;
+        border: 1px solid #ebebeb;
+        .project-logo{
+          position: absolute;
+          max-height: 200px;
+          left: 50%;
+          top: 50%;
+          fill: white;
+          transform: translate(-50%, -50%);
+        }
         .project-hover{
           position: absolute;
           width: 100%;
@@ -398,7 +408,7 @@ h2{
               width: 8px;
               box-sizing: border-box;
               transition: .2s ease-out;
-              border: 2px solid white;
+              border: 2px solid #ebebeb;
               margin: 5px;
               position: relative;
               &:first-of-type{
@@ -417,11 +427,12 @@ h2{
           }
         }
         .project-content{
-          padding: 75px 75px 25px 25px;
+          padding: 25px 75px 25px 25px;
           box-sizing: border-box;
           position: relative;
           height: 100%;
           opacity: 0;
+          border-radius: 3px 0 0 3px;
           will-change: transform, opacity;
           transform: translateX(-100%);
           z-index: 2;
@@ -433,10 +444,18 @@ h2{
             display: flex;
             flex-direction: column;
           }
+          li{
+            &:first-of-type{
+              font-weight: 700;
+              font-size: 1.75em;
+              margin: 0;
+            }
+          }
           .date, .tech, .desc{
             line-height: 24px;
             &:before{
               opacity: .5;
+              font-weight: 700;
               font-size: .85em;
             }
             &:first-of-type{
@@ -464,8 +483,8 @@ h2{
               padding: 10px 15px;
               transition: .2s ease-out;
               background: #222;
-              border-top: 1px solid #222;
-              border-bottom: 1px solid #222;
+              border-radius: 3px;
+              border: 1px solid #222;
               color: white;
               text-decoration: none;
             }

@@ -1,8 +1,8 @@
 <template>
     <div class='project-container' :style="project.style" :class='project.classy'>
-        <div class='project-box' @click='resizeProject()'>
-            <div class='project-hover'>
-                <h5>{{ project.name }}</h5>
+        <div class='project-box' @click='resizeProject()' :style="{ backgroundImage: project.background}">
+            <img class="project-logo" :src="project.logo" alt="">
+            <div class='project-hover' :style="{}">
                 <div class="full-screen-btn">
                     <span></span><span></span><span></span><span></span>
                 </div>
@@ -29,10 +29,6 @@
         },
         props: ['project'],
         methods: {
-            preventClicks(e){
-              console.log(e, this);
-              e.stopPropagation();
-            },
             resizeProject(){
                 if(!this.$parent.playing){
                     let boxes = this.$el.parentNode.children,

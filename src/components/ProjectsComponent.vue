@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="container">
-            <h2>Projects</h2>
+            <h2>My Recent Projects</h2>
             <div class="project-wrapper" :class="{initial: initial}">
                 <project-component
                         v-for="(project, index) in projects"
@@ -16,6 +16,18 @@
     import ProjectComponent from './ProjectComponent.vue'
     import Velocity from 'velocity-animate'
     import 'velocity-animate/velocity.ui.min.js'
+    import rh_thumb from '../assets/img/rh_thumb.png'
+    import ak_thumb from '../assets/img/ak_thumb.png'
+    import rem_thumb from '../assets/img/rem_thumb.png'
+    import cg_thumb from '../assets/img/cg_thumb.png'
+    import cm_thumb from '../assets/img/cm_thumb.png'
+    import zb_thumb from '../assets/img/zb_thumb.png'
+    import rh_logo from '../assets/img/rh_logo.png'
+    import ak_logo from '../assets/img/ak_logo.png'
+    import rem_logo from '../assets/img/rem_logo.png'
+    import cg_logo from '../assets/img/cg_logo.png'
+    import cm_logo from '../assets/img/cm_logo.png'
+    import zb_logo from '../assets/img/zb_logo.png'
     export default{
         components: {
             ProjectComponent
@@ -25,57 +37,63 @@
                 initial: false,
                 projects: [
                     {
-                        name: 'Project 1', style: {}, classy:[], active: false, width: null, index: 'first',
+                        style: {}, classy:[], active: false, width: null, index: 'first', background: 'url(' + rh_thumb + ')', logo: rh_logo,
                         content: {
+                            name: 'Russell Hobbs',
                             date: '2018',
-                            tech: 'Laravel 5.2, Vue.js, jQuery, vanilla js, PHP 7, SCSS, isotope.js',
-                            desc: 'This is a dummy text for one of the projects. Something more interesting is very very likely to appear here in the future. I reckon 3 sentences is a good grasp of what it is.',
-                            btn: "<a target='_blank' href='http://google.com'>See it online</a>"
+                            tech: 'Laravel 5.2, Vue.js, jQuery, VanillaJS, PHP 7, Sass, isotope.js',
+                            desc: "Household appliances manufacturer website with e-commerce, multi language support and a in-house built CMS. I've worked closely with the back-end team to ensure delivery of a high quality product",
+                            btn: "<a target='_blank' href='https://uk.russellhobbs.com'>See it online</a>"
                         }
                     },
                     {
-                        name: 'Project 1', style: {}, classy:[], active: false, width: null,
+                        style: {}, classy:[], active: false, width: null, background: 'url(' + ak_thumb + ')', logo: ak_logo,
                         content: {
+                            name: 'Aleksandra Koleśniak',
                             date: '2018',
-                            tech: 'Laravel 5.2, Vue.js, jQuery, vanilla js, PHP 7, SCSS, isotope.js',
-                            desc: 'This is a dummy text for one of the projects. Something more interesting is very very likely to appear here in the future. I reckon 3 sentences is a good grasp of what it is.',
-                            btn: "<a target='_blank' href='http://google.com'>See it online</a>"
+                            tech: 'VanillaJS, Sass, isotope.js',
+                            desc: 'Minimalistic graphics design portfolio to display arts in a grid with images being lazy-loaded',
+                            btn: "<a target='_blank' href='http://aleksandrakolesniak.com'>See it online</a>"
                         }
                     },
                     {
-                        name: 'Project 1', style: {}, classy:[], active: false, width: null,
+                        style: {}, classy:[], active: false, width: null, background: 'url(' + rem_thumb + ')', logo: rem_logo,
                         content: {
-                            date: '2018',
-                            tech: 'Laravel 5.2, Vue.js, jQuery, vanilla js, PHP 7, SCSS, isotope.js',
-                            desc: 'This is a dummy text for one of the projects. Something more interesting is very very likely to appear here in the future. I reckon 3 sentences is a good grasp of what it is.',
-                            btn: "<a target='_blank' href='http://google.com'>See it online</a>"
+                            name: 'Remington',
+                            date: '2017-2018',
+                            tech: 'jQuery, Sass',
+                            desc: "Personal care products manufacturer. I've worked with the web development team at Spectrum Brands on their Remington website",
+                            btn: "<a target='_blank' href='https://uk.remington-europe.com'>See it online</a>"
                         }
                     },
                     {
-                        name: 'Project 1', style: {}, classy:[], active: false, width: null,
+                        style: {}, classy:[], active: false, width: null, background: 'url(' + zb_thumb + ')', logo: zb_logo,
                         content: {
-                            date: '2018',
-                            tech: 'Laravel 5.2, Vue.js, jQuery, vanilla js, PHP 7, SCSS, isotope.js',
-                            desc: 'This is a dummy text for one of the projects. Something more interesting is very very likely to appear here in the future. I reckon 3 sentences is a good grasp of what it is.',
-                            btn: "<a target='_blank' href='http://google.com'>See it online</a>"
+                            name: 'Zoo Bedding',
+                            date: '2017',
+                            tech: 'Bootstrap 4, jQuery, Sass, velocity.js, Adobe Photoshop & Illustrator',
+                            desc: "Organic wildlife bedding manufacturer, I've worked on the website as well as all the marketing materials, graphics and logos",
+                            btn: "<a target='_blank' href='http://zoobedding.com'>See it online</a>"
                         }
                     },
                     {
-                        name: 'Project 1', style: {}, classy:[], active: false, width: null,
+                        style: {}, classy:[], active: false, width: null, background: 'url(' + cm_thumb + ')', logo: cm_logo,
                         content: {
-                            date: '2018',
-                            tech: 'Laravel 5.2, Vue.js, jQuery, vanilla js, PHP 7, SCSS, isotope.js',
-                            desc: 'This is a dummy text for one of the projects. Something more interesting is very very likely to appear here in the future. I reckon 3 sentences is a good grasp of what it is.',
-                            btn: "<a target='_blank' href='http://google.com'>See it online</a>"
+                            name: 'Cantaramusic',
+                            date: '2017',
+                            tech: 'Bootstrap 4, PHP, jQuery',
+                            desc: "Music news portal. I was revamping current website to be responsive and match today's web standards",
+                            btn: "<a target='_blank' href='https://cantaramusic.pl'>See it online</a>"
                         }
                     },
                     {
-                        name: 'Project 1', style: {}, classy:[], active: false, width: null, index: 'last',
+                        style: {}, classy:[], active: false, width: null, index: 'last', background: 'url(' + cg_thumb + ')', logo: cg_logo,
                         content: {
-                            date: '2018',
-                            tech: 'Laravel 5.2, Vue.js, jQuery, vanilla js, PHP 7, SCSS, isotope.js',
-                            desc: 'This is a dummy text for one of the projects. Something more interesting is very very likely to appear here in the future. I reckon 3 sentences is a good grasp of what it is.',
-                            btn: "<a target='_blank' href='http://google.com'>See it online</a>"
+                            name: 'Cocogreen',
+                            date: '2016-2017',
+                            tech: 'jQuery, velocity.js, CSS3, Adobe Photoshop & Illustrator',
+                            desc: 'Leading brand of speciality coir substrates for edible crops. I was working on their website and all the marketing graphics needed for the brand',
+                            btn: "<a target='_blank' href='http://cocogreen.co.uk'>See it online</a>"
                         }
                     }
                 ],

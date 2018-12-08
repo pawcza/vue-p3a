@@ -21,7 +21,7 @@
             return{
                 info: [
                     {
-                        ans: "<img src=" + photo + ">"
+                        ans: "<img title='Me!' src=" + photo + ">"
                     },
                     {
                         quest: "Are you currently available for work?",
