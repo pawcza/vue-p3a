@@ -12,7 +12,9 @@
   "dependencies": {
     "style-loader": "^0.23.1",
     "vue": "^2.5.17",
-    "vue-router": "^3.0.1"
+    "vue-lazyload": "^1.2.6",
+    "vue-router": "^3.0.1",
+    "vue-scroll-reveal": "^1.0.11"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
@@ -35,6 +37,7 @@
     "html-webpack-plugin": "^3.2.0",
     "image-webpack-loader": "^4.6.0",
     "node-sass": "^4.10.0",
+    "require": "^2.4.20",
     "sass-loader": "^7.1.0",
     "scss": "^0.2.4",
     "scss-loader": "0.0.1",
@@ -44,6 +47,7 @@
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.5.17",
     "vue2-animate": "^2.1.0",
+    "webp-loader": "^0.4.0",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",

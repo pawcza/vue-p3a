@@ -1,5 +1,5 @@
 <template>
-    <div class="intro_btn_container" @click="goSection()">
+    <div class="intro_btn_container" @click="window.scrollTo({top: document.querySelectorAll('#projects').offsetTop, behavior: 'smooth'})">
         <div class="intro_btn">
             <div class="line"></div>
             <div class="line"></div>
@@ -15,9 +15,6 @@
         components: {
         },
         methods:{
-            goSection: function(target){
-                this.$emit('goSection', target);
-            }
         }
     }
 </script>

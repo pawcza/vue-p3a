@@ -1,7 +1,7 @@
 <template>
     <div class='project-container' :style="project.style" :class='project.classy'>
-        <div class='project-box' @click='resizeProject()' :style="{ backgroundImage: project.background}">
-            <img class="project-logo" :src="project.logo" alt="">
+        <div class='project-box' @click='resizeProject()' v-lazy:background-image="project.img">
+            <img class="project-logo" :src="project.img.logo" alt="">
             <div class='project-hover' :style="{}">
                 <div class="full-screen-btn">
                     <span></span><span></span><span></span><span></span>
@@ -20,8 +20,6 @@
     </div>
 </template>
 <script>
-    import Velocity from 'velocity-animate'
-    import 'velocity-animate/velocity.ui.min.js'
     export default {
         data: function() {
             return {

@@ -1,8 +1,8 @@
 <template>
     <section @mousemove="moveText($event)">
-        <intro-text-component></intro-text-component>
-        <intro-copy-component></intro-copy-component>
-        <button-component @goSection="goSection('#projects')"></button-component>
+        <intro-text-component class="load-hidden" v-scroll-reveal="{ delay: 250 }" ></intro-text-component>
+        <intro-copy-component class="load-hidden" v-scroll-reveal="{ delay: 300 }" ></intro-copy-component>
+        <button-component class="load-hidden" v-scroll-reveal="{ delay: 350 }" @goSection="goSection('#projects')"></button-component>
     </section>
 </template>
 <script>
@@ -21,17 +21,6 @@
             IntroCopyComponent
         },
         methods:{
-            enterAnim(){
-                if (!this.done){
-                    this.$children[0].playText();
-                    this.done = true;
-                }
-                Velocity(
-                    this.$el.children,
-                    'transition.slideDownIn',
-                    {stagger: 100, display: 'flex', delay: 150}
-                )
-            },
             moveText(e){
               this.$emit('mousemove', e);
             },

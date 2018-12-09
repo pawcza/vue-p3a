@@ -8,8 +8,6 @@
 </template>
 <script>
     import palette from 'google-palette';
-    import Velocity from 'velocity-animate';
-
     export default {
         data() {
             return {
@@ -58,6 +56,7 @@
             }
         },
         mounted() {
+            this.playText();
             if (window.innerWidth > 1024) {
                 this.$parent.$on('mousemove', this.moveText);
             }

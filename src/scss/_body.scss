@@ -1,5 +1,7 @@
 body,html{
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow-y: overlay;
   color: #222;
   font-family: 'Montserrat';
   font-size: 1em;
@@ -103,11 +105,12 @@ body,html{
     transform: translate(0)
   }
 }
-.app_container{
+.loader{
   position: relative;
+  z-index: 99999;
+  transition: .2s ease-out;
   &:before, &:after{
     content: '';
-    transition: .2s ease-out;
   }
   &:before{
     position: fixed;
@@ -131,11 +134,15 @@ body,html{
     animation: spin 1s ease-in-out infinite;
   }
   &.loaded{
-    &:before, &:after{
-      opacity: 0;
-      pointer-events: none;
-    }
+    opacity: 0;
+    pointer-events: none;
   }
+}
+html.sr .load-hidden{
+  visibility: hidden;
+}
+.app_container{
+  position: relative;
 }
 section{
   height: 100vh;
@@ -161,7 +168,6 @@ section{
   transform: translate(-50%);
   left: 50%;
   bottom: 50px;
-  opacity: 0;
   .intro_btn{
     background: transparent;
     width: 100%;
@@ -223,7 +229,6 @@ section{
     max-width: 900px;
     position: relative;
     text-align: center;
-    opacity: 0;
     color: #222;
     font-weight: 300;
   }
@@ -237,7 +242,6 @@ section{
     flex-wrap: wrap;
     padding-bottom: 40px;
     margin-bottom: 40px;
-    opacity: 0;
     .text_loader{
       position: absolute;
       bottom: .5rem;
@@ -352,6 +356,7 @@ h2{
         width: 100%;
         background-size: cover;
         background-position: center;
+        background-color: #222;
         border-radius: 5px;
         height: 100%;
         border: 1px solid #ebebeb;
@@ -686,7 +691,6 @@ h2{
         width: 32px;
         height: 32px;
         margin: 3px;
-        opacity: 0;
         transition: .2s ease-out;
         border-radius: 50%;
         &.github{

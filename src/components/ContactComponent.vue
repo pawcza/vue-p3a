@@ -1,27 +1,26 @@
 <template>
     <section>
         <div class="container">
-            <h2 class="contact-animateable" data-title="Get in touch">Get in touch</h2>
+            <h2 class="contact-animateable" v-scroll-reveal="{ delay: 250 }" data-title="Get in touch">Get in touch</h2>
             <div class="contact-wrapper">
-                <article class="contact-animateable" v-for="block in info">
-                    <span v-if="block.quest">{{block.quest}}</span>
-                    <span v-html="block.ans"></span>
+                <article class="contact-animateable" v-for="block in info" v-scroll-reveal="{ delay: 300 }">
+                    <span v-scroll-reveal="{ delay: 350 }" v-if="block.quest">{{block.quest}}</span>
+                    <span v-scroll-reveal="{ delay: 400 }" v-html="block.ans"></span>
                 </article>
             </div>
             <div class="social-wrapper">
-                <a class="contact-animateable" v-for="social in socials" :href="social.link" :class="social.name" :data-cta="social.cta" target="_blank"></a>
+                <a class="contact-animateable" v-scroll-reveal="{ delay: index * 150 }" v-for="(social, index) in socials" :key="index" :href="social.link" :class="social.name" :data-cta="social.cta" target="_blank"></a>
             </div>
         </div>
     </section>
 </template>
 <script>
-    import photo from '../assets/img/me.jpg';
     export default {
         data(){
             return{
                 info: [
                     {
-                        ans: "<img title='Me!' src=" + photo + ">"
+                        ans: "<img title='Me!' src=" + require('../assets/img/me.png') + ">"
                     },
                     {
                         quest: "Are you currently available for work?",
@@ -49,13 +48,6 @@
         components: {
         },
         methods: {
-            enterAnim(){
-                Velocity(
-                    document.querySelectorAll('.contact-animateable'),
-                    'transition.slideLeftIn',
-                    {stagger: 200, easing: [500, 20]}
-                )
-            },
         }
 //        ,
 //        props: {

@@ -3,6 +3,8 @@
         <a :href="'#' + section.name"
            v-for="(section, index) in sections"
            :class="{ active: section.isActive }"
+           class="load-hidden"
+           v-scroll-reveal="{ delay: index * 150 }"
            :key="index"
            :data-text="section.name"
            @click="goSection('#' + section.name, index)">
@@ -14,8 +16,6 @@
     </nav>
 </template>
 <script>
-    import Velocity from 'velocity-animate'
-    import 'velocity-animate/velocity.ui.min.js'
     export default {
         data: function () {
             return {}

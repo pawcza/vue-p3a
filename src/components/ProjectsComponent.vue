@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section >
         <div class="container">
             <h2>My Recent Projects</h2>
             <div class="project-wrapper" :class="{initial: initial}">
@@ -14,20 +14,6 @@
 </template>
 <script>
     import ProjectComponent from './ProjectComponent.vue'
-    import Velocity from 'velocity-animate'
-    import 'velocity-animate/velocity.ui.min.js'
-    import rh_thumb from '../assets/img/rh_thumb.png'
-    import ak_thumb from '../assets/img/ak_thumb.png'
-    import rem_thumb from '../assets/img/rem_thumb.png'
-    import cg_thumb from '../assets/img/cg_thumb.png'
-    import cm_thumb from '../assets/img/cm_thumb.png'
-    import zb_thumb from '../assets/img/zb_thumb.png'
-    import rh_logo from '../assets/img/rh_logo.png'
-    import ak_logo from '../assets/img/ak_logo.png'
-    import rem_logo from '../assets/img/rem_logo.png'
-    import cg_logo from '../assets/img/cg_logo.png'
-    import cm_logo from '../assets/img/cm_logo.png'
-    import zb_logo from '../assets/img/zb_logo.png'
     export default{
         components: {
             ProjectComponent
@@ -37,7 +23,10 @@
                 initial: false,
                 projects: [
                     {
-                        style: {}, classy:[], active: false, width: null, index: 'first', background: 'url(' + rh_thumb + ')', logo: rh_logo,
+                        style: {}, classy:[], active: false, width: null, index: 'first',
+                        img: {
+                            src: require('../assets/img/rh_thumb.webp'), loading: require('../assets/img/rh_small.jpg'), logo: require('../assets/img/rh_logo.png')
+                        },
                         content: {
                             name: 'Russell Hobbs',
                             date: '2018',
@@ -47,7 +36,10 @@
                         }
                     },
                     {
-                        style: {}, classy:[], active: false, width: null, background: 'url(' + ak_thumb + ')', logo: ak_logo,
+                        style: {}, classy:[], active: false, width: null,
+                        img: {
+                            src: require('../assets/img/ak_thumb.webp'), loading: require('../assets/img/ak_small.jpg'), logo: require('../assets/img/ak_logo.png')
+                        },
                         content: {
                             name: 'Aleksandra Koleśniak',
                             date: '2018',
@@ -57,7 +49,10 @@
                         }
                     },
                     {
-                        style: {}, classy:[], active: false, width: null, background: 'url(' + rem_thumb + ')', logo: rem_logo,
+                        style: {}, classy:[], active: false, width: null,
+                        img: {
+                            src: require('../assets/img/rem_thumb.webp'), loading: require('../assets/img/rem_small.jpg'), logo: require('../assets/img/rem_logo.png')
+                        },
                         content: {
                             name: 'Remington',
                             date: '2017-2018',
@@ -67,7 +62,10 @@
                         }
                     },
                     {
-                        style: {}, classy:[], active: false, width: null, background: 'url(' + zb_thumb + ')', logo: zb_logo,
+                        style: {}, classy:[], active: false, width: null,
+                        img: {
+                            src: require('../assets/img/zb_thumb.webp'), loading: require('../assets/img/zb_small.jpg'), logo: require('../assets/img/zb_logo.png')
+                        },
                         content: {
                             name: 'Zoo Bedding',
                             date: '2017',
@@ -77,7 +75,10 @@
                         }
                     },
                     {
-                        style: {}, classy:[], active: false, width: null, background: 'url(' + cm_thumb + ')', logo: cm_logo,
+                        style: {}, classy:[], active: false, width: null,
+                        img: {
+                            src: require('../assets/img/cm_thumb.webp'), loading: require('../assets/img/cm_small.jpg'), logo: require('../assets/img/cm_logo.png')
+                        },
                         content: {
                             name: 'Cantaramusic',
                             date: '2017',
@@ -87,7 +88,10 @@
                         }
                     },
                     {
-                        style: {}, classy:[], active: false, width: null, index: 'last', background: 'url(' + cg_thumb + ')', logo: cg_logo,
+                        style: {}, classy:[], active: false, width: null, index: 'last',
+                        img: {
+                            src: require('../assets/img/cg_thumb.webp'), loading: require('../assets/img/cg_small.jpg'), logo: require('../assets/img/cg_logo.png')
+                        },
                         content: {
                             name: 'Cocogreen',
                             date: '2016-2017',
@@ -177,7 +181,8 @@
                         left: [this.positions[index].left, target.$el.style.left],
                         top: [this.positions[index].top, target.$el.style.top],
                         width: [this.positions[index].width, target.$el.style.width],
-                        height: [this.positions[index].height, target.$el.style.height]
+                        height: [this.positions[index].height, target.$el.style.height],
+                        translateZ: '0'
                     };
                     easing = 'easeOutQuart';
                 } else {
@@ -186,7 +191,8 @@
                         left: [this.$data.big.left, target.$el.style.left],
                         top: [this.$data.big.top, target.$el.style.top],
                         width: [this.$data.big.width, target.$el.style.width],
-                        height: [this.$data.big.height, target.$el.style.height]
+                        height: [this.$data.big.height, target.$el.style.height],
+                        translateZ: '0'
                     };
                     easing = 'easeOutQuart';
                 }
@@ -255,14 +261,7 @@
                 position: 'absolute'
             };
 
-            function resizedw(){
-                _this.setBoxValues();
-            }
 
-            window.onresize = function(){
-                clearTimeout(doit);
-                doit = setTimeout(resizedw, 100);
-            };
         }
     }
 </script>

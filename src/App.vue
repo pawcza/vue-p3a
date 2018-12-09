@@ -1,6 +1,6 @@
 <template>
     <div class="app_container">
-        <nav-component :sections="sections" @goSection="goSection"></nav-component>
+        <nav-component v-on:scroll.native="scrollNav($event)" :sections="sections" @goSection="goSection"></nav-component>
         <div class="puzzle_container" @mousewheel="wheel($event)">
             <intro-component class="active" id="intro"></intro-component>
             <projects-component id="projects"></projects-component>
@@ -34,58 +34,33 @@
             }
         },
         methods: {
-
+            scrollNav(event){
+//                console.log(event);
+            },
             goSection(target, index = ''){
-                let _this = this, _target = target, prevSection = _this.active;
+                let _this = this;
                 // If target is a string then select it's element based on ID from target
                 (typeof target === 'string') ? target = document.querySelectorAll(target)[0] : '';
-                (index === '') ? index = Array.prototype.slice.call(document.querySelectorAll('section')).indexOf(target) : '';
-                // If animation is not playing and target is not currently active then start playing
-                if(!this.playing && target !== this.active){
-                    // Disable active state on all navigation elements
-                    for(let x=0; x<this.sections.length; ++x){
-                        this.sections[x].isActive = false;
-                    }
-                    // Handle active toggle for sections
-                    this.active.classList.remove('active');
-                    this.playing = true;
-                    Velocity(
-                        document.body, 'scroll',
-                        {
-                            offset: target.offsetTop,
-                            easing: 'easeInOutExpo',
-                            duration: 500,
-                            begin: function(){
-                                _this.sections[index].isActive = true;
-                                _this.active = target;
-                                _this.active.__vue__.enterAnim();
-                            },
-                            complete: function(){
-                                _this.playing = false;
-                                target.classList.add('active');
-                                // Set location hash to target ID
-                                window.location.hash = target.id;
-                                document.title = 'Pawel Czarniecki - ' + target.id.charAt(0).toUpperCase() + target.id.slice(1);
-                            }
+                Velocity(
+                    document.body, 'scroll',
+                    {
+                        offset: target.offsetTop,
+                        easing: 'easeInOutExpo',
+                        duration: 500,
+                        begin: function(){
+                            _this.active = target;
+                        },
+                        complete: function(){
+                            // Set location hash to target ID
+                            window.location.hash = target.id;
+                            document.title = 'Pawel Czarniecki - ' + target.id.charAt(0).toUpperCase() + target.id.slice(1);
                         }
-                    )
-                }
-            },
-            nextSection: function(){
-                let target = this.active.nextElementSibling;
-                if(target !== null){
-                    this.goSection(target);
-                }
-            },
-            prevSection: function(){
-                let target = this.active.previousElementSibling;
-                if(target !== null && target.tagName !== 'NAV'){
-                    this.goSection(target);
-                }
+                    }
+                )
             },
             wheel: function(e){
-                (e.deltaY > 0) ? this.nextSection() : '';
-                (e.deltaY < 0) ? this.prevSection() : '';
+                (e.deltaY > 0) ? console.log('down') : '';
+                (e.deltaY < 0) ? console.log('up') : '';
             }
         },
         mounted() {
@@ -104,11 +79,12 @@
 
             });
 
-            window.addEventListener('load', function(){
-                document.querySelectorAll('.app_container')[0].classList.add('loaded');
-                _this.$children[0].enterAnim();
-                _this.$children[1].enterAnim();
+            document.addEventListener('DOMContentLoaded', function(){
+                document.querySelectorAll('.loader')[0].classList.add('loaded');
+                console.log(_this);
             });
+
+            window.addEventListener('scroll', this.scrollNav, true);
 
             // Set active section in case of page being loaded with id in the slug
             (window.location.hash != '') ? this.goSection(window.location.hash) : '';
