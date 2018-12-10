@@ -1,8 +1,8 @@
 <template>
-    <section >
+    <section style="background: #fbfbfb; z-index: 2;">
         <div class="container">
-            <h2>My Recent Projects</h2>
-            <div class="project-wrapper" :class="{initial: initial}">
+            <h2 v-scroll-reveal="{ delay: 150 }">My Recent Projects</h2>
+            <div v-scroll-reveal="{ delay: 150, afterReveal: setBoxValues }" class="project-wrapper" :class="{initial: initial}">
                 <project-component
                         v-for="(project, index) in projects"
                         :key="index"
@@ -25,79 +25,73 @@
                     {
                         style: {}, classy:[], active: false, width: null, index: 'first',
                         img: {
-                            src: require('../assets/img/rh_thumb.webp'), loading: require('../assets/img/rh_small.jpg'), logo: require('../assets/img/rh_logo.png')
+                            src: require('../assets/img/rh_thumb.png'), loading: require('../assets/img/rh_small.jpg'), logo: require('../assets/img/rh_logo.png')
                         },
                         content: {
                             name: 'Russell Hobbs',
-                            date: '2018',
-                            tech: 'Laravel 5.2, Vue.js, jQuery, VanillaJS, PHP 7, Sass, isotope.js',
                             desc: "Household appliances manufacturer website with e-commerce, multi language support and a in-house built CMS. I've worked closely with the back-end team to ensure delivery of a high quality product",
-                            btn: "<a target='_blank' href='https://uk.russellhobbs.com'>See it online</a>"
+                            tech: ['Laravel 5.2', 'Vue.js', 'jQuery', 'VanillaJS', 'PHP 7', 'Sass', 'isotope.js'],
+                            btn: "<a target='_blank' href='https://uk.russellhobbs.com'>uk.russellhobbs.com</a>"
                         }
                     },
                     {
                         style: {}, classy:[], active: false, width: null,
                         img: {
-                            src: require('../assets/img/ak_thumb.webp'), loading: require('../assets/img/ak_small.jpg'), logo: require('../assets/img/ak_logo.png')
+                            src: require('../assets/img/ak_thumb.png'), loading: require('../assets/img/ak_small.jpg'), logo: require('../assets/img/ak_logo.png')
                         },
                         content: {
                             name: 'Aleksandra Koleśniak',
-                            date: '2018',
-                            tech: 'VanillaJS, Sass, isotope.js',
                             desc: 'Minimalistic graphics design portfolio to display arts in a grid with images being lazy-loaded',
-                            btn: "<a target='_blank' href='http://aleksandrakolesniak.com'>See it online</a>"
+                            tech: ['VanillaJS', 'Sass', 'isotope.js'],
+                            btn: "<a target='_blank' href='http://aleksandrakolesniak.com'>aleksandrakolesniak.com</a>"
                         }
                     },
                     {
                         style: {}, classy:[], active: false, width: null,
                         img: {
-                            src: require('../assets/img/rem_thumb.webp'), loading: require('../assets/img/rem_small.jpg'), logo: require('../assets/img/rem_logo.png')
+                            src: require('../assets/img/rem_thumb.png'), loading: require('../assets/img/rem_small.jpg'), logo: require('../assets/img/rem_logo.png')
                         },
                         content: {
                             name: 'Remington',
-                            date: '2017-2018',
-                            tech: 'jQuery, Sass',
                             desc: "Personal care products manufacturer. I've worked with the web development team at Spectrum Brands on their Remington website",
-                            btn: "<a target='_blank' href='https://uk.remington-europe.com'>See it online</a>"
+                            tech: ['jQuery', 'Sass'],
+                            btn: "<a target='_blank' href='https://uk.remington-europe.com'>uk.remington-europe.com</a>"
                         }
                     },
                     {
                         style: {}, classy:[], active: false, width: null,
                         img: {
-                            src: require('../assets/img/zb_thumb.webp'), loading: require('../assets/img/zb_small.jpg'), logo: require('../assets/img/zb_logo.png')
+                            src: require('../assets/img/zb_thumb.png'), loading: require('../assets/img/zb_small.jpg'), logo: require('../assets/img/zb_logo.png')
                         },
                         content: {
                             name: 'Zoo Bedding',
-                            date: '2017',
-                            tech: 'Bootstrap 4, jQuery, Sass, velocity.js, Adobe Photoshop & Illustrator',
                             desc: "Organic wildlife bedding manufacturer, I've worked on the website as well as all the marketing materials, graphics and logos",
-                            btn: "<a target='_blank' href='http://zoobedding.com'>See it online</a>"
+                            tech: ['Bootstrap 4', 'jQuery', 'Sass', 'velocity.js', 'Adobe Photoshop & Illustrator'],
+                            btn: "<a target='_blank' href='http://zoobedding.com'>zoobedding.com</a>"
                         }
                     },
                     {
                         style: {}, classy:[], active: false, width: null,
                         img: {
-                            src: require('../assets/img/cm_thumb.webp'), loading: require('../assets/img/cm_small.jpg'), logo: require('../assets/img/cm_logo.png')
+                            src: require('../assets/img/cm_thumb.png'), loading: require('../assets/img/cm_small.jpg'), logo: require('../assets/img/cm_logo.png')
                         },
                         content: {
                             name: 'Cantaramusic',
-                            date: '2017',
-                            tech: 'Bootstrap 4, PHP, jQuery',
                             desc: "Music news portal. I was revamping current website to be responsive and match today's web standards",
-                            btn: "<a target='_blank' href='https://cantaramusic.pl'>See it online</a>"
+                            tech: ['Bootstrap 4', 'PHP', 'jQuery'],
+                            btn: "<a target='_blank' href='https://cantaramusic.pl'>cantaramusic.pl</a>"
                         }
                     },
                     {
                         style: {}, classy:[], active: false, width: null, index: 'last',
                         img: {
-                            src: require('../assets/img/cg_thumb.webp'), loading: require('../assets/img/cg_small.jpg'), logo: require('../assets/img/cg_logo.png')
+                            src: require('../assets/img/cg_thumb.png'), loading: require('../assets/img/cg_small.jpg'), logo: require('../assets/img/cg_logo.png')
                         },
                         content: {
                             name: 'Cocogreen',
-                            date: '2016-2017',
-                            tech: 'jQuery, velocity.js, CSS3, Adobe Photoshop & Illustrator',
                             desc: 'Leading brand of speciality coir substrates for edible crops. I was working on their website and all the marketing graphics needed for the brand',
-                            btn: "<a target='_blank' href='http://cocogreen.co.uk'>See it online</a>"
+                            tech: ['jQuery', 'velocity.js', 'CSS3', 'Adobe Photoshop & Illustrator'],
+                            btn: "<a target='_blank' href='http://cocogreen.co.uk'>cocogreen.co.uk</a>"
                         }
                     }
                 ],
@@ -111,15 +105,7 @@
         },
         template: "#project-template",
         methods: {
-            enterAnim(){
-                Velocity(
-                    this.$el.children,
-                    'transition.slideDownIn',
-                    {stagger: 100, display: 'flex'}
-                )
-            },
             setBoxValues(){
-                this.initial = true;
                 this.positions = [];
                 let boxes = this.$el.querySelectorAll('.project-container');
                 for (let x = 0; x<boxes.length; ++x){
@@ -128,28 +114,24 @@
                         top: boxes[x].offsetTop + 'px',
                         width: boxes[x].offsetWidth + 'px',
                         height: boxes[x].offsetHeight + 'px',
-                        position: 'absolute'
+                        position: 'absolute',
+                        pointerEvents: 'all'
                     };
                     this.positions.push(this.projects[x].style);
-                    this.projects[x].width = {width: this.positions[x].width};
+                    (window.innerWidth < 768) ? this.projects[x].width = {width: '100%'} : this.projects[x].width = {width: this.positions[x].width};
                 }
-                this.initial = false;
             },
             leftovers(target, index, boxes = this.$el.children){
                 let activeIndex = Array.from(boxes).findIndex(box => box.classList.contains('active')), _this = this;
                 if(activeIndex !== index && this.active){
+                    _this.projects[activeIndex].classy = [];
                     Velocity(
                         boxes[activeIndex],
                         this.positions[activeIndex],
                         {
                             duration: 420,
                             easing: 'easeOutQuart',
-                            queue: false,
-                            complete: function(){
-                                setTimeout(function(){
-                                    _this.projects[activeIndex].classy = [];
-                                }, 420);
-                            }
+                            queue: false
                         }
                     );
                     _this.projects[activeIndex].active = false;
@@ -205,7 +187,6 @@
                         queue: false,
                         complete: function(){
                             _this.playing = false;
-                            target.project.style = style;
                         }
                     }
                 );
@@ -238,15 +219,12 @@
                             translateX: [tx * 100 + '%', forcefeed.split(' ')[0].split('(')[1].split(')')[0]],
                             translateY: [ty * 100 + '%', forcefeed.split(' ')[1].split('(')[1].split(')')[0]]
                         },
-                        {duration: 420, easing: easing}
+                        {duration: 420, easing: easing, queue: false}
                     )
                 }
             }
         },
         mounted(){
-            this.setBoxValues();
-
-            let _this = this, doit;
             if(window.innerWidth < 768){
                 this.$data.rowSize = 2;
             } else {
@@ -255,7 +233,7 @@
             this.$data.small = this.$el.querySelectorAll('.project-container')[0].getBoundingClientRect();
             this.$data.big = {
                 width: this.$el.querySelectorAll('.project-wrapper')[0].offsetWidth + 'px',
-                height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight + 2 + 'px',
+                height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight + 'px',
                 left: 0,
                 top: 0,
                 position: 'absolute'

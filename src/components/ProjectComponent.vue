@@ -8,8 +8,9 @@
                 </div>
             </div>
             <transition-group name="staggered-fade" tag="ul" class="project-content" :style="project.width" @click.prevent="" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-                <li v-for="(content, index) in project.content" :key="index" v-html="content" v-if="project.active" :class="index" :data-index="Object.keys(project.content).indexOf(index)">
-                    {{content}}
+                <li v-for="(content, index) in project.content" :key="index" v-if="project.active" :class="index" :data-index="Object.keys(project.content).indexOf(index)">
+                    <span v-if="index !== 'tech'" v-html="content"></span>
+                    <span v-else v-for="elem in content">{{elem}}</span>
                 </li>
             </transition-group>
             <div class="project-controls">
@@ -69,7 +70,7 @@
                     )
                 }, delay)
             },
-            leave: function (el, done) {
+            leave: function (el) {
                 if(el.dataset.index === '0'){
                     Velocity(
                         el.parentNode,

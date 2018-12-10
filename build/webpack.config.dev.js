@@ -33,7 +33,7 @@ module.exports = {
                     })
             },
             {
-                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
                 use: [{
                     loader: 'file-loader',
                     options: {
@@ -43,14 +43,34 @@ module.exports = {
                 }]
             },
             {
-                test: /\.(png|jp(e*)g|svg)$/,
-                use: [{
-                    loader: 'url-loader',
-                    options: {
-                        limit: 8000, // Convert images < 8kb to base64 strings
-                        name: 'images/[hash]-[name].[ext]'
-                    }
-                }]
+                test: /\.(gif|png|jpe?g|svg|webp)$/i,
+                use: [
+                    'file-loader',
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            mozjpeg: {
+                                progressive: true,
+                                quality: 90
+                            },
+                            // optipng.enabled: false will disable optipng
+                            optipng: {
+                                enabled: false,
+                            },
+                            pngquant: {
+                                quality: '90',
+                                speed: 4
+                            },
+                            gifsicle: {
+                                interlaced: false,
+                            },
+                            // the webp option will enable WEBP
+                            webp: {
+                                quality: 90
+                            }
+                        }
+                    },
+                ],
             }
         ]
     },

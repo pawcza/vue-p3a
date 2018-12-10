@@ -1,7 +1,6 @@
 <template>
     <nav>
-        <a :href="'#' + section.name"
-           v-for="(section, index) in sections"
+        <a v-for="(section, index) in sections"
            :class="{ active: section.isActive }"
            class="load-hidden"
            v-scroll-reveal="{ delay: index * 150 }"
@@ -9,9 +8,7 @@
            :data-text="section.name"
            @click="goSection('#' + section.name, index)">
             {{section.name}}
-            <transition @before-enter="beforeEnter" @enter="enter" @leave="leave" class="nav-shadow">
-                <span class="nav-shadow" v-if="section.isActive">{{section.name}}</span>
-            </transition>
+            <span class="nav-shadow">{{section.name}}</span>
         </a>
     </nav>
 </template>
@@ -22,24 +19,21 @@
         },
         props: ['sections'],
         methods: {
-            enterAnim(){
-                Velocity(
-                    this.$el.childNodes,
-                    'transition.bounceDownIn',
-                    {stagger: 30, display: 'flex'}
-                )
+            scrollNav(){
+                let targets = document.querySelectorAll('.nav-shadow'), sections = document.querySelectorAll('section'), i;
+                for (i = 0; i < sections.length; ++i){
+                    let transform = (window.pageYOffset - sections[i].offsetTop) / sections[i].offsetHeight * 100;
+                    if(transform >= -100 && transform <= 100) {
+                        targets[i].style.transform = 'translateX(' + transform + '%)';
+                        targets[i].style.opacity = '1';
+                    } else{
+                        targets[i].style.opacity = '0';
+
+                    }
+                }
             },
             goSection(target, index){
                 this.$emit('goSection', target, index);
-            },
-            beforeEnter(el){
-              el.style.left = '-100%';
-            },
-            enter(el, done){
-                Velocity(el, { left: 0 }, { easing: 'easeOutQuad', duration: 340, complete: done })
-            },
-            leave(el, done){
-                Velocity(el, { left: '100%' }, { easing: 'easeOutQuad', duration: 340, complete: done })
             }
         }
     }

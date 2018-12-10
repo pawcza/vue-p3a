@@ -24,11 +24,11 @@
                     },
                     {
                         quest: "Are you currently available for work?",
-                        ans: "Yes! Let's create something awesome together. Feel free to contact me <a href='mailto:hello@pawcza.dev'>here</a>."
+                        ans: "Yes! Let's create something awesome together. Feel free to contact me <a href='mailto:hello@pawcza.codes'>here</a>"
                     },
                     {
                         quest: 'How much does a chicken nugget cost?',
-                        ans: "According to the newest independent study conducted by the moon people it would be around the half of the distance from here to Saturn. Gofrow ile tylko chcesz!!!"
+                        ans: "According to the newest independent study conducted by the moon people it would be around the half of the distance from here to Saturn"
                     }
                 ],
                 socials: [
@@ -40,21 +40,20 @@
                     {
                         link: 'http://linkedin.com/pawcza',
                         name: 'linkedin',
-                        cta: 'My LinkedIn profile'
+                        cta: 'LinkedIn profile'
+                    },
+                    {
+                        link: 'mailto:hello@pawcza.codes',
+                        name: 'mail',
+                        cta: 'Email me'
+                    },
+                    {
+                        link: 'phone:+447577125400',
+                        name: 'phone',
+                        cta: 'Call me'
                     }
                 ]
             }
-        },
-        components: {
-        },
-        methods: {
         }
-//        ,
-//        props: {
-//            name: {
-//                type: String,
-//                required: true
-//            }
-//        }
     }
 </script>

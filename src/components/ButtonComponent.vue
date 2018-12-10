@@ -1,13 +1,6 @@
 <template>
-    <div class="intro_btn_container" @click="window.scrollTo({top: document.querySelectorAll('#projects').offsetTop, behavior: 'smooth'})">
-        <div class="intro_btn">
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
-        <div class="intro_btn">
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
+    <div class="intro_btn" @click="goSection()">
+        Checkout my projects
     </div>
 </template>
 <script>
@@ -15,6 +8,9 @@
         components: {
         },
         methods:{
+            goSection: function(target){
+                this.$emit('goSection', target);
+            }
         }
     }
 </script>
