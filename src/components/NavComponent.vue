@@ -1,46 +1,98 @@
 <template>
-    <nav>
-        <a :href="'#' + section.name"
-           v-for="(section, index) in sections"
+    <transition-group tag="nav" name="navigation-on-load" @enter="enter">
+        <a v-for="(section, index) in sections"
+           v-if="ready"
            :class="{ active: section.isActive }"
-           class="load-hidden"
-           v-scroll-reveal="{ delay: index * 150 }"
            :key="index"
+           :data-index="index"
            :data-text="section.name"
            @click="goSection('#' + section.name, index)">
             {{section.name}}
-            <transition @before-enter="beforeEnter" @enter="enter" @leave="leave" class="nav-shadow">
-                <span class="nav-shadow" v-if="section.isActive">{{section.name}}</span>
-            </transition>
+            <span class="nav-shadow">{{section.name}}</span>
         </a>
-    </nav>
+    </transition-group>
 </template>
 <script>
     export default {
         data: function () {
-            return {}
+            return {
+                ready: false
+            }
         },
         props: ['sections'],
         methods: {
-            enterAnim(){
-                Velocity(
-                    this.$el.childNodes,
-                    'transition.bounceDownIn',
-                    {stagger: 30, display: 'flex'}
-                )
+            scrollNav(){
+                let targets = document.querySelectorAll('.nav-shadow'), sections = document.querySelectorAll('section'), i;
+                for (i = 0; i < sections.length; ++i){
+                    let transform = (window.pageYOffset - sections[i].offsetTop) / sections[i].offsetHeight * 100;
+                    if(transform >= -100 && transform <= 100) {
+                        targets[i].style.transform = 'translateX(' + transform + '%)';
+                        targets[i].style.opacity = '1';
+                    } else{
+                        targets[i].style.opacity = '0';
+
+                    }
+                }
             },
             goSection(target, index){
                 this.$emit('goSection', target, index);
             },
-            beforeEnter(el){
-              el.style.left = '-100%';
-            },
             enter(el, done){
-                Velocity(el, { left: 0 }, { easing: 'easeOutQuad', duration: 340, complete: done })
-            },
-            leave(el, done){
-                Velocity(el, { left: '100%' }, { easing: 'easeOutQuad', duration: 340, complete: done })
+                let index = el.dataset.index;
+                setTimeout(function(){
+                    Velocity(
+                        el,
+                        { translateY: [0, '-50px'], opacity: [1, 0] },
+                        { complete: done }
+                    )
+                }, 50 * index);
             }
+        },
+        mounted(){
+            this.ready = true;
         }
     }
 </script>
+<style lang="scss" scoped>
+    nav{
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 10px;
+        display: flex;
+        justify-content: center;
+        z-index: 99;
+        padding: 0 10px;
+        border-radius: 3px;
+        a{
+            cursor: pointer;
+            color: #222;
+            padding: 10px;
+            position: relative;
+            text-transform: capitalize;
+            background: white;
+            text-decoration: none;
+            overflow: hidden;
+            font-weight: 700;
+            transform: translateY(-50px);
+            opacity: 0;
+            .nav-shadow{
+                background: #222;
+                position: absolute;
+                color: white;
+                opacity: 0;
+                z-index: 2;
+                left: 0;
+                border-radius: 3px;
+                will-change: transform;
+                top: 0;
+                padding: 10px;
+            }
+            &:first-of-type{
+                .nav-shadow{
+                    opacity: 1;
+                }
+            }
+        }
+    }
+</style>

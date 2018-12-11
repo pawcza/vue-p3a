@@ -1,7 +1,7 @@
 <template>
     <div class="app_container">
         <nav-component v-on:scroll.native="scrollNav($event)" :sections="sections" @goSection="goSection"></nav-component>
-        <div class="puzzle_container" @mousewheel="wheel($event)">
+        <div class="puzzle_container">
             <intro-component class="active" id="intro"></intro-component>
             <projects-component id="projects"></projects-component>
             <contact-component id="contact"></contact-component>
@@ -34,37 +34,17 @@
             }
         },
         methods: {
-            scrollNav(event){
-//                console.log(event);
-            },
             goSection(target, index = ''){
-                let _this = this;
                 // If target is a string then select it's element based on ID from target
                 (typeof target === 'string') ? target = document.querySelectorAll(target)[0] : '';
-                Velocity(
-                    document.body, 'scroll',
-                    {
-                        offset: target.offsetTop,
-                        easing: 'easeInOutExpo',
-                        duration: 500,
-                        begin: function(){
-                            _this.active = target;
-                        },
-                        complete: function(){
-                            // Set location hash to target ID
-                            window.location.hash = target.id;
-                            document.title = 'Pawel Czarniecki - ' + target.id.charAt(0).toUpperCase() + target.id.slice(1);
-                        }
-                    }
-                )
-            },
-            wheel: function(e){
-                (e.deltaY > 0) ? console.log('down') : '';
-                (e.deltaY < 0) ? console.log('up') : '';
+                window.scrollTo({
+                    top: target.offsetTop,
+                    behavior: 'smooth'
+                })
             }
         },
         mounted() {
-            let _this = this;
+
             this.$data.active = this.$el.querySelectorAll('section.active')[0];
             window.addEventListener('keydown', function(e){
                 let target = this.document.querySelectorAll('.project-container.active')[0];
@@ -81,10 +61,11 @@
 
             document.addEventListener('DOMContentLoaded', function(){
                 document.querySelectorAll('.loader')[0].classList.add('loaded');
-                console.log(_this);
             });
 
-            window.addEventListener('scroll', this.scrollNav, true);
+            window.addEventListener('scroll', this.$children[0].scrollNav, true);
+
+            window.addEventListener('resize', this.$children[2].resizeHandler, true);
 
             // Set active section in case of page being loaded with id in the slug
             (window.location.hash != '') ? this.goSection(window.location.hash) : '';

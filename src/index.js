@@ -3,18 +3,19 @@ import App from './App.vue'
 import './scss/main.scss'
 import VueLazyLoad from 'vue-lazyload'
 import VueScrollReveal from 'vue-scroll-reveal'
+import Vue2TouchEvents from 'vue2-touch-events'
 
 Vue.use(VueScrollReveal, {
-    class: 'v-scroll-reveal', // A CSS class applied to elements with the v-scroll-reveal directive; useful for animation overrides.
     duration: 800,
-    scale: 1,
-    mobile: false
+    scale: .85
 });
 
 Vue.use(VueLazyLoad, {
     attempt: 1,
     listenEvents: ['scroll']
 });
+
+Vue.use(Vue2TouchEvents);
 
 new Vue({
     el: '#app',
