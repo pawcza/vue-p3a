@@ -2,7 +2,7 @@
     <section style="background: #fbfbfb; z-index: 2;">
         <div class="container">
             <h2 v-scroll-reveal="{ delay: 150 }">My Recent Projects</h2>
-            <div v-scroll-reveal="{ delay: 150, afterReveal: setBoxValues }" class="project-wrapper" :class="{initial: initial}">
+            <div v-scroll-reveal="{ delay: 250, afterReveal: setBoxValues }" class="project-wrapper">
                 <project-component
                         v-for="(project, index) in projects"
                         :key="index"
@@ -20,7 +20,6 @@
         },
         data: function() {
             return {
-                initial: false,
                 projects: [
                     {
                         style: {}, classy:[], active: false, width: null, index: 'first',
@@ -31,7 +30,7 @@
                             name: 'Russell Hobbs',
                             desc: "Household appliances manufacturer website with e-commerce, multi language support and a in-house built CMS. I've worked closely with the back-end team to ensure delivery of a high quality product",
                             tech: ['Laravel 5.2', 'Vue.js', 'jQuery', 'VanillaJS', 'PHP 7', 'Sass', 'isotope.js'],
-                            btn: "<a target='_blank' href='https://uk.russellhobbs.com'>uk.russellhobbs.com</a>"
+                            btn: "<a class='project-link' target='_blank' href='https://uk.russellhobbs.com'>uk.russellhobbs.com</a>"
                         }
                     },
                     {
@@ -43,7 +42,7 @@
                             name: 'Aleksandra Koleśniak',
                             desc: 'Minimalistic graphics design portfolio to display arts in a grid with images being lazy-loaded',
                             tech: ['VanillaJS', 'Sass', 'isotope.js'],
-                            btn: "<a target='_blank' href='http://aleksandrakolesniak.com'>aleksandrakolesniak.com</a>"
+                            btn: "<a class='project-link' target='_blank' href='http://aleksandrakolesniak.com'>aleksandrakolesniak.com</a>"
                         }
                     },
                     {
@@ -55,7 +54,7 @@
                             name: 'Remington',
                             desc: "Personal care products manufacturer. I've worked with the web development team at Spectrum Brands on their Remington website",
                             tech: ['jQuery', 'Sass'],
-                            btn: "<a target='_blank' href='https://uk.remington-europe.com'>uk.remington-europe.com</a>"
+                            btn: "<a class='project-link' target='_blank' href='https://uk.remington-europe.com'>uk.remington-europe.com</a>"
                         }
                     },
                     {
@@ -67,7 +66,7 @@
                             name: 'Zoo Bedding',
                             desc: "Organic wildlife bedding manufacturer, I've worked on the website as well as all the marketing materials, graphics and logos",
                             tech: ['Bootstrap 4', 'jQuery', 'Sass', 'velocity.js', 'Adobe Photoshop & Illustrator'],
-                            btn: "<a target='_blank' href='http://zoobedding.com'>zoobedding.com</a>"
+                            btn: "<a class='project-link' target='_blank' href='http://zoobedding.com'>zoobedding.com</a>"
                         }
                     },
                     {
@@ -79,7 +78,7 @@
                             name: 'Cantaramusic',
                             desc: "Music news portal. I was revamping current website to be responsive and match today's web standards",
                             tech: ['Bootstrap 4', 'PHP', 'jQuery'],
-                            btn: "<a target='_blank' href='https://cantaramusic.pl'>cantaramusic.pl</a>"
+                            btn: "<a class='project-link' target='_blank' href='https://cantaramusic.pl'>cantaramusic.pl</a>"
                         }
                     },
                     {
@@ -91,7 +90,7 @@
                             name: 'Cocogreen',
                             desc: 'Leading brand of speciality coir substrates for edible crops. I was working on their website and all the marketing graphics needed for the brand',
                             tech: ['jQuery', 'velocity.js', 'CSS3', 'Adobe Photoshop & Illustrator'],
-                            btn: "<a target='_blank' href='http://cocogreen.co.uk'>cocogreen.co.uk</a>"
+                            btn: "<a class='project-link' target='_blank' href='http://cocogreen.co.uk'>cocogreen.co.uk</a>"
                         }
                     }
                 ],
@@ -105,26 +104,44 @@
         },
         template: "#project-template",
         methods: {
+            getResizeValues(){
+                (window.innerWidth < 768) ? this.$data.rowSize = 2 : this.$data.rowSize = 3;
+                this.$data.small = this.$children[0].$el.getBoundingClientRect();
+                this.$data.big = {
+                    width: this.$el.querySelectorAll('.project-wrapper')[0].offsetWidth + 'px',
+                    height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight + 'px',
+                    left: 0,
+                    top: 0,
+                    position: 'absolute'
+                };
+            },
             setBoxValues(){
                 this.positions = [];
-                let boxes = this.$el.querySelectorAll('.project-container');
-                for (let x = 0; x<boxes.length; ++x){
+                for (let x = 0; x<this.$children.length; ++x){
                     this.projects[x].style = {
-                        left: boxes[x].offsetLeft + 'px',
-                        top: boxes[x].offsetTop + 'px',
-                        width: boxes[x].offsetWidth + 'px',
-                        height: boxes[x].offsetHeight + 'px',
+                        left: this.$children[x].$el.offsetLeft + 'px',
+                        top: this.$children[x].$el.offsetTop + 'px',
+                        width: this.$children[x].$el.offsetWidth + 'px',
+                        height: this.$children[x].$el.offsetHeight + 'px',
                         position: 'absolute',
                         pointerEvents: 'all'
                     };
                     this.positions.push(this.projects[x].style);
-                    (window.innerWidth < 768) ? this.projects[x].width = {width: '100%'} : this.projects[x].width = {width: this.positions[x].width};
+                    this.projects[x].width = this.positions[x].width;
                 }
             },
+            resizeHandler(){
+                this.getResizeValues();
+                for (let x = 0; x<this.$children.length; ++x){
+                    this.projects[x].width = this.positions[x].width;
+                    this.projects[x].style = {};
+                }
+                this.$nextTick(this.setBoxValues)
+            },
             leftovers(target, index, boxes = this.$el.children){
-                let activeIndex = Array.from(boxes).findIndex(box => box.classList.contains('active')), _this = this;
+                let activeIndex = Array.from(boxes).findIndex(box => box.classList.contains('active'));
                 if(activeIndex !== index && this.active){
-                    _this.projects[activeIndex].classy = [];
+                    this.projects[activeIndex].classy = [];
                     Velocity(
                         boxes[activeIndex],
                         this.positions[activeIndex],
@@ -134,7 +151,7 @@
                             queue: false
                         }
                     );
-                    _this.projects[activeIndex].active = false;
+                    this.projects[activeIndex].active = false;
                     this.active = !this.active;
                 }
             },
@@ -192,54 +209,70 @@
                 );
             },
             transform(index, boxes){
-                for(let x = 0; x < boxes.length; ++x){
-                    let forcefeed = boxes[x].style.transform, tx = 0, ty = 0, easing = 'easeOutQuart';
-                    if (Math.floor(index / this.rowSize) > 0 && this.active && x !== index) {
-                        ty = -1;
-                    } else if (this.active && x !== index) {
-                        ty = 1;
-                    } else if(x !== index){
-                        easing = 'easeOutQuart';
-                        ty = 0;
-                    }
-                    if(Math.floor(index / this.rowSize) === Math.floor(x / this.rowSize) && x !== index && this.active){
-                        ty = 0;
-                        if(Math.floor(index % this.rowSize) === 1){
-                            (x > index) ? tx = 1 : tx = -1;
-                        } else {
-                            (x > index) ? tx = 2 : tx = -2;
+                if(window.innerWidth > 768) {
+                    for (let x = 0; x < boxes.length; ++x) {
+                        let forcefeed = boxes[x].style.transform, tx = 0, ty = 0, easing = 'easeOutQuart';
+                        if (Math.floor(index / this.rowSize) > 0 && this.active && x !== index) {
+                            ty = -1;
+                        } else if (this.active && x !== index) {
+                            ty = 1;
+                        } else if (x !== index) {
+                            easing = 'easeOutQuart';
+                            ty = 0;
                         }
+                        if (Math.floor(index / this.rowSize) === Math.floor(x / this.rowSize) && x !== index && this.active) {
+                            ty = 0;
+                            if (Math.floor(index % this.rowSize) === 1) {
+                                (x > index) ? tx = 1 : tx = -1;
+                            } else {
+                                (x > index) ? tx = 2 : tx = -2;
+                            }
+                        }
+                        (forcefeed === '') ? forcefeed = 'translateX(0%) translateY(0%)' : '';
+
+                        Velocity(
+                            boxes[x],
+                            {
+                                translateX: [tx * 100 + '%', forcefeed.split(' ')[0].split('(')[1].split(')')[0]],
+                                translateY: [ty * 100 + '%', forcefeed.split(' ')[1].split('(')[1].split(')')[0]]
+                            },
+                            {duration: 420, easing: easing, queue: false}
+                        )
                     }
-
-                    (forcefeed === '') ? forcefeed = 'translateX(0%) translateY(0%)' : '';
-
-                    Velocity(
-                        boxes[x],
-                        {
-                            translateX: [tx * 100 + '%', forcefeed.split(' ')[0].split('(')[1].split(')')[0]],
-                            translateY: [ty * 100 + '%', forcefeed.split(' ')[1].split('(')[1].split(')')[0]]
-                        },
-                        {duration: 420, easing: easing, queue: false}
-                    )
                 }
             }
         },
         mounted(){
-            if(window.innerWidth < 768){
-                this.$data.rowSize = 2;
-            } else {
-                this.$data.rowSize = 3;
-            }
-            this.$data.small = this.$el.querySelectorAll('.project-container')[0].getBoundingClientRect();
-            this.$data.big = {
-                width: this.$el.querySelectorAll('.project-wrapper')[0].offsetWidth + 'px',
-                height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight + 'px',
-                left: 0,
-                top: 0,
-                position: 'absolute'
-            };
-
-
+            this.getResizeValues();
         }
     }
 </script>
+<style scoped lang="scss">
+    @import '../scss/plugins/include-media';
+    #projects{
+        .container{
+            display: flex;
+            flex-direction: column;
+            top: 10vh;
+            position: relative;
+            position: relative;
+            max-height: 80vh;
+            justify-content: space-around;
+            .project-wrapper {
+                position: relative;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                align-items: stretch;
+            }
+            @include media('<phone'){
+                max-height: 90vh;
+                .project-wrapper{
+                    max-height: inherit;
+                }
+            }
+        }
+    }
+</style>

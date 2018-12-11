@@ -44,7 +44,7 @@
             }
         },
         mounted() {
-            let _this = this;
+
             this.$data.active = this.$el.querySelectorAll('section.active')[0];
             window.addEventListener('keydown', function(e){
                 let target = this.document.querySelectorAll('.project-container.active')[0];
@@ -64,6 +64,8 @@
             });
 
             window.addEventListener('scroll', this.$children[0].scrollNav, true);
+
+            window.addEventListener('resize', this.$children[2].resizeHandler, true);
 
             // Set active section in case of page being loaded with id in the slug
             (window.location.hash != '') ? this.goSection(window.location.hash) : '';
