@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --config build/webpack.config.dev.js",
     "build": "webpack -p --config build/webpack.config.js",
-    "lint": "eslint --ext .js,.vue src"
+    "deploy": "git push origin :gh-pages && git subtree push --prefix dist origin gh-pages"
   },
   "author": "",
   "license": "ISC",
