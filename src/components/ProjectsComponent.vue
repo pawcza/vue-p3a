@@ -106,12 +106,11 @@
         template: "#project-template",
         methods: {
             getResizeValues(){
-                (window.innerWidth < 768) ? this.padding = 5 : '';
                 (window.innerWidth < 768) ? this.rowSize = 2 : this.rowSize = 3;
                 this.$data.small = this.$children[0].$el.getBoundingClientRect();
                 this.$data.big = {
-                    width: this.$el.querySelectorAll('.project-wrapper')[0].offsetWidth - (this.padding * 2) + 'px',
-                    height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight - (this.padding * 2) + 'px',
+                    width: this.$el.querySelectorAll('.project-wrapper')[0].offsetWidth + 'px',
+                    height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight + 'px',
                     left: 0,
                     top: 0,
                     position: 'absolute'
@@ -121,8 +120,8 @@
                 this.positions = [];
                 for (let x = 0; x<this.$children.length; ++x){
                     this.projects[x].style = {
-                        left: this.$children[x].$el.offsetLeft - this.padding + 'px',
-                        top: this.$children[x].$el.offsetTop - this.padding + 'px',
+                        top: this.$children[x].$el.offsetTop + 'px',
+                        left: this.$children[x].$el.offsetLeft + 'px',
                         width: this.$children[x].$el.offsetWidth + 'px',
                         height: this.$children[x].$el.offsetHeight + 'px',
                         position: 'absolute',
@@ -173,9 +172,9 @@
                     target.project.classy.push('active');
                 }
             },
-            resize(target, index, size, boxes = ''){
+            resize(target, index, size){
                 this.playing = true;
-                let values, style, _this = this, easing;
+                let values, style, _this = this;
                 if(size === 'small'){
                     style = this.positions[index];
                     values = {
@@ -185,7 +184,6 @@
                         height: [this.positions[index].height, target.$el.style.height],
                         translateZ: '0'
                     };
-                    easing = 'easeOutQuart';
                 } else {
                     style = this.positions[index];
                     values = {
@@ -195,14 +193,13 @@
                         height: [this.$data.big.height, target.$el.style.height],
                         translateZ: '0'
                     };
-                    easing = 'easeOutQuart';
                 }
                 Velocity(
                     target.$el,
                     values,
                     {
-                        duration: 420,
-                        easing: easing,
+                        duration: (window.innerWidth < 768) ? 0 : 420,
+                        easing: 'easeOutQuart',
                         queue: false,
                         complete: function(){
                             _this.playing = false;
@@ -271,6 +268,8 @@
                 max-height: 90vh;
                 .project-wrapper{
                     max-height: inherit;
+                    padding: 0 10px;
+                    box-sizing: border-box;
                 }
             }
         }

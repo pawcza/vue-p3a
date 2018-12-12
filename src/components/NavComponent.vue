@@ -2,8 +2,8 @@
     <transition-group tag="nav" name="navigation-on-load" @enter="enter">
         <a v-for="(section, index) in sections"
            v-if="ready"
+           :key="section.name"
            :class="{ active: section.isActive }"
-           :key="index"
            :data-index="index"
            :data-text="section.name"
            @click="goSection('#' + section.name, index)">

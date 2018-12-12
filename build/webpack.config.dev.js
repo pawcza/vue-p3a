@@ -32,22 +32,24 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(gif|png|jpe?g|svg|webp)$/i,
+                test: /\.(gif|png|jpe?g|svg)$/i,
                 use: [
                     'file-loader',
                     {
                         loader: 'image-webpack-loader',
-                        options: {
+                        query: {
                             mozjpeg: {
-                                progressive: true,
-                                quality: 90
-                            },
-                            pngquant: {
-                                quality: '90',
-                                speed: 4
+                            progressive: true,
                             },
                             gifsicle: {
-                                interlaced: false,
+                            interlaced: false,
+                            },
+                            optipng: {
+                            optimizationLevel: 4,
+                            },
+                            pngquant: {
+                            quality: '75-90',
+                            speed: 3,
                             }
                         }
                     }
@@ -59,8 +61,8 @@ module.exports = {
         new FaviconsWebpackPlugin('./src/favicon.png'),
         new webpack.HotModuleReplacementPlugin(),
         new MiniCssExtractPlugin({
-        filename: '[name].[hash].css',
-        chunkFilename: '[id].[hash].css'
+            filename: '[name].[hash].css',
+            chunkFilename: '[id].[hash].css'
         }),
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
