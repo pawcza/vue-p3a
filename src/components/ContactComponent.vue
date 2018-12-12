@@ -39,7 +39,7 @@
                     },
                     {
                         quest: "Are you currently available for work?",
-                        ans: "Yes! Let's create something awesome together. Feel free to contact me <a href='mailto:hello@pawcza.codes'>here</a>"
+                        ans: "Yes! Let's create something awesome together. Feel free to contact me <a href='mailto:paw.czarniecki@gmail.com'>here</a>"
                     },
                     {
                         quest: 'How much does a chicken nugget cost?',
@@ -53,12 +53,12 @@
                         cta: 'Check out my GitHub!'
                     },
                     {
-                        link: 'http://linkedin.com/pawcza',
+                        link: 'https://uk.linkedin.com/in/paweł-czarniecki-612230140',
                         name: 'linkedin',
                         cta: 'LinkedIn profile'
                     },
                     {
-                        link: 'mailto:hello@pawcza.codes',
+                        link: 'mailto:paw.czarniecki@gmail.com',
                         name: 'mail',
                         cta: 'Email me'
                     },
@@ -156,6 +156,7 @@
                         left: 50%;
                         transition: opacity .25s ease-out, transform .5s ease-in;
                         width: max-content;
+                        width: -moz-max-content;
                         transform: translate(-50%, -10px);
                         padding: 10px;
                         font-family: 'Montserrat';
@@ -163,7 +164,7 @@
                         font-size: .85em;
                         background: #222;
                         opacity: 0;
-                        border-radius: 3px;
+                        border-radius: 30px;
                         pointer-events: none;
                     }
                     &:hover{

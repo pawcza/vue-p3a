@@ -32,16 +32,6 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        name: '[name].[ext]',
-                        outputPath: 'fonts/'
-                    }
-                }]
-            },
-            {
                 test: /\.(gif|png|jpe?g|svg|webp)$/i,
                 use: [
                     'file-loader',
@@ -52,20 +42,12 @@ module.exports = {
                                 progressive: true,
                                 quality: 90
                             },
-                            // optipng.enabled: false will disable optipng
-                            optipng: {
-                                enabled: false,
-                            },
                             pngquant: {
                                 quality: '90',
                                 speed: 4
                             },
                             gifsicle: {
                                 interlaced: false,
-                            },
-                            // the webp option will enable WEBP
-                            webp: {
-                                quality: 90
                             }
                         }
                     }
