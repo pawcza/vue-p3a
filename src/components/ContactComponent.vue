@@ -1,15 +1,30 @@
 <template>
     <section>
         <div class="container">
-            <h2 class="contact-animateable" v-scroll-reveal="{ delay: 250 }" data-title="Get in touch">Get in touch</h2>
+            <h2 class="contact-animateable"
+                v-scroll-reveal="{ delay: 250 }"
+                data-title="Get in touch">Get in touch</h2>
             <div class="contact-wrapper">
-                <article class="contact-animateable contact-article" v-for="block in info" v-scroll-reveal="{ delay: 300 }">
-                    <span class="contact-quest" v-scroll-reveal="{ delay: 350 }" v-if="block.quest">{{block.quest}}</span>
-                    <span class="contact-ans" v-scroll-reveal="{ delay: 400 }" v-html="block.ans"></span>
+                <article class="contact-animateable contact-article"
+                         v-for="block in info"
+                         v-scroll-reveal="{ delay: 300 }">
+                    <span class="contact-quest"
+                          v-scroll-reveal="{ delay: 350 }"
+                          v-if="block.quest">{{block.quest}}</span>
+                    <span class="contact-ans"
+                          v-scroll-reveal="{ delay: 400 }"
+                          v-html="block.ans"></span>
                 </article>
             </div>
             <div class="social-wrapper">
-                <a class="contact-animateable" v-scroll-reveal="{ delay: index * 150 }" v-for="(social, index) in socials" :key="index" :href="social.link" :class="social.name" :data-cta="social.cta" target="_blank"></a>
+                <a class="contact-animateable"
+                   v-scroll-reveal="{ delay: index * 150 }"
+                   v-for="(social, index) in socials"
+                   :key="index"
+                   :href="social.link"
+                   :class="social.name"
+                   :data-cta="social.cta"
+                   target="_blank"></a>
             </div>
         </div>
     </section>
@@ -48,7 +63,7 @@
                         cta: 'Email me'
                     },
                     {
-                        link: 'phone:+447577125400',
+                        link: 'tel:+447577125400',
                         name: 'phone',
                         cta: 'Call me'
                     }

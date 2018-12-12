@@ -24,12 +24,12 @@ module.exports = {
                 use: 'vue-loader'
             },
             {
-            test: /\.(sa|sc|c)ss$/,
-            use: [
-              MiniCssExtractPlugin.loader,
-              'css-loader',
-              'sass-loader',
-            ],
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                  MiniCssExtractPlugin.loader,
+                  'css-loader',
+                  'sass-loader',
+                ],
             },
             {
                 test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
@@ -68,8 +68,8 @@ module.exports = {
                                 quality: 90
                             }
                         }
-                    },
-                ],
+                    }
+                ]
             }
         ]
     },
@@ -77,8 +77,8 @@ module.exports = {
         new FaviconsWebpackPlugin('./src/favicon.png'),
         new webpack.HotModuleReplacementPlugin(),
         new MiniCssExtractPlugin({
-        filename: "[name].[hash].css",
-        chunkFilename: "[id].[hash].css"
+        filename: '[name].[hash].css',
+        chunkFilename: '[id].[hash].css'
         }),
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({

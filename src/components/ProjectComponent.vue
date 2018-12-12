@@ -189,8 +189,8 @@
                 z-index: 2;
                 background: rgba(255,255,255,1);
                 border: 1px solid #ebebeb;
-                //-webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
-                //clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
+                -webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
+                clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
                 >*{
                     margin: .75em 0;
                     display: flex;
@@ -205,9 +205,9 @@
                 }
                 .tech, .desc, .btn{
                     font-size: .85em;
-                    line-height: 24px;
+                    line-height: 1.5em;
                     &:before{
-                        opacity: .5;
+                        opacity: .65;
                         margin-right: 100%;
                         font-weight: 700;
                         padding-left: 20px;
@@ -215,7 +215,7 @@
                         background-size: 16px;
                         background-position: left center;
                         background-repeat: no-repeat;
-                        margin-bottom: 5px;
+                        margin-bottom: 10px;
                     }
                     &:first-of-type{
                         margin-top: 0;
@@ -228,9 +228,11 @@
                     span{
                         box-sizing: border-box;
                         margin: 3px 3px 0 0;
-                        padding: 3px 7px;
-                        border-radius: 3px;
-                        border: 1px solid #222;
+                        padding: 3px 10px;
+                        border-radius: 30px;
+                        color: white;
+                        background: #222;
+                        border: 1px solid #1f1f1f;
                     }
                     &:before{
                         background-image: url('../assets/img/tech_icon.svg');
@@ -405,6 +407,8 @@
                     border-radius: 0;
                     width: 100% !important;
                     opacity: .85;
+                    -webkit-clip-path: none;
+                    clip-path: none;
                 }
                 .project-controls{
                     padding: 15px !important;

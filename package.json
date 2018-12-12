@@ -15,7 +15,6 @@
     "style-loader": "^0.23.1",
     "vue": "^2.5.17",
     "vue-lazyload": "^1.2.6",
-    "vue-router": "^3.0.1",
     "vue-scroll-reveal": "^1.0.11"
   },
   "devDependencies": {

@@ -5,12 +5,8 @@
 </template>
 <script>
     export default {
-        components: {
-        },
         methods:{
-            goSection: function(target){
-                this.$emit('goSection', target);
-            }
+            goSection(target){this.$emit('goSection', target)}
         }
     }
 </script>
