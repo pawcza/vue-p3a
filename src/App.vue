@@ -63,7 +63,7 @@
 
             window.addEventListener('scroll', this.$children[0].scrollNav, true);
 
-            window.addEventListener('resize', this.$children[2].resizeHandler, true);
+            // window.addEventListener('resize', this.$children[2].resizeHandler, true);
 
             // Set active section in case of page being loaded with id in the slug
             (window.location.hash != '') ? this.goSection(window.location.hash) : '';
