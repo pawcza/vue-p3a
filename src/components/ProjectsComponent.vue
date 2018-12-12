@@ -160,12 +160,13 @@
                 if(target.project.classy.indexOf('active') !== -1){
                     target.project.active = false;
                     this.active = false;
-                    let _target = target;
+                    let _target = target,
+                        delay = (window.innerWidth < 768) ? 0 : 420;
                     setTimeout(function(){
                         _target.project.classy = _target.project.classy.filter(function(value){
                             return value !== 'active';
                         })
-                    }, 340);
+                    }, delay);
                 } else {
                     this.active = target.project;
                     target.project.active = true;
