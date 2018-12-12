@@ -2,7 +2,7 @@
     <section style="background: #fbfbfb; z-index: 2;">
         <div class="container">
             <h2 v-scroll-reveal="{ delay: 150 }">My Recent Projects</h2>
-            <div v-scroll-reveal="{ delay: 250, afterReveal: setBoxValues }" class="project-wrapper">
+            <div v-scroll-reveal="{ delay: 250, afterReveal: setBoxValues}" class="project-wrapper">
                 <project-component
                         v-for="(project, index) in projects"
                         :key="index"
@@ -99,17 +99,19 @@
                 big: null,
                 active: false,
                 rowSize: null,
-                playing: false
+                playing: false,
+                padding: 10
             }
         },
         template: "#project-template",
         methods: {
             getResizeValues(){
-                (window.innerWidth < 768) ? this.$data.rowSize = 2 : this.$data.rowSize = 3;
+                (window.innerWidth < 768) ? this.padding = 5 : '';
+                (window.innerWidth < 768) ? this.rowSize = 2 : this.rowSize = 3;
                 this.$data.small = this.$children[0].$el.getBoundingClientRect();
                 this.$data.big = {
-                    width: this.$el.querySelectorAll('.project-wrapper')[0].offsetWidth + 'px',
-                    height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight + 'px',
+                    width: this.$el.querySelectorAll('.project-wrapper')[0].offsetWidth - (this.padding * 2) + 'px',
+                    height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight - (this.padding * 2) + 'px',
                     left: 0,
                     top: 0,
                     position: 'absolute'
@@ -119,8 +121,8 @@
                 this.positions = [];
                 for (let x = 0; x<this.$children.length; ++x){
                     this.projects[x].style = {
-                        left: this.$children[x].$el.offsetLeft + 'px',
-                        top: this.$children[x].$el.offsetTop + 'px',
+                        left: this.$children[x].$el.offsetLeft - this.padding + 'px',
+                        top: this.$children[x].$el.offsetTop - this.padding + 'px',
                         width: this.$children[x].$el.offsetWidth + 'px',
                         height: this.$children[x].$el.offsetHeight + 'px',
                         position: 'absolute',
@@ -255,7 +257,6 @@
             flex-direction: column;
             top: 10vh;
             position: relative;
-            position: relative;
             max-height: 80vh;
             justify-content: space-around;
             .project-wrapper {
@@ -265,7 +266,6 @@
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-around;
-                align-items: stretch;
             }
             @include media('<phone'){
                 max-height: 90vh;
