@@ -1,9 +1,8 @@
-'use strict';
-
-const webpack = require('webpack');
-const { VueLoaderPlugin } = require('vue-loader');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack')
+const { VueLoaderPlugin } = require('vue-loader')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
     mode: 'development',
@@ -25,12 +24,12 @@ module.exports = {
                 use: 'vue-loader'
             },
             {
-                test: /\.scss$/,
-                use: ExtractTextPlugin.extract(
-                    {
-                        fallback: 'style-loader',
-                        use: ['css-loader', 'sass-loader']
-                    })
+            test: /\.(sa|sc|c)ss$/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              'css-loader',
+              'sass-loader',
+            ],
             },
             {
                 test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
@@ -75,8 +74,12 @@ module.exports = {
         ]
     },
     plugins: [
+        new FaviconsWebpackPlugin('./src/favicon.png'),
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin({filename: 'style.css'}),
+        new MiniCssExtractPlugin({
+        filename: "[name].[hash].css",
+        chunkFilename: "[id].[hash].css"
+        }),
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',

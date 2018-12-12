@@ -59,9 +59,7 @@
 
             });
 
-            document.addEventListener('DOMContentLoaded', function(){
-                document.querySelectorAll('.loader')[0].classList.add('loaded');
-            });
+            document.querySelectorAll('.loader')[0].classList.add('loaded');
 
             window.addEventListener('scroll', this.$children[0].scrollNav, true);
 
