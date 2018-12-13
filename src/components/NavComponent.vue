@@ -54,6 +54,7 @@
     }
 </script>
 <style lang="scss" scoped>
+    @import '../scss/plugins/include-media';
     nav{
         position: fixed;
         left: 50%;
@@ -63,7 +64,7 @@
         justify-content: center;
         z-index: 99;
         padding: 0 10px;
-        border-radius: 3px;
+        border-radius: 30px;
         a{
             cursor: pointer;
             color: #222;
@@ -76,6 +77,7 @@
             font-weight: 700;
             transform: translateY(-50px);
             opacity: 0;
+            border-radius: 30px;
             .nav-shadow{
                 background: #222;
                 position: absolute;
@@ -91,6 +93,25 @@
             &:first-of-type{
                 .nav-shadow{
                     opacity: 1;
+                }
+            }
+        }
+        @include media('<phone'){
+            left: 0;
+            transform: none;
+            width: 100%;
+            top: 0;
+            border-radius: 0;
+            padding: 0;
+            a{
+                flex-grow:1;
+                text-align: center;
+                border-radius: 0;
+                .nav-shadow{
+                    border-radius: 0;
+                    box-sizing: border-box;
+                    width: 100%;
+                    text-align: center;
                 }
             }
         }

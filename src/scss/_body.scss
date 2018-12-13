@@ -65,6 +65,7 @@ h2{
   box-sizing:border-box;
   font-weight: 700;
   color: #222;
+  text-shadow: 5px 5px 0px rgba(0,0,0,.15);
   position: relative;
   @include media('<phone'){
     text-align: center;

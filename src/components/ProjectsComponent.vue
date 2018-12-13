@@ -98,15 +98,14 @@
                 small: null,
                 big: null,
                 active: false,
-                rowSize: null,
+                rowSize: (window.innerWidth < 768) ? 2 : 3,
                 playing: false,
-                padding: 10
+                delay: (window.innerWidth < 768) ? 0 : 420
             }
         },
         template: "#project-template",
         methods: {
             getResizeValues(){
-                (window.innerWidth < 768) ? this.rowSize = 2 : this.rowSize = 3;
                 this.$data.small = this.$children[0].$el.getBoundingClientRect();
                 this.$data.big = {
                     width: this.$el.querySelectorAll('.project-wrapper')[0].offsetWidth + 'px',
@@ -131,14 +130,6 @@
                     this.projects[x].width = this.positions[x].width;
                 }
             },
-            resizeHandler(){
-                this.getResizeValues();
-                for (let x = 0; x<this.$children.length; ++x){
-                    this.projects[x].width = this.positions[x].width;
-                    this.projects[x].style = {};
-                }
-                this.$nextTick(this.setBoxValues)
-            },
             leftovers(target, index, boxes = this.$el.children){
                 let activeIndex = Array.from(boxes).findIndex(box => box.classList.contains('active'));
                 if(activeIndex !== index && this.active){
@@ -147,7 +138,7 @@
                         boxes[activeIndex],
                         this.positions[activeIndex],
                         {
-                            duration: 420,
+                            duration: this.delay,
                             easing: 'easeOutQuart',
                             queue: false
                         }
@@ -160,13 +151,12 @@
                 if(target.project.classy.indexOf('active') !== -1){
                     target.project.active = false;
                     this.active = false;
-                    let _target = target,
-                        delay = (window.innerWidth < 768) ? 0 : 420;
+                    let _target = target;
                     setTimeout(function(){
                         _target.project.classy = _target.project.classy.filter(function(value){
                             return value !== 'active';
                         })
-                    }, delay);
+                    }, this.delay);
                 } else {
                     this.active = target.project;
                     target.project.active = true;
@@ -199,7 +189,7 @@
                     target.$el,
                     values,
                     {
-                        duration: (window.innerWidth < 768) ? 0 : 420,
+                        duration: this.delay,
                         easing: 'easeOutQuart',
                         queue: false,
                         complete: function(){
@@ -236,7 +226,7 @@
                                 translateX: [tx * 100 + '%', forcefeed.split(' ')[0].split('(')[1].split(')')[0]],
                                 translateY: [ty * 100 + '%', forcefeed.split(' ')[1].split('(')[1].split(')')[0]]
                             },
-                            {duration: 420, easing: easing, queue: false}
+                            {duration: this.delay, easing: easing, queue: false}
                         )
                     }
                 }

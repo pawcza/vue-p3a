@@ -5,7 +5,7 @@
          v-touch:swipe.left="nextProject"
          v-touch:swipe.right="prevProject"
     >
-        <div class='project-box' @click='resizeProject' v-touch="resizeProject" v-lazy:background-image="project.img">
+        <div class='project-box' v-touch="resizeProject" v-lazy:background-image="project.img">
             <img class="project-logo" :src="project.img.logo" alt="">
             <div class='project-hover' :style="{}">
                 <div class="full-screen-btn">
@@ -19,8 +19,8 @@
                 </li>
             </transition-group>
             <div class="project-controls">
-                <span class="prev" v-if="project.index !== 'first'" v-touch="prevProject" @click.stop.prevent="prevProject"> Previous</span>
-                <span class="next" v-if="project.index !== 'last'" v-touch="nextProject" @click.stop.prevent="nextProject">Next </span>
+                <span class="prev" v-if="project.index !== 'first'" v-touch="prevProject"> Previous</span>
+                <span class="next" v-if="project.index !== 'last'" v-touch="nextProject">Next </span>
             </div>
         </div>
     </div>
@@ -110,6 +110,8 @@
             background-position: center;
             border-radius: 5px;
             height: 100%;
+            will-change: box-shadow;
+            transition: box-shadow .3s ease-out;
             .project-logo{
                 position: absolute;
                 max-height: 200px;
@@ -189,8 +191,8 @@
                 will-change: transform, opacity;
                 transform: translateX(-100%);
                 z-index: 2;
-                background: rgba(255,255,255,1);
                 border: 1px solid #ebebeb;
+                background: linear-gradient(100deg, #ffffff, rgba(255,255,255,.5), transparent);
                 -webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
                 clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
                 >*{
@@ -231,7 +233,8 @@
                         box-sizing: border-box;
                         margin: 3px 3px 0 0;
                         padding: 3px 10px;
-                        border-radius: 30px;
+                        border-radius: 5px;
+                        transform: skewX(-15deg);
                         color: white;
                         background: #222;
                         border: 1px solid #1f1f1f;
@@ -289,7 +292,13 @@
                     &:before, &:after{
                         padding: 7px;
                         border: 1px solid #222;
-                        border-radius: 3px;
+                        border-radius: 50%;
+                        width: 32px;
+                        display: inline-block;
+                        box-sizing: border-box;
+                        height: 32px;
+                        background: #222;
+                        color: white;
                     }
                     &:before{
                         content: '\2190';
@@ -302,6 +311,8 @@
                         &:after{
                             content: '\2192';
                             border-color: white;
+                            background: white;
+                            color: #222;
                         }
                     }
                 }
@@ -312,11 +323,16 @@
                 }
             }
         }
+        &:hover{
+            .project-box{
+                box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+            }
+        }
         &.active{
             width: 100%;
             height: 100%;
             opacity: 1;
-            z-index: 1;
+            z-index: 9;
             max-width: 100%;
             .project-hover{
                 opacity: 1;
@@ -408,9 +424,14 @@
                     padding: 20px 15px;
                     border-radius: 0;
                     width: 100% !important;
+                    background: white;
                     opacity: .85;
                     -webkit-clip-path: none;
                     clip-path: none;
+                    /deep/ .project-link{
+                        display: inline-block;
+                        padding: 10px 0;
+                    }
                 }
                 .project-controls{
                     padding: 15px !important;

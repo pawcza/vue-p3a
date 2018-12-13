@@ -1,8 +1,8 @@
 <template>
     <div id="text_container" ref="text">
         <div class="text_loader" ref="loader"></div>
-        <div v-for="letter in text" :style="{width: letterWidth}" class="letter_container"
-             :class="{break : letter === ' '}">w
+        <div v-for="letter in text" :style="{width: letterWidth}" class="letter_container" :data-letter="letter"
+             :class="{break : letter === ' '}">{{letter}}
         </div>
     </div>
 </template>
@@ -66,36 +66,30 @@
         .text_loader {
             position: absolute;
             width: 0;
-            bottom: 0;
+            bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
-            height: 1px;
+            height: 10px;
             transition: 230ms width cubic-bezier(0.75, 0, 0, 1);
-            background: #222;
+            background: #22222215;
         }
         .letter_container {
             position: relative;
             text-align: center;
-            margin: 0 5px;
-            p {
-                height: 100%;
-                margin: 0;
-                text-align: center;
-                opacity: .5;
-                position: absolute;
-                left: 25%;
-                box-sizing: border-box;
+            margin: 0 10px;
+            text-shadow: 5px 5px 0px rgba(0,0,0,.25);
+            &.break{
+                opacity: 0;
             }
         }
         @include media('<phone') {
             padding-bottom: 0;
-            letter-spacing: -.5px;
             font-size: 2.25em;
             .text_loader {
                 display: none;
             }
             .letter_container {
-                margin: 0 2px;
+                margin: 0 5px;
                 &.break {
                     width: 100%;
                     height: 10px;
