@@ -103,12 +103,12 @@
         .project-box{
             overflow: hidden;
             cursor: pointer;
-            position: relative;
-            width: 100%;
+            position: absolute;
+            width: calc(100% - 20px);
             background-size: cover;
             background-position: center;
             border-radius: 5px;
-            height: 100%;
+            height: calc(100% - 20px);
             will-change: box-shadow;
             transition: box-shadow .3s ease-out;
             .project-logo{
@@ -406,6 +406,8 @@
             .project-box{
                 box-shadow: none!important;
                 border-radius: 0;
+                height: 100%;
+                width: 100%;
                 .project-hover{
                     .full-screen-btn{
                         right: 7px !important;
