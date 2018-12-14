@@ -3,8 +3,7 @@
          :style="project.style"
          :class='project.classy'
          v-touch:swipe.left="nextProject"
-         v-touch:swipe.right="prevProject"
-    >
+         v-touch:swipe.right="prevProject">
         <div class='project-box' v-touch="resizeProject" v-lazy:background-image="project.img">
             <img class="project-logo" :src="project.img.logo" alt="">
             <div class='project-hover' :style="{}">
@@ -12,15 +11,15 @@
                     <span></span><span></span><span></span><span></span>
                 </div>
             </div>
-            <transition-group name="staggered-fade" tag="ul" class="project-content" :style="{width: project.width}" @click.prevent="" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+            <transition-group name="staggered-fade" tag="ul" class="project-content" :style="{width: project.width}" @click.prevent="" @before-enter="beforeEnter" @enter="enter" @leave="leave" v-touch.stop="">
                 <li v-for="(content, index) in project.content" :key="'key_' + index" v-if="project.active" :class="index" :data-index="Object.keys(project.content).indexOf(index)">
                     <span v-if="index !== 'tech'" v-html="content"></span>
                     <span v-else v-for="elem in content">{{elem}}</span>
                 </li>
             </transition-group>
             <div class="project-controls">
-                <span class="prev" v-if="project.index !== 'first'" v-touch="prevProject"> Previous</span>
-                <span class="next" v-if="project.index !== 'last'" v-touch="nextProject">Next </span>
+                <span class="prev" v-if="project.index !== 'first'" v-touch.stop="prevProject"> Previous</span>
+                <span class="next" v-if="project.index !== 'last'" v-touch.stop="nextProject">Next </span>
             </div>
         </div>
     </div>
@@ -128,6 +127,7 @@
                 box-sizing: border-box;
                 opacity: 0;
                 display: flex;
+                pointer-events: none;
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: flex-start;
@@ -163,7 +163,7 @@
                         width: 8px;
                         box-sizing: border-box;
                         transition: .2s ease-out;
-                        border: 2px solid #ebebeb;
+                        border: 2px solid #373737;
                         margin: 5px;
                         position: relative;
                         &:first-of-type{
@@ -192,7 +192,8 @@
                 transform: translateX(-100%);
                 z-index: 2;
                 border: 1px solid #ebebeb;
-                background: linear-gradient(100deg, #ffffff, rgba(255,255,255,.5), transparent);
+                background: white;
+                /*background: linear-gradient(100deg, #ffffff, rgba(255,255,255,.5), transparent);*/
                 -webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
                 clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
                 >*{
@@ -236,7 +237,7 @@
                         border-radius: 5px;
                         transform: skewX(-15deg);
                         color: white;
-                        background: #222;
+                        background: #373737;
                         border: 1px solid #1f1f1f;
                     }
                     &:before{
@@ -259,13 +260,13 @@
                     span{
                         /deep/ .project-link{
                             transition: .2s ease-out;
-                            color: #222;
+                            color: #373737;
                             text-decoration: none;
-                            border-bottom: 1px dashed #222;
+                            border-bottom: 1px dashed #373737;
                         }
                         &:hover{
                             /deep/ .project-link{
-                                border-bottom: 1px solid #222;
+                                border-bottom: 1px solid #373737;
                             }
                         }
                     }
@@ -288,16 +289,19 @@
                 span{
                     font-size: .85em;
                     letter-spacing: .1em;
-                    color: #222;
+                    transform: skewX(-10deg);
+                    color: #373737;
                     &:before, &:after{
                         padding: 7px;
-                        border: 1px solid #222;
-                        border-radius: 50%;
+                        border: 1px solid #373737;
+                        border-radius: 5px;
                         width: 32px;
                         display: inline-block;
                         box-sizing: border-box;
                         height: 32px;
-                        background: #222;
+                        text-align: center;
+                        line-height: 16px;
+                        background: #373737;
                         color: white;
                     }
                     &:before{
@@ -312,7 +316,7 @@
                             content: '\2192';
                             border-color: white;
                             background: white;
-                            color: #222;
+                            color: #373737;
                         }
                     }
                 }
@@ -338,7 +342,7 @@
                 opacity: 1;
                 pointer-events: none;
                 h5,p{
-                    color: #222;
+                    color: #373737;
                 }
                 .full-screen-btn{
                     pointer-events: all;
@@ -398,10 +402,10 @@
         }
         @include media('<tablet'){
             flex-basis: 50%;
-            padding: 5px;
-            border-radius: 50%;
+            padding: 0;
             .project-box{
-                border-radius: 5px;
+                box-shadow: none!important;
+                border-radius: 0;
                 .project-hover{
                     .full-screen-btn{
                         right: 7px !important;
@@ -409,7 +413,7 @@
                         width: 24px!important;
                         height: 24px!important;
                         span{
-                            border-color: #222!important;
+                            border-color: #373737!important;
                             height: 6px !important;
                             width: 6px !important;
                             margin: 3px !important;
@@ -432,13 +436,25 @@
                         display: inline-block;
                         padding: 10px 0;
                     }
+                    .tech{
+                        span{
+                            transform: none;
+                        }
+                    }
+                    li:not(.name){
+                        font-size: 1em!important;
+                    }
                 }
                 .project-controls{
                     padding: 15px !important;
+                    span{
+                        transform: none!important;
+                    }
                     .next{
-                        color: #222!important;
+                        color: #373737!important;
                         &:after{
-                            border-color: #222!important;
+                            border-color: #373737!important;
+                            background: transparent!important;
                         }
                     }
                 }

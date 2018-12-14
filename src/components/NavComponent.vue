@@ -67,7 +67,7 @@
         border-radius: 30px;
         a{
             cursor: pointer;
-            color: #222;
+            color: #373737;
             padding: 10px;
             position: relative;
             text-transform: capitalize;
@@ -79,7 +79,7 @@
             opacity: 0;
             border-radius: 30px;
             .nav-shadow{
-                background: #222;
+                background: #373737;
                 position: absolute;
                 color: white;
                 opacity: 0;

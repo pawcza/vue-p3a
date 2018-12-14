@@ -12,7 +12,7 @@
         max-width: 900px;
         position: relative;
         text-align: center;
-        color: #222;
+        color: #373737;
         font-weight: 300;
         @include media('<phone'){
             font-size: 1.25em;

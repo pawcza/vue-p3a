@@ -1,7 +1,7 @@
 <template>
-    <div id="text_container" ref="text">
+    <div id="text_container" ref="title">
         <div class="text_loader" ref="loader"></div>
-        <div v-for="letter in text" :style="{width: letterWidth}" class="letter_container" :data-letter="letter"
+        <div v-for="letter in text" class="letter_container" :data-letter="letter"
              :class="{break : letter === ' '}">{{letter}}
         </div>
     </div>
@@ -11,24 +11,21 @@
         data () {
             return {
                 text: 'Paweł Czarniecki',
-                chars: '',
-                letterWidth: undefined
+                chars: ''
             }
         },
         created () {
             this.chars = this.text + '#!£$&2345678<>/<>/<>/'
         },
         mounted () {
-            let letters = document.querySelectorAll('.letter_container')
             for (let i = 0; i < this.text.length; ++i) {
-                letters[i].style.width = letters[i].clientWidth + 'px'
+                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
             }
         },
         methods: {
             playText () {
                 let that = this,
                     matched = 0,
-                    interval = 50,
                     letterInterval = setInterval(function () {
                     for (let x = 0; x < that.text.length; ++x) {
                         let random = Math.floor(Math.random() * that.chars.length),
@@ -36,7 +33,6 @@
 
                         if (target.innerHTML === that.text[x]) {
                             if (!target.classList.contains('matched')) {
-                                interval = interval + 10;
                                 matched++;
                                 target.classList.add('matched');
                             }
@@ -46,7 +42,7 @@
                     }
                     (matched === that.text.length) ? clearInterval(letterInterval) : ''
                     that.$refs.loader.style.width = matched / that.text.length * 100 + '%'
-                }, interval)
+                }, 50)
             }
         }
     }
@@ -61,6 +57,7 @@
         justify-content: center;
         flex-wrap: wrap;
         padding-bottom: 40px;
+        position: relative;
         margin-bottom: 40px;
         letter-spacing: 1px;
         .text_loader {
@@ -71,13 +68,13 @@
             transform: translateX(-50%);
             height: 10px;
             transition: 230ms width cubic-bezier(0.75, 0, 0, 1);
-            background: #22222215;
+            background: #37373715;
         }
         .letter_container {
             position: relative;
+            display: inline-block;
             text-align: center;
             margin: 0 10px;
-            text-shadow: 5px 5px 0px rgba(0,0,0,.25);
             &.break{
                 opacity: 0;
             }
@@ -93,6 +90,8 @@
                 &.break {
                     width: 100%;
                     height: 10px;
+                    margin: 0 auto;
+                    flex-basis: 100%;
                     opacity: 0;
                 }
             }

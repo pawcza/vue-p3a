@@ -80,34 +80,28 @@ module.exports = {
         use: 'vue-loader'
       },
       {
-        test: /\.(gif|png|jpe?g|svg|webp)$/i,
-        use: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              mozjpeg: {
-                progressive: true,
-                quality: 90
-              },
-              // optipng.enabled: false will disable optipng
-              optipng: {
-                enabled: false,
-              },
-              pngquant: {
-                quality: '90',
-                speed: 4
-              },
-              gifsicle: {
-                interlaced: false,
-              },
-              // the webp option will enable WEBP
-              webp: {
-                quality: 90
+          test: /\.(gif|png|jpe?g|svg)$/i,
+          use: [
+              'file-loader',
+              {
+                  loader: 'image-webpack-loader',
+                  query: {
+                      mozjpeg: {
+                          progressive: true,
+                      },
+                      gifsicle: {
+                          interlaced: false,
+                      },
+                      optipng: {
+                          optimizationLevel: 4,
+                      },
+                      pngquant: {
+                          quality: '75-90',
+                          speed: 3,
+                      }
+                  }
               }
-            }
-          },
-        ],
+          ]
       },
       {
         test: /\.(sa|sc|c)ss$/,

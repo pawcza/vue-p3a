@@ -6,9 +6,7 @@ import VueScrollReveal from 'vue-scroll-reveal'
 import Vue2TouchEvents from 'vue2-touch-events'
 
 Vue.use(VueScrollReveal, {
-    duration: 800,
-    distance: '25px',
-    scale: .9
+    duration: 800
 });
 
 Vue.use(VueLazyLoad, {

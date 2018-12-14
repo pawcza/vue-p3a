@@ -2,7 +2,7 @@ body,html{
   overflow-x: hidden;
   overflow-y: scroll;
   overflow-y: overlay;
-  color: #222;
+  color: #373737;
   font-family: 'Montserrat', sans-serif;
   font-size: 1em;
   @include media('<phone'){
@@ -29,7 +29,7 @@ body,html{
     left: 32px;
     z-index: 10;
     top: 32px;
-    border-top: 2px solid #222;
+    border-top: 2px solid #373737;
     border-radius: 50%;
     animation: spin 1s ease-in-out infinite;
   }
@@ -57,6 +57,18 @@ section{
   width: 100%;
 }
 
+.title-wrapper{
+  span{
+    display: inline-block;
+    margin: 0 .5px;
+    &.break{
+      width: 5px;
+      display: inline-block;
+      opacity: 0;
+    }
+  }
+}
+
 h2{
   width: 100%;
   font-size: 2em;
@@ -64,8 +76,7 @@ h2{
   margin-bottom: 15px;
   box-sizing:border-box;
   font-weight: 700;
-  color: #222;
-  text-shadow: 5px 5px 0px rgba(0,0,0,.15);
+  color: #373737;
   position: relative;
   @include media('<phone'){
     text-align: center;

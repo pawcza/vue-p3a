@@ -61,8 +61,8 @@ module.exports = {
         new FaviconsWebpackPlugin('./src/favicon.png'),
         new webpack.HotModuleReplacementPlugin(),
         new MiniCssExtractPlugin({
-            filename: '[name].[hash].css',
-            chunkFilename: '[id].[hash].css'
+            filename: '[name].css',
+            chunkFilename: '[id].css'
         }),
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({

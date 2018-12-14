@@ -1,7 +1,11 @@
 <template>
     <section style="background: #fbfbfb; z-index: 2;">
         <div class="container">
-            <h2 v-scroll-reveal="{ delay: 150 }">My Recent Projects</h2>
+            <h2 v-scroll-reveal="{ delay: 150, beforeReveal: playText }" class="title-wrapper" ref="title">
+                <span v-for="letter in text" :data-letter="letter"
+                     :class="{break : letter === ' '}">{{letter}}
+                </span>
+            </h2>
             <div v-scroll-reveal="{ delay: 250, afterReveal: setBoxValues}" class="project-wrapper">
                 <project-component
                         v-for="(project, index) in projects"
@@ -20,6 +24,7 @@
         },
         data: function() {
             return {
+                text: 'My recent projects',
                 projects: [
                     {
                         style: {}, classy:[], active: false, width: null, index: 'first',
@@ -105,11 +110,31 @@
         },
         template: "#project-template",
         methods: {
+            playText () {
+                let that = this,
+                    matched = 0,
+                    letterInterval = setInterval(function () {
+                        for (let x = 0; x < that.text.length; ++x) {
+                            let random = Math.floor(Math.random() * that.chars.length),
+                                target = that.$refs.title.children[x];
+
+                            if (target.innerHTML === that.text[x]) {
+                                if (!target.classList.contains('matched')) {
+                                    matched++;
+                                    target.classList.add('matched');
+                                }
+                            } else {
+                                target.innerHTML = that.chars.substring(random, random + 1)
+                            }
+                        }
+                        (matched === that.text.length) ? clearInterval(letterInterval) : '';
+                    }, 50)
+            },
             getResizeValues(){
                 this.$data.small = this.$children[0].$el.getBoundingClientRect();
                 this.$data.big = {
                     width: this.$el.querySelectorAll('.project-wrapper')[0].offsetWidth + 'px',
-                    height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight + 'px',
+                    height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight + 2 + 'px',
                     left: 0,
                     top: 0,
                     position: 'absolute'
@@ -232,8 +257,14 @@
                 }
             }
         },
+        created () {
+            this.chars = this.text + '#!£$&2345678<>/<>/<>/';
+        },
         mounted(){
             this.getResizeValues();
+            for (let i = 0; i < this.text.length; ++i) {
+                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
+            }
         }
     }
 </script>
@@ -259,7 +290,7 @@
                 max-height: 90vh;
                 .project-wrapper{
                     max-height: inherit;
-                    padding: 0 10px;
+                    padding: 10px;
                     box-sizing: border-box;
                 }
             }

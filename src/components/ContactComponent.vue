@@ -1,11 +1,13 @@
 <template>
     <section>
         <div class="container">
-            <h2 class="contact-animateable"
-                v-scroll-reveal="{ delay: 250 }"
-                data-title="Get in touch">Get in touch</h2>
+            <h2 v-scroll-reveal="{ delay: 150, beforeReveal: playText }" class="title-wrapper" ref="title">
+                <span v-for="letter in text" :data-letter="letter"
+                      :class="{break : letter === ' '}">{{letter}}
+                </span>
+            </h2>
             <div class="contact-wrapper">
-                <article class="contact-animateable contact-article"
+                <article class="contact-article"
                          v-for="block in info"
                          v-scroll-reveal="{ delay: 300 }">
                     <span class="contact-quest"
@@ -17,8 +19,7 @@
                 </article>
             </div>
             <div class="social-wrapper">
-                <a class="contact-animateable"
-                   v-scroll-reveal="{ delay: index * 150 }"
+                <a v-scroll-reveal="{ delay: index * 150 }"
                    v-for="(social, index) in socials"
                    :key="index"
                    :href="social.link"
@@ -33,6 +34,7 @@
     export default {
         data(){
             return{
+                text: 'Get in touch',
                 info: [
                     {
                         ans: "<img title='Me!' src=" + require('../assets/img/me.png') + ">"
@@ -68,6 +70,36 @@
                         cta: 'Call me'
                     }
                 ]
+            }
+        },
+        methods: {
+            playText () {
+                let that = this,
+                    matched = 0,
+                    letterInterval = setInterval(function () {
+                        for (let x = 0; x < that.text.length; ++x) {
+                            let random = Math.floor(Math.random() * that.chars.length),
+                                target = that.$refs.title.children[x];
+
+                            if (target.innerHTML === that.text[x]) {
+                                if (!target.classList.contains('matched')) {
+                                    matched++;
+                                    target.classList.add('matched');
+                                }
+                            } else {
+                                target.innerHTML = that.chars.substring(random, random + 1)
+                            }
+                        }
+                        (matched === that.text.length) ? clearInterval(letterInterval) : '';
+                    }, 50)
+            }
+        },
+        created () {
+            this.chars = this.text + '#!£$&2345678<>/<>/<>/';
+        },
+        mounted(){
+            for (let i = 0; i < this.text.length; ++i) {
+                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
             }
         }
     }
@@ -109,7 +141,7 @@
                         }
                         /deep/ a{
                             text-decoration: none;
-                            color: #222;
+                            color: #373737;
                             border-bottom: 1px dotted;
                             transition: .2s ease-out;
                             &:hover{
@@ -162,7 +194,7 @@
                         font-family: 'Montserrat';
                         color: white;
                         font-size: .85em;
-                        background: #222;
+                        background: #373737;
                         opacity: 0;
                         border-radius: 30px;
                         pointer-events: none;

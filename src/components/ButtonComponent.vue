@@ -19,13 +19,13 @@
         border-radius: 30px;
         padding: 15px 20px;
         font-weight: 700;
-        border: 2px solid #222;
+        border: 2px solid #373737;
         transition: background .2s ease-in-out, color .1s ease-out;
         bottom: 50px;
         cursor: pointer;
         text-align: center;
         &:hover{
-             background: #222;
+             background: #373737;
              color: white;
         }
         @include media('<phone'){
@@ -34,7 +34,7 @@
             transform: none;
             bottom: 0;
             margin-top: 40px;
-            background: #222;
+            background: #373737;
             color: white;
         }
     }
