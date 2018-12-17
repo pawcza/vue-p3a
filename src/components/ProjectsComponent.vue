@@ -1,5 +1,5 @@
 <template>
-    <section style="background: #fbfbfb; z-index: 2;">
+    <section style="z-index: 2;">
         <div class="container">
             <h2 v-scroll-reveal="{ delay: 150, beforeReveal: playText }" class="title-wrapper" ref="title">
                 <span v-for="letter in text" :data-letter="letter"
@@ -33,8 +33,8 @@
                         },
                         content: {
                             name: 'Russell Hobbs',
-                            desc: "Household appliances manufacturer website with e-commerce, multi language support and a in-house built CMS. I've worked closely with the back-end team to ensure delivery of a high quality product",
-                            tech: ['Laravel 5.2', 'Vue.js', 'jQuery', 'VanillaJS', 'PHP 7', 'Sass', 'isotope.js'],
+                            desc: "International household appliances manufacturer website with e-commerce solution. I've worked closely with the back-end team to ensure good understanding between front-end and back-end needs.",
+                            tech: ['Laravel 5.2', 'Vue.js', 'jQuery', 'VanillaJS', 'Sass', 'isotope.js'],
                             btn: "<a class='project-link' target='_blank' href='https://uk.russellhobbs.com'>uk.russellhobbs.com</a>"
                         }
                     },
@@ -45,8 +45,8 @@
                         },
                         content: {
                             name: 'Aleksandra Koleśniak',
-                            desc: 'Minimalistic graphics design portfolio to display arts in a grid with images being lazy-loaded',
-                            tech: ['VanillaJS', 'Sass', 'isotope.js'],
+                            desc: 'Minimalistic graphics design portfolio website to display arts in a grid. Lazy-loading images and page load speed was a priority in this project',
+                            tech: ['VanillaJS', 'Sass', 'isotope.js, Wordpress'],
                             btn: "<a class='project-link' target='_blank' href='http://aleksandrakolesniak.com'>aleksandrakolesniak.com</a>"
                         }
                     },
@@ -57,8 +57,8 @@
                         },
                         content: {
                             name: 'Remington',
-                            desc: "Personal care products manufacturer. I've worked with the web development team at Spectrum Brands on their Remington website",
-                            tech: ['jQuery', 'Sass'],
+                            desc: "Personal care products manufacturer website. I was a part of a bigger development team in Spectrum Brands with this project.",
+                            tech: ['jQuery', 'Sass', 'Laravel 5.2'],
                             btn: "<a class='project-link' target='_blank' href='https://uk.remington-europe.com'>uk.remington-europe.com</a>"
                         }
                     },
@@ -69,7 +69,7 @@
                         },
                         content: {
                             name: 'Zoo Bedding',
-                            desc: "Organic wildlife bedding manufacturer, I've worked on the website as well as all the marketing materials, graphics and logos",
+                            desc: "Organic wildlife bedding manufacturer, I've created the website as well as all the marketing materials, graphics and logos",
                             tech: ['Bootstrap 4', 'jQuery', 'Sass', 'velocity.js', 'Adobe Photoshop & Illustrator'],
                             btn: "<a class='project-link' target='_blank' href='http://zoobedding.com'>zoobedding.com</a>"
                         }
@@ -81,7 +81,7 @@
                         },
                         content: {
                             name: 'Cantaramusic',
-                            desc: "Music news portal. I was revamping current website to be responsive and match today's web standards",
+                            desc: "Music news portal. I was revamping their old website to use a grid system and be responsive.",
                             tech: ['Bootstrap 4', 'PHP', 'jQuery'],
                             btn: "<a class='project-link' target='_blank' href='https://cantaramusic.pl'>cantaramusic.pl</a>"
                         }
@@ -93,7 +93,7 @@
                         },
                         content: {
                             name: 'Cocogreen',
-                            desc: 'Leading brand of speciality coir substrates for edible crops. I was working on their website and all the marketing graphics needed for the brand',
+                            desc: 'Leading brand of speciality coir substrates for edible crops. I have created their website and all the marketing graphics needed for the brand',
                             tech: ['jQuery', 'velocity.js', 'CSS3', 'Adobe Photoshop & Illustrator'],
                             btn: "<a class='project-link' target='_blank' href='http://cocogreen.co.uk'>cocogreen.co.uk</a>"
                         }
@@ -108,7 +108,6 @@
                 delay: (window.innerWidth < 768) ? 0 : 420
             }
         },
-        template: "#project-template",
         methods: {
             playText () {
                 let that = this,

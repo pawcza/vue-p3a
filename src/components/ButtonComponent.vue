@@ -1,6 +1,6 @@
 <template>
     <div class="intro_btn" @click="goSection()">
-        Check out my projects
+        Check my projects out
     </div>
 </template>
 <script>
@@ -18,15 +18,17 @@
         transform: translateX(-50%);
         border-radius: 30px;
         padding: 15px 20px;
-        font-weight: 700;
-        border: 2px solid #373737;
+        font-weight: 300;
+        border: 1px solid #373737;
+        background: #373737;
+        color: white;
         transition: background .2s ease-in-out, color .1s ease-out;
         bottom: 50px;
         cursor: pointer;
         text-align: center;
         &:hover{
-             background: #373737;
-             color: white;
+             background: transparent;
+             color: #373737;
         }
         @include media('<phone'){
             position: relative;

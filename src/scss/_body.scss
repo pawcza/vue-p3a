@@ -9,6 +9,27 @@ body,html{
     font-size: 14px;
   }
 }
+body{
+  &:before{
+    background-image: url('../assets/img/bg.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+    @include media('<tablet'){
+      background-image: url('../assets/img/bg_mid.png');
+    }
+    @include media('<phone'){
+      background-image: url('../assets/img/bg_min.png');
+    }
+  }
+}
 @keyframes spin{
   0%{
     transform: translate(-50%, -50%) rotate(0deg);
@@ -51,7 +72,7 @@ section{
   position: relative;
 }
 .container{
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
   height: 100%;
   width: 100%;

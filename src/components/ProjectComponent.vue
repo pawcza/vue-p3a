@@ -104,10 +104,11 @@
             overflow: hidden;
             cursor: pointer;
             position: absolute;
+            border-radius: 5px;
             width: calc(100% - 20px);
+            outline: 1px solid #ebebeb;
             background-size: cover;
             background-position: center;
-            border-radius: 5px;
             height: calc(100% - 20px);
             will-change: box-shadow;
             transition: box-shadow .3s ease-out;
@@ -185,13 +186,12 @@
                 padding: 25px 75px 25px 25px;
                 box-sizing: border-box;
                 position: relative;
-                height: 100%;
+                height: calc(100% + 2px);
+                top: -1px;
                 opacity: 0;
-                border-radius: 5px 0 0 5px;
                 will-change: transform, opacity;
                 transform: translateX(-100%);
                 z-index: 2;
-                border: 1px solid #ebebeb;
                 background: white;
                 /*background: linear-gradient(100deg, #ffffff, rgba(255,255,255,.5), transparent);*/
                 -webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
@@ -210,7 +210,7 @@
                 }
                 .tech, .desc, .btn{
                     font-size: .85em;
-                    line-height: 1.5em;
+                    line-height: 1.66em;
                     &:before{
                         opacity: .65;
                         margin-right: 100%;
@@ -329,7 +329,7 @@
         }
         &:hover{
             .project-box{
-                box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+                /*box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);*/
             }
         }
         &.active{

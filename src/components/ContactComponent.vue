@@ -40,12 +40,8 @@
                         ans: "<img title='Me!' src=" + require('../assets/img/me.png') + ">"
                     },
                     {
-                        quest: "Are you currently available for work?",
-                        ans: "Yes! Let's create something awesome together. Feel free to contact me <a href='mailto:paw.czarniecki@gmail.com'>here</a>"
-                    },
-                    {
-                        quest: 'How much does a chicken nugget cost?',
-                        ans: "According to the newest independent study conducted by the moon people it would be around the half of the distance from here to Saturn"
+                        quest: "That's all great so where do we start?",
+                        ans: "If you liked my work or you have any questions feel free to contact me <a href='mailto:paw.czarniecki@gmail.com'>here</a> or using any of the social sites below.</br>Let's create something awesome together :-)"
                     }
                 ],
                 socials: [
@@ -117,9 +113,14 @@
             .contact-wrapper{
                 display: flex;
                 >.contact-article{
-                    flex-basis: 33.3%;
+                    flex-basis: 67%;
                     padding: 10px 15px;
+                    font-size: 1.5em;
+                    &:first-of-type{
+                        flex-basis: 33%;
+                    }
                     >span{
+                        font-weight: 300;
                         /deep/ img{
                             max-width: 300px;
                             border-radius: 50%;
@@ -131,13 +132,11 @@
                         }
                         line-height: 1.25em;
                         &:first-of-type{
-                            color: #bbbbbb;
                             display: block;
                             font-weight: 700;
                             font-size: 1em;
                             margin-bottom: 10px;
                             padding-bottom: 10px;
-                            border-bottom: 1px solid #ebebeb;
                         }
                         /deep/ a{
                             text-decoration: none;
@@ -218,6 +217,7 @@
                     text-align: center;
                     .contact-article{
                         span{
+                            font-size: .85em;
                             /deep/ img{
                                 max-width: 150px;
                             }

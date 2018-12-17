@@ -26,7 +26,7 @@
                 for (i = 0; i < sections.length; ++i){
                     let transform = (window.pageYOffset - sections[i].offsetTop) / sections[i].offsetHeight * 100;
                     if(transform >= -100 && transform <= 100) {
-                        targets[i].style.transform = 'translateX(' + transform + '%)';
+                        targets[i].style.transform = `translateX(${transform}%)`;
                         targets[i].style.opacity = '1';
                     } else{
                         targets[i].style.opacity = '0';
@@ -42,7 +42,7 @@
                 setTimeout(function(){
                     Velocity(
                         el,
-                        { translateY: [0, '-50px'], opacity: [1, 0] },
+                        { translateY: [0, '-50px'], opacity: [1, 0]},
                         { complete: done }
                     )
                 }, 50 * index);
@@ -63,21 +63,19 @@
         display: flex;
         justify-content: center;
         z-index: 99;
-        padding: 0 10px;
-        border-radius: 30px;
+        border-radius: 5px;
+        overflow: hidden;
         a{
             cursor: pointer;
             color: #373737;
             padding: 10px;
             position: relative;
             text-transform: capitalize;
-            background: white;
             text-decoration: none;
             overflow: hidden;
             font-weight: 700;
             transform: translateY(-50px);
             opacity: 0;
-            border-radius: 30px;
             .nav-shadow{
                 background: #373737;
                 position: absolute;
@@ -85,7 +83,7 @@
                 opacity: 0;
                 z-index: 2;
                 left: 0;
-                border-radius: 3px;
+                border-radius: 5px;
                 will-change: transform;
                 top: 0;
                 padding: 10px;
