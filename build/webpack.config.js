@@ -8,6 +8,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+
 
 module.exports = {
   mode: 'production',
@@ -60,6 +62,27 @@ module.exports = {
               },
           },
       }],
+    }),
+    new WebpackPwaManifest({
+      name: 'Pawel Czarniecki',
+      short_name: 'pawcza',
+      description: 'Front-end Developer',
+      orientation: 'portrait',
+      start_url: '.',
+      display: 'fullscreen',
+      background_color: '#ffffff',
+      theme_color: '#373737',
+      crossorigin: 'use-credentials',
+      icons: [
+          {
+              src: path.resolve('./src/favicon.png'),
+              sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+          },
+          {
+              src: path.resolve('./src/favicon.png'),
+              size: '1024x1024' // you can also use the specifications pattern
+          }
+      ]
     })
   ],
   optimization: {

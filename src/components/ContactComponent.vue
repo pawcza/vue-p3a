@@ -9,7 +9,7 @@
             <div class="contact-wrapper">
                 <article class="contact-article">
                     <span class="contact-ans">
-                        <img title='Me!' v-lazy="require('../assets/img/me.png')">
+                        <img title='Me!' v-scroll-reveal="{ delay: 300 }" v-lazy="require('../assets/img/me.png')">
                     </span>
                 </article>
                 <article class="contact-article"
