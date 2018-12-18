@@ -31,6 +31,7 @@
                    :class="social.name"
                    :data-cta="social.cta"
                    :title="social.cta"
+                   rel="noopener"
                    target="_blank"></a>
             </div>
         </div>
