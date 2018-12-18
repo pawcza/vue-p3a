@@ -47,7 +47,7 @@ module.exports = {
       }),
       new OptimizeCSSAssetsPlugin({})
     ],
-    runtimeChunk: true,
+    runtimeChunk: 'single',
     splitChunks: {
       chunks: "async",
       minSize: 1000,
@@ -63,7 +63,8 @@ module.exports = {
         },
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          priority: -10
+          name: 'vendors',
+          chunks: 'all'
         }
       }
     }

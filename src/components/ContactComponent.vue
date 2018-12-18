@@ -7,6 +7,11 @@
                 </span>
             </h2>
             <div class="contact-wrapper">
+                <article class="contact-article">
+                    <span class="contact-ans">
+                        <img title='Me!' v-lazy="require('../assets/img/me.png')">
+                    </span>
+                </article>
                 <article class="contact-article"
                          v-for="block in info"
                          v-scroll-reveal="{ delay: 300 }">
@@ -25,6 +30,7 @@
                    :href="social.link"
                    :class="social.name"
                    :data-cta="social.cta"
+                   :title="social.cta"
                    target="_blank"></a>
             </div>
         </div>
@@ -37,11 +43,8 @@
                 text: 'Get in touch',
                 info: [
                     {
-                        ans: "<img title='Me!' src=" + require('../assets/img/me.png') + ">"
-                    },
-                    {
                         quest: "That's all great so where do we start?",
-                        ans: "If you liked my work or you have any questions feel free to contact me <a href='mailto:paw.czarniecki@gmail.com'>here</a> or using any of the social sites below.</br>Let's create something awesome together :-)"
+                        ans: "If you liked my work or you have any questions feel free to <a href='mailto:paw.czarniecki@gmail.com'>contact me here</a> or using any of the social sites below.</br>Let's create something awesome together :-)"
                     }
                 ],
                 socials: [
@@ -113,9 +116,9 @@
             .contact-wrapper{
                 display: flex;
                 >.contact-article{
-                    flex-basis: 67%;
+                    flex-basis: 50%;
                     padding: 10px 15px;
-                    font-size: 1.5em;
+                    font-size: 1.25em;
                     &:first-of-type{
                         flex-basis: 33%;
                     }
@@ -218,6 +221,10 @@
                     .contact-article{
                         span{
                             font-size: .85em;
+                            &:first-of-type{
+                                padding-bottom: 5px;
+                                margin-bottom: 5px;
+                            }
                             /deep/ img{
                                 max-width: 150px;
                             }

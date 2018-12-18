@@ -73,6 +73,7 @@
             text-transform: capitalize;
             text-decoration: none;
             overflow: hidden;
+            background: rgba(255,255,255,.25);
             font-weight: 700;
             transform: translateY(-50px);
             opacity: 0;

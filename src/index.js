@@ -11,6 +11,7 @@ Vue.use(VueScrollReveal, {
 
 Vue.use(VueLazyLoad, {
     attempt: 1,
+    preLoad: 1,
     listenEvents: ['scroll']
 });
 

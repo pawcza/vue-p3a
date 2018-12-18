@@ -35,7 +35,7 @@
                             name: 'Russell Hobbs',
                             desc: "International household appliances manufacturer website with e-commerce solution. I've worked closely with the back-end team to ensure good understanding between front-end and back-end needs.",
                             tech: ['Laravel 5.2', 'Vue.js', 'jQuery', 'VanillaJS', 'Sass', 'isotope.js'],
-                            btn: "<a class='project-link' target='_blank' href='https://uk.russellhobbs.com'>uk.russellhobbs.com</a>"
+                            btn: "<a class='project-link' rel='noopener' target='_blank' href='https://uk.russellhobbs.com'>uk.russellhobbs.com</a>"
                         }
                     },
                     {
@@ -47,7 +47,7 @@
                             name: 'Aleksandra Koleśniak',
                             desc: 'Minimalistic graphics design portfolio website to display arts in a grid. Lazy-loading images and page load speed was a priority in this project',
                             tech: ['VanillaJS', 'Sass', 'isotope.js, Wordpress'],
-                            btn: "<a class='project-link' target='_blank' href='http://aleksandrakolesniak.com'>aleksandrakolesniak.com</a>"
+                            btn: "<a class='project-link' rel='noopener' target='_blank' href='http://aleksandrakolesniak.com'>aleksandrakolesniak.com</a>"
                         }
                     },
                     {
@@ -59,7 +59,7 @@
                             name: 'Remington',
                             desc: "Personal care products manufacturer website. I was a part of a bigger development team in Spectrum Brands with this project.",
                             tech: ['jQuery', 'Sass', 'Laravel 5.2'],
-                            btn: "<a class='project-link' target='_blank' href='https://uk.remington-europe.com'>uk.remington-europe.com</a>"
+                            btn: "<a class='project-link' rel='noopener' target='_blank' href='https://uk.remington-europe.com'>uk.remington-europe.com</a>"
                         }
                     },
                     {
@@ -71,7 +71,7 @@
                             name: 'Zoo Bedding',
                             desc: "Organic wildlife bedding manufacturer, I've created the website as well as all the marketing materials, graphics and logos",
                             tech: ['Bootstrap 4', 'jQuery', 'Sass', 'velocity.js', 'Adobe Photoshop & Illustrator'],
-                            btn: "<a class='project-link' target='_blank' href='http://zoobedding.com'>zoobedding.com</a>"
+                            btn: "<a class='project-link' rel='noopener' target='_blank' href='http://zoobedding.com'>zoobedding.com</a>"
                         }
                     },
                     {
@@ -83,7 +83,7 @@
                             name: 'Cantaramusic',
                             desc: "Music news portal. I was revamping their old website to use a grid system and be responsive.",
                             tech: ['Bootstrap 4', 'PHP', 'jQuery'],
-                            btn: "<a class='project-link' target='_blank' href='https://cantaramusic.pl'>cantaramusic.pl</a>"
+                            btn: "<a class='project-link' rel='noopener' target='_blank' href='https://cantaramusic.pl'>cantaramusic.pl</a>"
                         }
                     },
                     {
@@ -95,7 +95,7 @@
                             name: 'Cocogreen',
                             desc: 'Leading brand of speciality coir substrates for edible crops. I have created their website and all the marketing graphics needed for the brand',
                             tech: ['jQuery', 'velocity.js', 'CSS3', 'Adobe Photoshop & Illustrator'],
-                            btn: "<a class='project-link' target='_blank' href='http://cocogreen.co.uk'>cocogreen.co.uk</a>"
+                            btn: "<a class='project-link' rel='noopener' target='_blank' href='http://cocogreen.co.uk'>cocogreen.co.uk</a>"
                         }
                     }
                 ],
