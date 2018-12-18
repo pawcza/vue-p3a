@@ -40,6 +40,24 @@ module.exports = {
       filename: "[name].[hash].css",
       chunkFilename: "[id].[hash].css"
     }),
+    new WebpackPwaManifest({
+      name: 'Pawel Czarniecki',
+      short_name: 'pawcza',
+      description: 'Front-end Developer',
+      orientation: 'portrait',
+      start_url: '.',
+      display: 'fullscreen',
+      background_color: '#ffffff',
+      ios: true,
+      theme_color: '#373737',
+      crossorigin: 'use-credentials',
+      icons: [
+          {
+              src: path.resolve('src/favicon.png'),
+              sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+          }
+      ]
+    }),
     new WorkboxPlugin.GenerateSW({
       // Exclude images from the precache
       exclude: [/\.(?:png|jpg|jpeg|svg)$/],
@@ -62,27 +80,6 @@ module.exports = {
               },
           },
       }],
-    }),
-    new WebpackPwaManifest({
-      name: 'Pawel Czarniecki',
-      short_name: 'pawcza',
-      description: 'Front-end Developer',
-      orientation: 'portrait',
-      start_url: '.',
-      display: 'fullscreen',
-      background_color: '#ffffff',
-      theme_color: '#373737',
-      crossorigin: 'use-credentials',
-      icons: [
-          {
-              src: path.resolve('./src/favicon.png'),
-              sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
-          },
-          {
-              src: path.resolve('./src/favicon.png'),
-              size: '1024x1024' // you can also use the specifications pattern
-          }
-      ]
     })
   ],
   optimization: {
