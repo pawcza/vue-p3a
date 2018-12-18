@@ -1,0 +1,47 @@
+{
+  "icons": [
+    {
+      "src": "icon_1024x1024.fc6eae756f49775f4de433e58319c078.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_512x512.0e9aa191d9c0ce41d603ba22e7df65bc.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_384x384.be84baf574c04bc9b83b3185e232ffc0.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_256x256.34e0097c783efc10e929cc1062ed0722.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_192x192.e2fca03567b08f7bf3013aa1404401be.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_128x128.67b8b356bc2d890a64b421f7c31350a0.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_96x96.563eda8cf0b64b6b98d77cf577f34c36.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "name": "Pawel Czarniecki",
+  "short_name": "pawcza",
+  "orientation": "portrait",
+  "display": "fullscreen",
+  "start_url": ".",
+  "description": "Front-end Developer",
+  "background_color": "#ffffff",
+  "theme_color": "#373737"
+}
