@@ -1,0 +1,10 @@
+{
+  "name": "Pawel Czarniecki",
+  "short_name": "pawcza",
+  "orientation": "portrait",
+  "display": "fullscreen",
+  "start_url": ".",
+  "description": "Front-end Developer",
+  "background_color": "#ffffff",
+  "theme_color": "#373737"
+}
