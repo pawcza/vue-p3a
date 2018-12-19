@@ -4,22 +4,22 @@
          :class='project.classy'
          v-touch:swipe.left="nextProject"
          v-touch:swipe.right="prevProject">
-        <div class='project-box' v-touch="resizeProject" v-lazy:background-image="project.img">
+        <div class='project-box' v-touch.self="resizeProject" v-lazy:background-image="project.img">
             <img class="project-logo" :src="project.img.logo" alt="">
             <div class='project-hover' :style="{}">
-                <div class="full-screen-btn">
+                <div class="full-screen-btn" v-touch.self="resizeProject">
                     <span></span><span></span><span></span><span></span>
                 </div>
             </div>
-            <transition-group name="staggered-fade" tag="ul" class="project-content" :style="{width: project.width}" @click.stop.prevent="" @before-enter="beforeEnter" @enter="enter" @leave="leave" v-touch.stop.prevent="">
+            <transition-group name="staggered-fade" tag="ul" class="project-content" :style="{width: project.width}" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                 <li v-for="(content, index) in project.content" :key="'key_' + index" v-if="project.active" :class="index" :data-index="Object.keys(project.content).indexOf(index)">
                     <span v-if="index !== 'tech'" v-html="content"></span>
                     <span v-else v-for="elem in content">{{elem}}</span>
                 </li>
             </transition-group>
             <div class="project-controls">
-                <span class="prev" v-if="project.index !== 'first'" v-touch.stop="prevProject"> Previous</span>
-                <span class="next" v-if="project.index !== 'last'" v-touch.stop="nextProject">Next </span>
+                <span class="prev" v-if="project.index !== 'first'" v-touch.self.stop="prevProject"> Previous</span>
+                <span class="next" v-if="project.index !== 'last'" v-touch.self.stop="nextProject">Next </span>
             </div>
         </div>
     </div>
@@ -120,6 +120,7 @@
                 top: 50%;
                 fill: white;
                 transform: translate(-50%, -50%);
+                pointer-events: none;
             }
             .project-hover{
                 position: absolute;
@@ -188,6 +189,7 @@
                 box-sizing: border-box;
                 position: relative;
                 height: calc(100% + 2px);
+                cursor: default;
                 top: -1px;
                 opacity: 0;
                 will-change: transform, opacity;
@@ -438,6 +440,9 @@
                     /deep/ .project-link{
                         display: inline-block;
                         padding: 10px 0;
+                    }
+                    .name{
+                        padding-right: 30px;
                     }
                     .tech{
                         span{

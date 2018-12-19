@@ -79,7 +79,7 @@
             position: relative;
             display: inline-block;
             text-align: center;
-            margin: 0 10px;
+            margin: 0 5px;
             &.break{
                 opacity: 0;
             }
@@ -91,7 +91,7 @@
                 display: none;
             }
             .letter_container {
-                margin: 0 5px;
+                margin: 0 2px;
                 &.break {
                     width: 100%;
                     height: 10px;

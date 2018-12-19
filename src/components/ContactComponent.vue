@@ -147,6 +147,7 @@
                         position: relative;
                         border-radius: 5px;
                         line-height: 1.25em;
+                        transform: skewX(-5deg);
                         font-size: .85em;
                         /deep/ .contact-link{
                             text-decoration: none;
@@ -242,6 +243,7 @@
                             padding: 15px;
                             border-radius: 0;
                             width: 100%;
+                            transform: none;
                             background: rgba(31, 31, 31, 0.75);
                             /deep/ .contact-link{
                                 border: none;
