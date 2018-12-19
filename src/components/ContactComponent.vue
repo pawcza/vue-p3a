@@ -8,9 +8,7 @@
             </h2>
             <div class="contact-wrapper">
                 <article class="contact-article">
-                    <span class="contact-ans">
-                        <img title='Me!' v-scroll-reveal="{ delay: 300 }" v-lazy="require('../assets/img/me.png')">
-                    </span>
+                    <img class="contact-img" title='Me!' v-scroll-reveal="{ delay: 300 }" v-lazy="require('../assets/img/me.png')">
                 </article>
                 <article class="contact-article"
                          v-for="block in info"
@@ -42,10 +40,11 @@
         data(){
             return{
                 text: 'Get in touch',
+                runningTime: 0,
                 info: [
                     {
-                        quest: "That's all great so where do we start?",
-                        ans: "If you liked my work or you have any questions feel free to <a href='mailto:paw.czarniecki@gmail.com'>contact me here</a> or using any of the social sites below.</br>Let's create something awesome together :-)"
+                        quest: "That's all great but where do we start?",
+                        ans: "Did you like my work? Do you have any questions? Feel free to <a class='contact-link' href='mailto:paw.czarniecki@gmail.com'>contact me here</a> or using any of the social sites below.</br></br>Let's create something awesome together :-)"
                     }
                 ],
                 socials: [
@@ -80,18 +79,21 @@
                         for (let x = 0; x < that.text.length; ++x) {
                             let random = Math.floor(Math.random() * that.chars.length),
                                 target = that.$refs.title.children[x];
-
                             if (target.innerHTML === that.text[x]) {
                                 if (!target.classList.contains('matched')) {
                                     matched++;
                                     target.classList.add('matched');
                                 }
+                            } else if(that.runningTime > 2500){
+                                target.innerHTML = that.text[x];
+                                matched++;
                             } else {
                                 target.innerHTML = that.chars.substring(random, random + 1)
                             }
                         }
                         (matched === that.text.length) ? clearInterval(letterInterval) : '';
-                    }, 50)
+                        that.runningTime += 50;
+                    }, 50);
             }
         },
         created () {
@@ -116,45 +118,53 @@
             justify-content: space-between;
             .contact-wrapper{
                 display: flex;
-                >.contact-article{
+                .contact-article{
                     flex-basis: 50%;
                     padding: 10px 15px;
                     font-size: 1.25em;
                     &:first-of-type{
                         flex-basis: 33%;
                     }
-                    >span{
+                    .contact-img{
+                        max-width: 300px;
+                        border-radius: 50%;
+                        height: auto;
+                    }
+                    .contact-quest{
+                        display: block;
+                        font-weight: 700;
+                        font-size: 1em;
+                        margin-bottom: 5px;
+                        padding-bottom: 10px;
+                    }
+                    .contact-ans{
                         font-weight: 300;
-                        /deep/ img{
-                            max-width: 300px;
-                            border-radius: 50%;
-                            height: auto;
-                        }
-                        >p{
-                            margin-top: 10px;
-
-                        }
+                        padding: 10px;
+                        margin-left: -10px;
+                        background: #373737;
+                        color: white;
+                        display: inline-block;
+                        position: relative;
+                        border-radius: 5px;
                         line-height: 1.25em;
-                        &:first-of-type{
-                            display: block;
-                            font-weight: 700;
-                            font-size: 1em;
-                            margin-bottom: 10px;
-                            padding-bottom: 10px;
-                        }
-                        /deep/ a{
+                        font-size: .85em;
+                        /deep/ .contact-link{
                             text-decoration: none;
-                            color: #373737;
+                            color: white;
                             border-bottom: 1px dotted;
                             transition: .2s ease-out;
                             &:hover{
                                 border-bottom-style: solid;
                             }
                         }
-                    }
-                    &:first-of-type{
-                        >span{
-                            border: none;
+                        &:before{
+                            content: '';
+                            left: 15px;
+                            position: absolute;
+                            top: -5px;
+                            border-left: 5px solid transparent;
+                            border-right: 5px solid transparent;
+                            border-bottom: 5px solid #373737;
                         }
                     }
                 }
@@ -222,13 +232,29 @@
                     .contact-article{
                         span{
                             font-size: .85em;
-                            &:first-of-type{
-                                padding-bottom: 5px;
-                                margin-bottom: 5px;
+                        }
+                        .contact-quest{
+                            padding-bottom: 5px;
+                            margin-bottom: 5px;
+                        }
+                        .contact-ans{
+                            margin-left: -15px;
+                            padding: 15px;
+                            border-radius: 0;
+                            width: 100%;
+                            background: rgba(31, 31, 31, 0.75);
+                            /deep/ .contact-link{
+                                border: none;
+                                font-weight: 700;
                             }
-                            /deep/ img{
-                                max-width: 150px;
+                            &:before{
+                                left: 50%;
+                                transform: translateX(-50%);
+                                border-bottom-color: rgba(31,31,31,.75);
                             }
+                        }
+                        .contact-img{
+                            max-width: 150px;
                         }
                     }
                 }
@@ -238,8 +264,12 @@
                 }
             }
             @include media('<350px'){
-                /deep/ img{
-                    max-width: 125px!important;
+                .contact-wrapper{
+                    .contact-article{
+                        .contact-img{
+                            max-width: 125px!important;
+                        }
+                    }
                 }
             }
         }

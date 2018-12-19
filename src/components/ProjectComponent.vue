@@ -11,7 +11,7 @@
                     <span></span><span></span><span></span><span></span>
                 </div>
             </div>
-            <transition-group name="staggered-fade" tag="ul" class="project-content" :style="{width: project.width}" @click.prevent="" @before-enter="beforeEnter" @enter="enter" @leave="leave" v-touch.stop="">
+            <transition-group name="staggered-fade" tag="ul" class="project-content" :style="{width: project.width}" @click.stop.prevent="" @before-enter="beforeEnter" @enter="enter" @leave="leave" v-touch.stop.prevent="">
                 <li v-for="(content, index) in project.content" :key="'key_' + index" v-if="project.active" :class="index" :data-index="Object.keys(project.content).indexOf(index)">
                     <span v-if="index !== 'tech'" v-html="content"></span>
                     <span v-else v-for="elem in content">{{elem}}</span>
@@ -34,6 +34,7 @@
     methods: {
       resizeProject(){
         if(!this.$parent.playing){
+            console.log('hmmm');
           let boxes = this.$el.parentNode.children,
             targetIndex = Array.prototype.indexOf.call(boxes, this.$el);
           this.$parent.leftovers(this, targetIndex, boxes);
@@ -275,7 +276,7 @@
             }
             .project-controls{
                 position: absolute;
-                z-index: 5;
+                z-index: 15;
                 box-sizing: border-box;
                 bottom: 18px;
                 width:100%;
@@ -402,12 +403,13 @@
         }
         @include media('<tablet'){
             flex-basis: 50%;
-            padding: 0;
+            padding: 5px;
             .project-box{
                 box-shadow: none!important;
-                border-radius: 0;
-                height: 100%;
-                width: 100%;
+                border-radius: 5px;
+                height: calc(100% - 10px);
+                width: calc(100% - 10px);
+                outline: none;
                 .project-hover{
                     .full-screen-btn{
                         right: 7px !important;
@@ -430,8 +432,7 @@
                     padding: 20px 15px;
                     border-radius: 0;
                     width: 100% !important;
-                    background: white;
-                    opacity: .85;
+                    background: rgba(255,255,255,.75);
                     -webkit-clip-path: none;
                     clip-path: none;
                     /deep/ .project-link{
