@@ -102,10 +102,25 @@
             top: 0;
             border-radius: 0;
             padding: 0;
+            overflow: visible;
+            &:before{
+                bottom: -5px;
+                box-shadow: inset 0px 4px 8px -3px rgba(17, 17, 17, .16);
+                content: "";
+                height: 5px;
+                left: 0px;
+                opacity: 1;
+                pointer-events: none;
+                position: absolute;
+                right: 0px;
+                width: 100%;
+                z-index: 2050;
+            }
             a{
                 flex-grow:1;
                 text-align: center;
                 border-radius: 0;
+                background: white;
                 .nav-shadow{
                     border-radius: 0;
                     box-sizing: border-box;

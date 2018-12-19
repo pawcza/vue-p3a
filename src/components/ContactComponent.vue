@@ -147,7 +147,6 @@
                         position: relative;
                         border-radius: 5px;
                         line-height: 1.25em;
-                        transform: skewX(-5deg);
                         font-size: .85em;
                         /deep/ .contact-link{
                             text-decoration: none;
@@ -235,8 +234,8 @@
                             font-size: .85em;
                         }
                         .contact-quest{
-                            padding-bottom: 5px;
-                            margin-bottom: 5px;
+                            padding-bottom: 10px;
+                            margin-bottom: 10px;
                         }
                         .contact-ans{
                             margin-left: -15px;

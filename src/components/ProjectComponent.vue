@@ -1,10 +1,9 @@
 <template>
     <div class='project-container'
          :style="project.style"
-         :class='project.classy'
-         v-touch:swipe.left="nextProject"
-         v-touch:swipe.right="prevProject">
-        <div class='project-box' v-touch.self="resizeProject" v-lazy:background-image="project.img">
+         :class='project.classy'>
+        <div class='project-box' v-touch.self.stop="resizeProject" v-touch:swipe.left="nextProject"
+             v-touch:swipe.right="prevProject" v-lazy:background-image="project.img">
             <img class="project-logo" :src="project.img.logo" alt="">
             <div class='project-hover' :style="{}">
                 <div class="full-screen-btn" v-touch.self="resizeProject">
@@ -34,7 +33,6 @@
     methods: {
       resizeProject(){
         if(!this.$parent.playing){
-            console.log('hmmm');
           let boxes = this.$el.parentNode.children,
             targetIndex = Array.prototype.indexOf.call(boxes, this.$el);
           this.$parent.leftovers(this, targetIndex, boxes);
@@ -105,7 +103,7 @@
             overflow: hidden;
             cursor: pointer;
             position: absolute;
-            border-radius: 5px;
+            border-radius: 15px;
             width: calc(100% - 20px);
             outline: 1px solid #ebebeb;
             background-size: cover;
@@ -317,7 +315,7 @@
                         }
                         &:after{
                             content: '\2192';
-                            border-color: white;
+                            border-color: #ebebeb;
                             background: white;
                             color: #373737;
                         }
@@ -455,6 +453,7 @@
                 }
                 .project-controls{
                     padding: 15px !important;
+                    bottom: 0 !important;
                     span{
                         transform: none!important;
                     }

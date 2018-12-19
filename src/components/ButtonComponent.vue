@@ -18,17 +18,16 @@
         transform: translateX(-50%);
         border-radius: 30px;
         padding: 15px 20px;
-        font-weight: 300;
+        font-weight: 700;
         border: 1px solid #373737;
-        background: #373737;
+        background: linear-gradient(135deg, #222, #373737);
         color: white;
         transition: background .2s ease-in-out, color .1s ease-out;
         bottom: 50px;
         cursor: pointer;
         text-align: center;
         &:hover{
-             background: transparent;
-             color: #373737;
+            background: linear-gradient(135deg, #373737, #222);
         }
         @include media('<phone'){
             position: relative;
@@ -36,7 +35,6 @@
             transform: none;
             bottom: 0;
             margin-top: 40px;
-            background: #373737;
             color: white;
         }
     }
