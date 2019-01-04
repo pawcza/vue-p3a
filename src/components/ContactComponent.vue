@@ -44,7 +44,7 @@
                 info: [
                     {
                         quest: "That's all great but where do we start?",
-                        ans: "Did you like my work? Do you have any questions? Feel free to <a class='contact-link' href='mailto:paw.czarniecki@gmail.com'>contact me here</a> or using any of the social sites below.</br></br>Let's create something awesome together :-)"
+                        ans: "Did you like my work? Do you have any questions? Feel free to <a class='contact-link' href='mailto:hello@pawcza.codes'>contact me here</a> or using any of the social sites below.</br></br>Let's create something awesome together :-)"
                     }
                 ],
                 socials: [
@@ -59,7 +59,7 @@
                         cta: 'LinkedIn profile'
                     },
                     {
-                        link: 'mailto:paw.czarniecki@gmail.com',
+                        link: 'mailto:hello@pawcza.codes',
                         name: 'mail',
                         cta: 'Email me'
                     },

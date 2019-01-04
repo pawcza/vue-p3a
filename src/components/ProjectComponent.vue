@@ -90,7 +90,7 @@
 <style scoped lang="scss">
     @import '../scss/plugins/include-media';
     .project-container{
-        padding: 10px;
+        padding: 0px;
         flex-basis: 33.3%;
         opacity: 1;
         left: 0;
@@ -103,12 +103,12 @@
             overflow: hidden;
             cursor: pointer;
             position: absolute;
-            border-radius: 15px;
-            width: calc(100% - 20px);
-            outline: 1px solid #ebebeb;
+            border-radius: 0;
+            width: calc(100%);
+            border: 1px solid #cdcdcd;
             background-size: cover;
             background-position: center;
-            height: calc(100% - 20px);
+            height: calc(100%);
             will-change: box-shadow;
             transition: box-shadow .3s ease-out;
             .project-logo{
@@ -194,9 +194,9 @@
                 transform: translateX(-100%);
                 z-index: 2;
                 background: white;
-                /*background: linear-gradient(100deg, #ffffff, rgba(255,255,255,.5), transparent);*/
-                -webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
-                clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
+                background: linear-gradient(to right, #ffffff, rgba(255,255,255,.5), transparent);
+                /*-webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);*/
+                /*clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);*/
                 >*{
                     margin: .75em 0;
                     display: flex;
@@ -247,6 +247,7 @@
                     }
                 }
                 .desc{
+                    font-size: 1.05em;
                     &:before{
                         background-image: url('../assets/img/about_icon.svg');
                         content: 'About: ';
