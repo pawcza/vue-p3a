@@ -9,6 +9,7 @@
             goSection(target){this.$emit('goSection', target)}
         }
     }
+
 </script>
 <style lang="scss" scoped>
     @import '../scss/plugins/include-media';
