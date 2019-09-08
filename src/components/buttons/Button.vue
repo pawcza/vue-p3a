@@ -11,7 +11,7 @@
     }
 </script>
 <style lang="scss" scoped>
-    @import '../scss/plugins/include-media';
+    @import '../../scss/plugins/include-media';
     .intro_btn{
         position: absolute;
         left: 50%;

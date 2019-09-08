@@ -89,7 +89,7 @@
   }
 </script>
 <style scoped lang="scss">
-    @import '../scss/plugins/include-media';
+    @import '../../scss/plugins/include-media';
     .project-container{
         padding: 10px;
         flex-basis: 33.3%;
@@ -241,19 +241,19 @@
                         border: 1px solid #1f1f1f;
                     }
                     &:before{
-                        background-image: url('../assets/img/tech_icon.svg');
+                        background-image: url('../../assets/img/tech_icon.svg');
                         content: 'Technologies: ';
                     }
                 }
                 .desc{
                     &:before{
-                        background-image: url('../assets/img/about_icon.svg');
+                        background-image: url('../../assets/img/about_icon.svg');
                         content: 'About: ';
                     }
                 }
                 .btn{
                     &:before{
-                        background-image: url('../assets/img/link_icon.svg');
+                        background-image: url('../../assets/img/link_icon.svg');
                         content: 'See it online: ';
                     }
                     display: inline-block;

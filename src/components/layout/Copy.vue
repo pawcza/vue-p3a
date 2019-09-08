@@ -4,7 +4,8 @@
     </p>
 </template>
 <style lang="scss" scoped>
-    @import '../scss/plugins/include-media';
+    @import '../../scss/plugins/include-media';
+
     .text_note{
         font-size: 1.5em;
         padding: 10px 15px;

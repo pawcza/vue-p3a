@@ -4,7 +4,6 @@ const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
-const WorkboxPlugin = require('workbox-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 
@@ -91,29 +90,6 @@ module.exports = {
                     sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
                 }
             ]
-        }),
-        new WorkboxPlugin.GenerateSW({
-            // Exclude images from the precache
-            exclude: [/\.(?:png|jpg|jpeg|svg)$/],
-
-            // Define runtime caching rules.
-            runtimeCaching: [{
-                // Match any request ends with .png, .jpg, .jpeg or .svg.
-                urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
-
-                // Apply a cache-first strategy.
-                handler: 'cacheFirst',
-
-                options: {
-                    // Use a custom cache name.
-                    cacheName: 'images',
-
-                    // Only cache 10 images.
-                    expiration: {
-                        maxEntries: 10,
-                    },
-                },
-            }],
         })
     ]
 };

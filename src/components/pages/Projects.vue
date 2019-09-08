@@ -7,20 +7,20 @@
                 </span>
             </h2>
             <div v-scroll-reveal="{ delay: 250, afterReveal: setBoxValues}" class="project-wrapper">
-                <project-component
+                <project
                         v-for="(project, index) in projects"
                         :key="index"
                         :project="project">
-                </project-component>
+                </project>
             </div>
         </div>
     </section>
 </template>
 <script>
-    import ProjectComponent from './ProjectComponent.vue'
+    import Project from '../layout/Project.vue'
     export default{
         components: {
-            ProjectComponent
+            Project
         },
         data: function() {
             return {
@@ -29,7 +29,7 @@
                     {
                         style: {}, classy:[], active: false, width: null, index: 'first',
                         img: {
-                            src: require('../assets/img/rh_thumb.png'), loading: require('../assets/img/rh_small.jpg'), logo: require('../assets/img/rh_logo.png')
+                            src: require('../../assets/img/rh_thumb.png'), loading: require('../../assets/img/rh_small.jpg'), logo: require('../../assets/img/rh_logo.png')
                         },
                         content: {
                             name: 'Russell Hobbs',
@@ -41,7 +41,7 @@
                     {
                         style: {}, classy:[], active: false, width: null,
                         img: {
-                            src: require('../assets/img/ak_thumb.png'), loading: require('../assets/img/ak_small.jpg'), logo: require('../assets/img/ak_logo.png')
+                            src: require('../../assets/img/ak_thumb.png'), loading: require('../../assets/img/ak_small.jpg'), logo: require('../../assets/img/ak_logo.png')
                         },
                         content: {
                             name: 'Aleksandra Koleśniak',
@@ -53,7 +53,7 @@
                     {
                         style: {}, classy:[], active: false, width: null,
                         img: {
-                            src: require('../assets/img/rem_thumb.png'), loading: require('../assets/img/rem_small.jpg'), logo: require('../assets/img/rem_logo.png')
+                            src: require('../../assets/img/rem_thumb.png'), loading: require('../../assets/img/rem_small.jpg'), logo: require('../../assets/img/rem_logo.png')
                         },
                         content: {
                             name: 'Remington',
@@ -65,7 +65,7 @@
                     {
                         style: {}, classy:[], active: false, width: null,
                         img: {
-                            src: require('../assets/img/zb_thumb.png'), loading: require('../assets/img/zb_small.jpg'), logo: require('../assets/img/zb_logo.png')
+                            src: require('../../assets/img/zb_thumb.png'), loading: require('../../assets/img/zb_small.jpg'), logo: require('../../assets/img/zb_logo.png')
                         },
                         content: {
                             name: 'Zoo Bedding',
@@ -77,7 +77,7 @@
                     {
                         style: {}, classy:[], active: false, width: null,
                         img: {
-                            src: require('../assets/img/cm_thumb.png'), loading: require('../assets/img/cm_small.jpg'), logo: require('../assets/img/cm_logo.png')
+                            src: require('../../assets/img/cm_thumb.png'), loading: require('../../assets/img/cm_small.jpg'), logo: require('../../assets/img/cm_logo.png')
                         },
                         content: {
                             name: 'Cantaramusic',
@@ -89,7 +89,7 @@
                     {
                         style: {}, classy:[], active: false, width: null, index: 'last',
                         img: {
-                            src: require('../assets/img/cg_thumb.png'), loading: require('../assets/img/cg_small.jpg'), logo: require('../assets/img/cg_logo.png')
+                            src: require('../../assets/img/cg_thumb.png'), loading: require('../../assets/img/cg_small.jpg'), logo: require('../../assets/img/cg_logo.png')
                         },
                         content: {
                             name: 'Cocogreen',
@@ -262,13 +262,13 @@
         mounted(){
             this.getResizeValues();
             for (let i = 0; i < this.text.length; ++i) {
-                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
+//                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
             }
         }
     }
 </script>
 <style scoped lang="scss">
-    @import '../scss/plugins/include-media';
+    @import '../../scss/plugins/include-media';
     #projects{
         .container{
             display: flex;

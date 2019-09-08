@@ -54,7 +54,7 @@
     }
 </script>
 <style lang="scss" scoped>
-    @import '../scss/plugins/include-media';
+    @import '../../scss/plugins/include-media';
     nav{
         position: fixed;
         left: 50%;

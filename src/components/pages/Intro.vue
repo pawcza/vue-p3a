@@ -1,22 +1,23 @@
 <template>
     <section>
-        <intro-text-component class="load-hidden" v-scroll-reveal="{ delay: 250, beforeReveal: playText}" ></intro-text-component>
-        <intro-copy-component class="load-hidden" v-scroll-reveal="{ delay: 300 }" ></intro-copy-component>
+        <header-component class="load-hidden" v-scroll-reveal="{ delay: 250, beforeReveal: playText}" ></header-component>
+        <copy class="load-hidden" v-scroll-reveal="{ delay: 300 }" ></copy>
         <button-component class="load-hidden" v-scroll-reveal="{ delay: 350 }" @goSection="goSection('#projects')"></button-component>
     </section>
 </template>
 <script>
-    import ButtonComponent from './ButtonComponent.vue'
-    import IntroTextComponent from './IntroTextComponent.vue'
-    import IntroCopyComponent from './IntroCopyComponent.vue'
+    import ButtonComponent from '../buttons/Button.vue'
+    import HeaderComponent from '../layout/Header.vue'
+    import Copy from '../layout/Copy.vue'
     export default {
         components: {
             ButtonComponent,
-            IntroTextComponent,
-            IntroCopyComponent
+            HeaderComponent,
+            Copy
         },
         methods:{
             playText(){
+                console.log(this);
                 this.$children[0].playText();
             },
             goSection(target){

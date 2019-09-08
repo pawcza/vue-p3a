@@ -19,7 +19,7 @@
         },
         mounted () {
             for (let i = 0; i < this.text.length; ++i) {
-                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
+//                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
             }
         },
         methods: {
@@ -48,7 +48,7 @@
     }
 </script>
 <style scoped lang="scss">
-    @import '../scss/plugins/include-media';
+    @import '../../scss/plugins/include-media';
 
     #text_container {
         display: flex;

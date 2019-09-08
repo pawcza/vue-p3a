@@ -1,26 +1,26 @@
 <template>
     <div class="app_container">
-        <nav-component v-on:scroll.native="scrollNav($event)" :sections="sections" @goSection="goSection"></nav-component>
+        <nav v-on:scroll.native="scrollNav($event)" :sections="sections" @goSection="goSection"></nav>
         <div class="puzzle_container">
-            <intro-component class="active" id="intro"></intro-component>
-            <projects-component id="projects"></projects-component>
-            <contact-component id="contact"></contact-component>
+            <intro class="active" id="intro"></intro>
+            <projects id="projects"></projects>
+            <contact id="contact"></contact>
         </div>
     </div>
 </template>
 <script>
-    import NavComponent from './components/NavComponent.vue'
-    import IntroComponent from './components/IntroComponent.vue'
-    import ProjectsComponent from './components/ProjectsComponent.vue'
-    import ContactComponent from './components/ContactComponent.vue'
+    import Nav from './components/layout/Nav.vue'
+    import Intro from './components/pages/Intro.vue'
+    import Projects from './components/pages/Projects.vue'
+    import Contact from './components/pages/Contact.vue'
     import Velocity from 'velocity-animate'
     import 'velocity-animate/velocity.ui.min.js'
     export default {
         components: {
-            NavComponent,
-            IntroComponent,
-            ProjectsComponent,
-            ContactComponent
+            Nav,
+            Intro,
+            Projects,
+            Contact
         },
         data: function() {
             return {

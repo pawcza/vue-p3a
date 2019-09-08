@@ -8,9 +8,7 @@
             </h2>
             <div class="contact-wrapper">
                 <article class="contact-article">
-                    <span class="contact-ans">
-                        <img title='Me!' v-scroll-reveal="{ delay: 300 }" v-lazy="require('../assets/img/me.png')">
-                    </span>
+                        <img class="contact-img" title='Me!' v-scroll-reveal="{ delay: 300 }" v-lazy="require('../../assets/img/me.png')">
                 </article>
                 <article class="contact-article"
                          v-for="block in info"
@@ -45,7 +43,7 @@
                 info: [
                     {
                         quest: "That's all great so where do we start?",
-                        ans: "If you liked my work or you have any questions feel free to <a href='mailto:paw.czarniecki@gmail.com'>contact me here</a> or using any of the social sites below.</br>Let's create something awesome together :-)"
+                        ans: "Did you like my work? Do you have any questions? <br/>Feel free to <a href='mailto:paw.czarniecki@gmail.com'>contact me here</a> or using any of the social sites below.</br>Let's create something awesome together :-)"
                     }
                 ],
                 socials: [
@@ -99,13 +97,13 @@
         },
         mounted(){
             for (let i = 0; i < this.text.length; ++i) {
-                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
+//                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
             }
         }
     }
 </script>
 <style scoped lang="scss">
-    @import '../scss/plugins/include-media';
+    @import '../../scss/plugins/include-media';
     #contact{
         .container{
             display: flex;
@@ -120,36 +118,48 @@
                     flex-basis: 50%;
                     padding: 10px 15px;
                     font-size: 1.25em;
+                    img{
+                        max-width: 300px;
+                        border-radius: 50%;
+                        height: auto;
+                    }
                     &:first-of-type{
                         flex-basis: 33%;
                     }
-                    >span{
-                        font-weight: 300;
-                        /deep/ img{
-                            max-width: 300px;
-                            border-radius: 50%;
-                            height: auto;
-                        }
-                        >p{
-                            margin-top: 10px;
-
-                        }
-                        line-height: 1.25em;
-                        &:first-of-type{
-                            display: block;
-                            font-weight: 700;
-                            font-size: 1em;
-                            margin-bottom: 10px;
-                            padding-bottom: 10px;
-                        }
+                    .contact-quest{
+                        display: block;
+                        font-weight: 700;
+                        font-size: 1em;
+                        margin-bottom: 5px;
+                        padding-bottom: 10px;
+                    }
+                    .contact-ans{
                         /deep/ a{
                             text-decoration: none;
-                            color: #373737;
+                            color: white;
                             border-bottom: 1px dotted;
                             transition: .2s ease-out;
                             &:hover{
                                 border-bottom-style: solid;
                             }
+                        }
+                        padding: 10px;
+                        margin-left: -10px;
+                        font-size: .85em;
+                        display: inline-block;
+                        background: #373737;
+                        line-height: 1.5em;
+                        color: white;
+                        border-radius: 5px;
+                        position: relative;
+                        &:before{
+                            position: absolute;
+                            content: '';
+                            left: 15px;
+                            border-right: 5px solid transparent;
+                            border-left: 5px solid transparent;
+                            border-bottom: 5px solid #373737;
+                            top: -5px;
                         }
                     }
                     &:first-of-type{
@@ -173,16 +183,16 @@
                     background-repeat: no-repeat;
                     border-radius: 50%;
                     &.github{
-                        background-image: url('../assets/img/github_icon.svg');
+                        background-image: url('../../assets/img/github_icon.svg');
                     }
                     &.linkedin{
-                        background-image: url('../assets/img/linkedin_icon.svg');
+                        background-image: url('../../assets/img/linkedin_icon.svg');
                     }
                     &.mail{
-                        background-image: url('../assets/img/mail_icon.svg');
+                        background-image: url('../../assets/img/mail_icon.svg');
                     }
                     &.phone{
-                        background-image: url('../assets/img/phone_icon.svg');
+                        background-image: url('../../assets/img/phone_icon.svg');
                     }
                     &:before{
                         content: attr(data-cta);
