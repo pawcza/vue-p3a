@@ -96,7 +96,6 @@ section{
 .title-wrapper{
   span{
     display: inline-block;
-    margin: 0 .5px;
     &.break{
       width: 5px;
       display: inline-block;
@@ -116,10 +115,10 @@ h2{
   position: relative;
   @include media('<phone'){
     text-align: center;
+    padding: 0 0 5px 0;
   }
   @include media('<340px'){
     font-size: 1.75em;
-    padding: 0 0 5px 10px;
     margin-bottom: 10px;
   }
 }

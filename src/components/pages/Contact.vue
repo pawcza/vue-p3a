@@ -40,10 +40,11 @@
         data(){
             return{
                 text: 'Get in touch',
+                runningTime: 0,
                 info: [
                     {
-                        quest: "That's all great so where do we start?",
-                        ans: "Did you like my work? Do you have any questions? <br/>Feel free to <a href='mailto:paw.czarniecki@gmail.com'>contact me here</a> or using any of the social sites below.</br>Let's create something awesome together :-)"
+                        quest: "That's all great but where do we start?",
+                        ans: "Did you like my work? Do you have any questions? Feel free to <a class='contact-link' href='mailto:hello@pawcza.codes'>contact me here</a> or using any of the social sites below.</br></br>Let's create something awesome together :-)"
                     }
                 ],
                 socials: [
@@ -58,7 +59,7 @@
                         cta: 'LinkedIn profile'
                     },
                     {
-                        link: 'mailto:paw.czarniecki@gmail.com',
+                        link: 'mailto:hello@pawcza.codes',
                         name: 'mail',
                         cta: 'Email me'
                     },
@@ -84,12 +85,16 @@
                                     matched++;
                                     target.classList.add('matched');
                                 }
+                            } else if(that.runningTime > 2500){
+                                target.innerHTML = that.text[x];
+                                matched++;
                             } else {
                                 target.innerHTML = that.chars.substring(random, random + 1)
                             }
                         }
                         (matched === that.text.length) ? clearInterval(letterInterval) : '';
-                    }, 50)
+                        that.runningTime += 50;
+                    }, 50);
             }
         },
         created () {
@@ -97,7 +102,7 @@
         },
         mounted(){
             for (let i = 0; i < this.text.length; ++i) {
-//                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
+                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
             }
         }
     }
@@ -114,17 +119,17 @@
             justify-content: space-between;
             .contact-wrapper{
                 display: flex;
-                >.contact-article{
+                .contact-article{
                     flex-basis: 50%;
                     padding: 10px 15px;
                     font-size: 1.25em;
-                    img{
+                    &:first-of-type{
+                        flex-basis: 33%;
+                    }
+                    .contact-img{
                         max-width: 300px;
                         border-radius: 50%;
                         height: auto;
-                    }
-                    &:first-of-type{
-                        flex-basis: 33%;
                     }
                     .contact-quest{
                         display: block;
@@ -134,7 +139,17 @@
                         padding-bottom: 10px;
                     }
                     .contact-ans{
-                        /deep/ a{
+                        font-weight: 300;
+                        padding: 10px;
+                        margin-left: -10px;
+                        background: #373737;
+                        color: white;
+                        display: inline-block;
+                        position: relative;
+                        border-radius: 5px;
+                        line-height: 1.25em;
+                        font-size: .85em;
+                        /deep/ .contact-link{
                             text-decoration: none;
                             color: white;
                             border-bottom: 1px dotted;
@@ -143,28 +158,14 @@
                                 border-bottom-style: solid;
                             }
                         }
-                        padding: 10px;
-                        margin-left: -10px;
-                        font-size: .85em;
-                        display: inline-block;
-                        background: #373737;
-                        line-height: 1.5em;
-                        color: white;
-                        border-radius: 5px;
-                        position: relative;
                         &:before{
-                            position: absolute;
                             content: '';
                             left: 15px;
-                            border-right: 5px solid transparent;
-                            border-left: 5px solid transparent;
-                            border-bottom: 5px solid #373737;
+                            position: absolute;
                             top: -5px;
-                        }
-                    }
-                    &:first-of-type{
-                        >span{
-                            border: none;
+                            border-left: 5px solid transparent;
+                            border-right: 5px solid transparent;
+                            border-bottom: 5px solid #373737;
                         }
                     }
                 }
@@ -232,13 +233,30 @@
                     .contact-article{
                         span{
                             font-size: .85em;
-                            &:first-of-type{
-                                padding-bottom: 5px;
-                                margin-bottom: 5px;
+                        }
+                        .contact-quest{
+                            padding-bottom: 10px;
+                            margin-bottom: 10px;
+                        }
+                        .contact-ans{
+                            margin-left: -15px;
+                            padding: 15px;
+                            border-radius: 0;
+                            width: 100%;
+                            transform: none;
+                            background: rgba(31, 31, 31, 0.75);
+                            /deep/ .contact-link{
+                                border: none;
+                                font-weight: 700;
                             }
-                            /deep/ img{
-                                max-width: 150px;
+                            &:before{
+                                left: 50%;
+                                transform: translateX(-50%);
+                                border-bottom-color: rgba(31,31,31,.75);
                             }
+                        }
+                        .contact-img{
+                            max-width: 150px;
                         }
                     }
                 }
@@ -248,8 +266,12 @@
                 }
             }
             @include media('<350px'){
-                /deep/ img{
-                    max-width: 125px!important;
+                .contact-wrapper{
+                    .contact-article{
+                        .contact-img{
+                            max-width: 125px!important;
+                        }
+                    }
                 }
             }
         }

@@ -1,25 +1,24 @@
 <template>
     <div class='project-container'
          :style="project.style"
-         :class='project.classy'
-         v-touch:swipe.left="nextProject"
-         v-touch:swipe.right="prevProject">
-        <div class='project-box' v-touch="resizeProject" v-lazy:background-image="project.img">
+         :class='project.classy'>
+        <div class='project-box' v-touch.self.stop="resizeProject" v-touch:swipe.left="nextProject"
+             v-touch:swipe.right="prevProject" v-lazy:background-image="project.img">
             <img class="project-logo" :src="project.img.logo" alt="">
             <div class='project-hover' :style="{}">
-                <div class="full-screen-btn">
+                <div class="full-screen-btn" v-touch.self="resizeProject">
                     <span></span><span></span><span></span><span></span>
                 </div>
             </div>
-            <transition-group name="staggered-fade" tag="ul" class="project-content" :style="{width: project.width}" @click.prevent="" @before-enter="beforeEnter" @enter="enter" @leave="leave" v-touch.stop="">
+            <transition-group name="staggered-fade" tag="ul" class="project-content" :style="{width: project.width}" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                 <li v-for="(content, index) in project.content" :key="'key_' + index" v-if="project.active" :class="index" :data-index="Object.keys(project.content).indexOf(index)">
                     <span v-if="index !== 'tech'" v-html="content"></span>
                     <span v-else v-for="elem in content">{{elem}}</span>
                 </li>
             </transition-group>
             <div class="project-controls">
-                <span class="prev" v-if="project.index !== 'first'" v-touch.stop="prevProject"> Previous</span>
-                <span class="next" v-if="project.index !== 'last'" v-touch.stop="nextProject">Next </span>
+                <span class="prev" v-if="project.index !== 'first'" v-touch.self.stop="prevProject"> Previous</span>
+                <span class="next" v-if="project.index !== 'last'" v-touch.self.stop="nextProject">Next </span>
             </div>
         </div>
     </div>
@@ -91,7 +90,7 @@
 <style scoped lang="scss">
     @import '../../scss/plugins/include-media';
     .project-container{
-        padding: 10px;
+        padding: 0px;
         flex-basis: 33.3%;
         opacity: 1;
         left: 0;
@@ -104,12 +103,12 @@
             overflow: hidden;
             cursor: pointer;
             position: absolute;
-            border-radius: 5px;
-            width: calc(100% - 20px);
-            outline: 1px solid #ebebeb;
+            border-radius: 0;
+            width: calc(100%);
+            border: 1px solid #cdcdcd;
             background-size: cover;
             background-position: center;
-            height: calc(100% - 20px);
+            height: calc(100%);
             will-change: box-shadow;
             transition: box-shadow .3s ease-out;
             .project-logo{
@@ -119,6 +118,7 @@
                 top: 50%;
                 fill: white;
                 transform: translate(-50%, -50%);
+                pointer-events: none;
             }
             .project-hover{
                 position: absolute;
@@ -187,15 +187,16 @@
                 box-sizing: border-box;
                 position: relative;
                 height: calc(100% + 2px);
+                cursor: default;
                 top: -1px;
                 opacity: 0;
                 will-change: transform, opacity;
                 transform: translateX(-100%);
                 z-index: 2;
                 background: white;
-                /*background: linear-gradient(100deg, #ffffff, rgba(255,255,255,.5), transparent);*/
-                -webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
-                clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
+                background: linear-gradient(to right, #ffffff, rgba(255,255,255,.5), transparent);
+                /*-webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);*/
+                /*clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);*/
                 >*{
                     margin: .75em 0;
                     display: flex;
@@ -246,6 +247,7 @@
                     }
                 }
                 .desc{
+                    font-size: 1.05em;
                     &:before{
                         background-image: url('../../assets/img/about_icon.svg');
                         content: 'About: ';
@@ -275,7 +277,7 @@
             }
             .project-controls{
                 position: absolute;
-                z-index: 5;
+                z-index: 15;
                 box-sizing: border-box;
                 bottom: 18px;
                 width:100%;
@@ -314,7 +316,7 @@
                         }
                         &:after{
                             content: '\2192';
-                            border-color: white;
+                            border-color: #ebebeb;
                             background: white;
                             color: #373737;
                         }
@@ -402,12 +404,13 @@
         }
         @include media('<tablet'){
             flex-basis: 50%;
-            padding: 0;
+            padding: 5px;
             .project-box{
                 box-shadow: none!important;
-                border-radius: 0;
-                height: 100%;
-                width: 100%;
+                border-radius: 5px;
+                height: calc(100% - 10px);
+                width: calc(100% - 10px);
+                outline: none;
                 .project-hover{
                     .full-screen-btn{
                         right: 7px !important;
@@ -430,13 +433,15 @@
                     padding: 20px 15px;
                     border-radius: 0;
                     width: 100% !important;
-                    background: white;
-                    opacity: .85;
+                    background: rgba(255,255,255,.75);
                     -webkit-clip-path: none;
                     clip-path: none;
                     /deep/ .project-link{
                         display: inline-block;
                         padding: 10px 0;
+                    }
+                    .name{
+                        padding-right: 30px;
                     }
                     .tech{
                         span{
@@ -449,6 +454,7 @@
                 }
                 .project-controls{
                     padding: 15px !important;
+                    bottom: 0 !important;
                     span{
                         transform: none!important;
                     }

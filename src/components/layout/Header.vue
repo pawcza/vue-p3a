@@ -11,7 +11,8 @@
         data () {
             return {
                 text: 'Paweł Czarniecki',
-                chars: ''
+                chars: '',
+                runningTime: 0
             }
         },
         created () {
@@ -36,13 +37,17 @@
                                 matched++;
                                 target.classList.add('matched');
                             }
+                        } else if(that.runningTime > 2500){
+                            target.innerHTML = that.text[x];
+                            matched++;
                         } else {
                             target.innerHTML = that.chars.substring(random, random + 1)
                         }
                     }
                     (matched === that.text.length) ? clearInterval(letterInterval) : ''
                     that.$refs.loader.style.width = matched / that.text.length * 100 + '%'
-                }, 50)
+                    that.runningTime += 50;
+                }, 50);
             }
         }
     }
@@ -74,7 +79,7 @@
             position: relative;
             display: inline-block;
             text-align: center;
-            margin: 0 10px;
+            margin: 0 5px;
             &.break{
                 opacity: 0;
             }
@@ -86,7 +91,7 @@
                 display: none;
             }
             .letter_container {
-                margin: 0 5px;
+                margin: 0 2px;
                 &.break {
                     width: 100%;
                     height: 10px;

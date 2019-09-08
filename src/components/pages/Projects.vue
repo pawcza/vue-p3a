@@ -25,6 +25,7 @@
         data: function() {
             return {
                 text: 'My recent projects',
+                runningTime: 0,
                 projects: [
                     {
                         style: {}, classy:[], active: false, width: null, index: 'first',
@@ -116,18 +117,21 @@
                         for (let x = 0; x < that.text.length; ++x) {
                             let random = Math.floor(Math.random() * that.chars.length),
                                 target = that.$refs.title.children[x];
-
                             if (target.innerHTML === that.text[x]) {
                                 if (!target.classList.contains('matched')) {
                                     matched++;
                                     target.classList.add('matched');
                                 }
+                            } else if(that.runningTime > 2500){
+                                target.innerHTML = that.text[x];
+                                matched++;
                             } else {
                                 target.innerHTML = that.chars.substring(random, random + 1)
                             }
                         }
                         (matched === that.text.length) ? clearInterval(letterInterval) : '';
-                    }, 50)
+                        that.runningTime += 50;
+                    }, 50);
             },
             getResizeValues(){
                 this.$data.small = this.$children[0].$el.getBoundingClientRect();
