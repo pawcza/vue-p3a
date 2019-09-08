@@ -6,7 +6,7 @@
            :class="{ active: section.isActive }"
            :data-index="index"
            :data-text="section.name"
-           @click="goSection('#' + section.name, index)">
+           @click="goSection(section.name, index)">
             {{section.name}}
             <span class="nav-shadow">{{section.name}}</span>
         </a>
@@ -28,9 +28,8 @@
                     if(transform >= -100 && transform <= 100) {
                         targets[i].style.transform = `translateX(${transform}%)`;
                         targets[i].style.opacity = '1';
-                    } else{
+                    } else {
                         targets[i].style.opacity = '0';
-
                     }
                 }
             },

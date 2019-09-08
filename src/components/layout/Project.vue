@@ -90,25 +90,25 @@
 <style scoped lang="scss">
     @import '../../scss/plugins/include-media';
     .project-container{
-        padding: 0px;
+        padding: 10px;
         flex-basis: 33.3%;
         opacity: 1;
         left: 0;
         top: 0;
         pointer-events: none;
-        box-sizing:border-box;
+        box-sizing: border-box;
         transform: translateX(0) translateY(0);
         will-change: transform, opacity, width, height;
         .project-box{
             overflow: hidden;
             cursor: pointer;
             position: absolute;
-            border-radius: 0;
-            width: calc(100%);
+            border-radius: 5px;
+            width: calc(100% - 20px);
             border: 1px solid #cdcdcd;
             background-size: cover;
             background-position: center;
-            height: calc(100%);
+            height: calc(100% - 20px);
             will-change: box-shadow;
             transition: box-shadow .3s ease-out;
             .project-logo{
@@ -156,6 +156,16 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: stretch;
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate3d(-50%, -50%, 0);
+                        height: 200%;
+                        width: 200%;
+                        background: transparent;
+                    }
                     &:hover{
                         transform: scale(1.2);
                     }
@@ -405,6 +415,9 @@
         @include media('<tablet'){
             flex-basis: 50%;
             padding: 5px;
+
+            &.active {
+            }
             .project-box{
                 box-shadow: none!important;
                 border-radius: 5px;

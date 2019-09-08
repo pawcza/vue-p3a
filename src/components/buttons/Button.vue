@@ -1,12 +1,14 @@
 <template>
-    <div class="intro_btn" @click="goSection()">
+    <div class="intro_btn" @click="handleClick()">
         Check my projects out
     </div>
 </template>
 <script>
     export default {
         methods:{
-            goSection(target){this.$emit('goSection', target)}
+            handleClick() {
+                this.$emit('goSection')
+            }
         }
     }
 

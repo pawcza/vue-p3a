@@ -2,7 +2,7 @@
     <section>
         <header-component class="load-hidden" v-scroll-reveal="{ delay: 250, beforeReveal: playText}" ></header-component>
         <copy class="load-hidden" v-scroll-reveal="{ delay: 300 }" ></copy>
-        <button-component class="load-hidden" v-scroll-reveal="{ delay: 350 }" @goSection="goSection('#projects')"></button-component>
+        <button-component class="load-hidden" v-scroll-reveal="{ delay: 350 }" @goSection="goSection('projects')"></button-component>
     </section>
 </template>
 <script>
@@ -15,11 +15,12 @@
             HeaderComponent,
             Copy
         },
+
         methods:{
             playText(){
-                console.log(this);
                 this.$children[0].playText();
             },
+
             goSection(target){
                 this.$parent.goSection(target);
             }
