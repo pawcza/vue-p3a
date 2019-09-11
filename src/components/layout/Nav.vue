@@ -62,7 +62,6 @@
         display: flex;
         justify-content: center;
         z-index: 99;
-        border-radius: 5px;
         overflow: hidden;
         a{
             cursor: pointer;
@@ -73,7 +72,6 @@
             text-decoration: none;
             overflow: hidden;
             background: rgba(255,255,255,.25);
-            font-weight: 700;
             transform: translateY(-50px);
             opacity: 0;
             .nav-shadow{
@@ -83,7 +81,6 @@
                 opacity: 0;
                 z-index: 2;
                 left: 0;
-                border-radius: 5px;
                 will-change: transform;
                 top: 0;
                 padding: 10px;

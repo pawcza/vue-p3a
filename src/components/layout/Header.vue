@@ -2,7 +2,8 @@
     <div id="text_container" ref="title">
         <div class="text_loader" ref="loader"></div>
         <div v-for="letter in text" class="letter_container" :data-letter="letter"
-             :class="{break : letter === ' '}">{{letter}}
+             :class="{break : letter === ' '}">
+            {{ letter }}
         </div>
     </div>
 </template>
@@ -19,35 +20,34 @@
             this.chars = this.text + '#!£$&2345678<>/<>/<>/'
         },
         mounted () {
+            let targetWidth = this.$refs.title.children[1].offsetWidth
             for (let i = 0; i < this.text.length; ++i) {
-//                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
+               this.$refs.title.children[i].style.width = `${targetWidth}px`
             }
         },
         methods: {
             playText () {
-                let that = this,
-                    matched = 0,
-                    letterInterval = setInterval(function () {
-                    for (let x = 0; x < that.text.length; ++x) {
-                        let random = Math.floor(Math.random() * that.chars.length),
-                            target = that.$el.children[x + 1];
-
-                        if (target.innerHTML === that.text[x]) {
+                let matched = 0
+                let letterInterval = setInterval(() => {
+                    for (let x = 0; x < this.text.length; ++x) {
+                        let random = Math.floor(Math.random() * this.chars.length)
+                        let target = this.$el.children[x + 1]
+                        if (target.innerHTML === this.text[x]) {
                             if (!target.classList.contains('matched')) {
-                                matched++;
-                                target.classList.add('matched');
+                                ++matched
+                                target.classList.add('matched')
                             }
-                        } else if(that.runningTime > 2500){
-                            target.innerHTML = that.text[x];
-                            matched++;
+                        } else if (this.runningTime > 2500) {
+                            target.innerHTML = this.text[x]
+                            ++matched
                         } else {
-                            target.innerHTML = that.chars.substring(random, random + 1)
+                            target.innerHTML = this.chars.substring(random, random + 1)
                         }
                     }
-                    (matched === that.text.length) ? clearInterval(letterInterval) : ''
-                    that.$refs.loader.style.width = matched / that.text.length * 100 + '%'
-                    that.runningTime += 50;
-                }, 50);
+                    if (matched === this.text.length) clearInterval(letterInterval)
+                    this.$refs.loader.style.width = matched / this.text.length * 100 + '%'
+                    this.runningTime += 50
+                }, 50)
             }
         }
     }
@@ -68,12 +68,13 @@
         .text_loader {
             position: absolute;
             width: 0;
-            bottom: 50px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            height: 10px;
+            height: 100%;
+            transform: translate(-50%, -50%);
             transition: 230ms width cubic-bezier(0.75, 0, 0, 1);
-            background: #37373715;
+            mask-image: linear-gradient(to right, transparent, black, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black, transparent);
         }
         .letter_container {
             position: relative;

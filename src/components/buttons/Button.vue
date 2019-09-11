@@ -1,6 +1,6 @@
 <template>
     <div class="intro_btn" @click="handleClick()">
-        Check my projects out
+        My recent work
     </div>
 </template>
 <script>
@@ -19,48 +19,47 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        border-radius: 30px;
         padding: 15px 20px;
         font-weight: 700;
-        border: 1px solid #373737;
-        background: #222;
+        background: #373737;
         color: white;
         transition: background .2s ease-in-out, color .1s ease-out;
         bottom: 50px;
         cursor: pointer;
+        border: 1px solid #373737;
         text-align: center;
         &:after{
             position: absolute;
-            content: '';
-            width: calc(100% + 10px);
-            height: calc(100% + 10px);
-            border: 1px solid #222;
-            border-radius: 30px;
-            top: -7px;
+            content: 'Check it out';
+            vertical-align: middle;
+            color: #373737;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #373737;
+            top: 8px;
+            padding: 15px 20px;
+            box-sizing: border-box;
             transition: .2s ease-out;
-            left: -7px;
+            left: 8px;
         }
         &:before{
             position: absolute;
             content: '';
-            bottom: -15px;
+            bottom: -18px;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-top: 10px solid #222222;
+            border-top: 10px solid #373737;
             transition: .2s ease-out;
             left: 50%;
             transform: translateX(-50%);
         }
         &:hover{
             background: transparent;
-            color: #222;
+            color: transparent;
             &:after{
-                transform: scale(1.2);
-                opacity: 0;
-            }
-            &:before{
-                transform: translate(-50%, 5px);
-                opacity: 0;
+                background: #373737;
+                color: white;
             }
         }
         @include media('<phone'){

@@ -18,6 +18,7 @@
             </transition-group>
             <div class="project-controls">
                 <span class="prev" v-if="project.index !== 'first'" v-touch.self.stop="prevProject"> Previous</span>
+                <span class="keyboard-info">Navigate using arrow keys (← / →)</span>
                 <span class="next" v-if="project.index !== 'last'" v-touch.self.stop="nextProject">Next </span>
             </div>
         </div>
@@ -103,9 +104,7 @@
             overflow: hidden;
             cursor: pointer;
             position: absolute;
-            border-radius: 5px;
             width: calc(100% - 20px);
-            border: 1px solid #cdcdcd;
             background-size: cover;
             background-position: center;
             height: calc(100% - 20px);
@@ -204,9 +203,9 @@
                 transform: translateX(-100%);
                 z-index: 2;
                 background: white;
-                background: linear-gradient(to right, #ffffff, rgba(255,255,255,.5), transparent);
-                /*-webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);*/
-                /*clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);*/
+                background: linear-gradient(90deg, #ffffff, rgba(255,255,255,.85), transparent);
+                -webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
+                clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
                 >*{
                     margin: .75em 0;
                     display: flex;
@@ -220,8 +219,8 @@
                     }
                 }
                 .tech, .desc, .btn{
-                    font-size: .85em;
-                    line-height: 1.66em;
+                    font-size: .85em!important;
+                    line-height: 1.66em!important;
                     &:before{
                         opacity: .65;
                         margin-right: 100%;
@@ -245,8 +244,6 @@
                         box-sizing: border-box;
                         margin: 3px 3px 0 0;
                         padding: 3px 10px;
-                        border-radius: 5px;
-                        transform: skewX(-15deg);
                         color: white;
                         background: #373737;
                         border: 1px solid #1f1f1f;
@@ -306,7 +303,6 @@
                     &:before, &:after{
                         padding: 7px;
                         border: 1px solid #373737;
-                        border-radius: 5px;
                         width: 32px;
                         display: inline-block;
                         box-sizing: border-box;
@@ -332,6 +328,17 @@
                         }
                     }
                 }
+                .keyboard-info {
+                    padding: 10px;
+                    background: rgba(0, 0, 0, .5);
+                    color: white;
+                    margin: -10px 10px;
+                    &:before, &:after {
+                        opacity: 0;
+                        width: 0;
+                        height: 0;
+                    }
+                }
             }
             &:hover{
                 .project-hover{
@@ -350,6 +357,9 @@
             opacity: 1;
             z-index: 9;
             max-width: 100%;
+            .project-box {
+                box-shadow: 0 0 30px -5px rgba(0, 0, 0, .75);
+            }
             .project-hover{
                 opacity: 1;
                 pointer-events: none;
@@ -420,7 +430,6 @@
             }
             .project-box{
                 box-shadow: none!important;
-                border-radius: 5px;
                 height: calc(100% - 10px);
                 width: calc(100% - 10px);
                 outline: none;
@@ -444,7 +453,6 @@
                 }
                 .project-content{
                     padding: 20px 15px;
-                    border-radius: 0;
                     width: 100% !important;
                     background: rgba(255,255,255,.75);
                     -webkit-clip-path: none;
@@ -468,6 +476,9 @@
                 .project-controls{
                     padding: 15px !important;
                     bottom: 0 !important;
+                    .keyboard-info {
+                        display: none;
+                    }
                     span{
                         transform: none!important;
                     }

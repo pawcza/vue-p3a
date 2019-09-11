@@ -8,16 +8,15 @@
             </h2>
             <div class="contact-wrapper">
                 <article class="contact-article">
-                        <img class="contact-img" title='Me!' v-scroll-reveal="{ delay: 300 }" v-lazy="require('../../assets/img/me.png')">
+                        <img class="contact-img" title='Me!' v-scroll-reveal="{ delay: 300, origin: 'left', distance: '50px' }" v-lazy="require('../../assets/img/me.png')">
                 </article>
                 <article class="contact-article"
-                         v-for="block in info"
-                         v-scroll-reveal="{ delay: 300 }">
+                         v-for="block in info">
                     <span class="contact-quest"
-                          v-scroll-reveal="{ delay: 350 }"
+                          v-scroll-reveal="{ delay: 350, origin: 'right', distance: '50px'}"
                           v-if="block.quest">{{block.quest}}</span>
                     <span class="contact-ans"
-                          v-scroll-reveal="{ delay: 400 }"
+                          v-scroll-reveal="{ delay: 400, origin: 'right', distance: '50px' }"
                           v-html="block.ans"></span>
                 </article>
             </div>
@@ -72,37 +71,36 @@
             }
         },
         methods: {
-            playText () {
-                let that = this,
-                    matched = 0,
-                    letterInterval = setInterval(function () {
-                        for (let x = 0; x < that.text.length; ++x) {
-                            let random = Math.floor(Math.random() * that.chars.length),
-                                target = that.$refs.title.children[x];
-
-                            if (target.innerHTML === that.text[x]) {
-                                if (!target.classList.contains('matched')) {
-                                    matched++;
-                                    target.classList.add('matched');
-                                }
-                            } else if(that.runningTime > 2500){
-                                target.innerHTML = that.text[x];
-                                matched++;
-                            } else {
-                                target.innerHTML = that.chars.substring(random, random + 1)
-                            }
-                        }
-                        (matched === that.text.length) ? clearInterval(letterInterval) : '';
-                        that.runningTime += 50;
-                    }, 50);
-            }
+          playText () {
+            let matched = 0
+            let letterInterval = setInterval(() => {
+              for (let x = 0; x < this.text.length; ++x) {
+                let random = Math.floor(Math.random() * this.chars.length)
+                let target = this.$refs.title.children[x]
+                if (target.innerHTML === this.text[x]) {
+                  if (!target.classList.contains('matched')) {
+                    ++matched
+                    target.classList.add('matched')
+                  }
+                } else if (this.runningTime > 2500) {
+                  target.innerHTML = this.text[x]
+                  ++matched
+                } else {
+                  target.innerHTML = this.chars.substring(random, random + 1)
+                }
+              }
+              if (matched === this.text.length) clearInterval(letterInterval)
+              this.runningTime += 50
+            }, 50)
+          }
         },
         created () {
             this.chars = this.text + '#!£$&2345678<>/<>/<>/';
         },
         mounted(){
+            let targetWidth = this.$refs.title.children[0].offsetWidth
             for (let i = 0; i < this.text.length; ++i) {
-                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
+            this.$refs.title.children[i].style.width = `${targetWidth}px`
             }
         }
     }
@@ -139,9 +137,9 @@
                         padding-bottom: 10px;
                     }
                     .contact-ans{
-                        font-weight: 300;
-                        padding: 10px;
-                        margin-left: -10px;
+                        font-weight: 400;
+                        padding: 15px 20px;
+                        margin-left: -15px;
                         background: #373737;
                         color: white;
                         display: inline-block;
@@ -160,7 +158,7 @@
                         }
                         &:before{
                             content: '';
-                            left: 15px;
+                            left: 20px;
                             position: absolute;
                             top: -5px;
                             border-left: 5px solid transparent;

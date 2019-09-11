@@ -22,9 +22,9 @@
         components: {
             Project
         },
-        data: function() {
+        data: function () {
             return {
-                text: 'My recent projects',
+                text: 'Projects',
                 runningTime: 0,
                 projects: [
                     {
@@ -95,7 +95,7 @@
                         content: {
                             name: 'Aleksandra Koleśniak',
                             desc: 'Minimalistic graphics design portfolio website to display arts in a grid. Lazy-loading images and page load speed was a priority in this project',
-                            tech: ['VanillaJS', 'SCSS', 'isotope.js, Wordpress'],
+                            tech: ['VanillaJS', 'SCSS', 'isotope.js', 'Wordpress'],
                             btn: "<a class='project-link' rel='noopener' target='_blank' href='http://aleksandrakolesniak.com'>aleksandrakolesniak.com</a>"
                         }
                     },
@@ -122,31 +122,49 @@
                 transRegex: /\.*translateX\((.*)%\)/i,
             }
         },
+        created () {
+        this.chars = this.text + '#!£$&2345678<>/<>/<>///#######';
+        },
+        mounted () {
+        this.getResizeValues()
+        let targetWidth = this.$refs.title.children[0].offsetWidth
+        for (let i = 0; i < this.text.length; ++i) {
+          this.$refs.title.children[i].style.width = `${targetWidth}px`
+        }
+        window.addEventListener('keydown', e => {
+          let index = this.projects.indexOf(this.active)
+          if (e.key === 'ArrowRight' && index < this.projects.length - 1) {
+            this.$children[index + 1].resizeProject()
+          }
+          if (e.key === 'ArrowLeft' && index > 0) {
+            this.$children[index - 1].resizeProject()
+          }
+        })
+        },
         methods: {
             playText () {
-                let that = this,
-                    matched = 0,
-                    letterInterval = setInterval(function () {
-                        for (let x = 0; x < that.text.length; ++x) {
-                            let random = Math.floor(Math.random() * that.chars.length),
-                                target = that.$refs.title.children[x];
-                            if (target.innerHTML === that.text[x]) {
+                let matched = 0
+                let letterInterval = setInterval(() => {
+                        for (let x = 0; x < this.text.length; ++x) {
+                            let random = Math.floor(Math.random() * this.chars.length)
+                            let target = this.$refs.title.children[x]
+                            if (target.innerHTML === this.text[x]) {
                                 if (!target.classList.contains('matched')) {
-                                    matched++;
-                                    target.classList.add('matched');
+                                    ++matched
+                                    target.classList.add('matched')
                                 }
-                            } else if(that.runningTime > 2500){
-                                target.innerHTML = that.text[x];
-                                matched++;
+                            } else if (this.runningTime > 2500) {
+                                target.innerHTML = this.text[x]
+                                ++matched
                             } else {
-                                target.innerHTML = that.chars.substring(random, random + 1)
+                                target.innerHTML = this.chars.substring(random, random + 1)
                             }
                         }
-                        (matched === that.text.length) ? clearInterval(letterInterval) : '';
-                        that.runningTime += 50;
-                    }, 50);
+                        if (matched === this.text.length) clearInterval(letterInterval)
+                        this.runningTime += 50
+                    }, 50)
             },
-            getResizeValues(){
+            getResizeValues () {
                 this.$data.small = this.$children[0].$el.getBoundingClientRect();
                 this.$data.big = {
                     width: this.$el.querySelectorAll('.project-wrapper')[0].offsetWidth + 'px',
@@ -154,11 +172,11 @@
                     left: 0,
                     top: 0,
                     position: 'absolute'
-                };
+                }
             },
-            setBoxValues(){
-                this.positions = [];
-                for (let x = 0; x<this.$children.length; ++x){
+            setBoxValues () {
+                this.positions = []
+                for (let x = 0; x < this.$children.length; ++x) {
                     this.projects[x].style = {
                         top: this.$children[x].$el.offsetTop + 'px',
                         left: this.$children[x].$el.offsetLeft + 'px',
@@ -166,15 +184,15 @@
                         height: this.$children[x].$el.offsetHeight + 'px',
                         position: 'absolute',
                         pointerEvents: 'all'
-                    };
-                    this.positions.push(this.projects[x].style);
-                    this.projects[x].width = this.positions[x].width;
+                    }
+                    this.positions.push(this.projects[x].style)
+                    this.projects[x].width = this.positions[x].width
                 }
             },
-            leftovers(target, index, boxes = this.$el.children){
+            leftovers (target, index, boxes = this.$el.children) {
                 let activeIndex = Array.from(boxes).findIndex(box => box.classList.contains('active'));
-                if(activeIndex !== index && this.active){
-                    this.projects[activeIndex].classy = [];
+                if (activeIndex !== index && this.active) {
+                    this.projects[activeIndex].classy = []
                     Velocity(
                         boxes[activeIndex],
                         this.positions[activeIndex],
@@ -183,38 +201,36 @@
                             easing: 'easeOutQuart',
                             queue: false
                         }
-                    );
-                    this.projects[activeIndex].active = false;
-                    this.active = !this.active;
+                    )
+                    this.projects[activeIndex].active = false
+                    this.active = !this.active
                 }
             },
-            toggleActive(target){
-                if(target.project.classy.indexOf('active') !== -1){
-                    target.project.active = false;
-                    this.active = false;
-                    setTimeout( () => {
-                        target.project.classy = target.project.classy.filter(value => value !== 'active')
-                    }, this.delay);
+            toggleActive (target) {
+                if (target.project.classy.indexOf('active') !== -1) {
+                    target.project.active = false
+                    this.active = false
+                    target.project.classy = target.project.classy.filter(value => value !== 'active')
                 } else {
-                    this.active = target.project;
-                    target.project.active = true;
-                    target.project.classy.push('active');
+                    this.active = target.project
+                    target.project.active = true
+                    target.project.classy.push('active')
                 }
             },
-            resize(target, index, size){
-                this.playing = true;
-                let values;
-                if(size === 'small'){
+            resize (target, index, size) {
+                this.playing = true
+                let values
+                if (size === 'small') {
                     values = {
                         left: target.$el.style.left,
                         top: target.$el.style.top,
                         width: target.$el.style.width,
                         height: target.$el.style.height
-                    };
-                    target.$el.style.left = this.positions[index].left;
-                    target.$el.style.top = this.positions[index].top;
-                    target.$el.style.width = this.positions[index].width;
-                    target.$el.style.height = this.positions[index].height;
+                    }
+                    target.$el.style.left = this.positions[index].left
+                    target.$el.style.top = this.positions[index].top
+                    target.$el.style.width = this.positions[index].width
+                    target.$el.style.height = this.positions[index].height
                 } else {
                     values = {
                         left: target.$el.style.left,
@@ -222,55 +238,52 @@
                         width: target.$el.style.width,
                         height: target.$el.style.height
                     };
-                    target.$el.style.left = this.$data.big.left;
-                    target.$el.style.top = this.$data.big.top;
-                    target.$el.style.width = this.$data.big.width;
-                    target.$el.style.height = this.$data.big.height;
+                    target.$el.style.left = this.$data.big.left
+                    target.$el.style.top = this.$data.big.top
+                    target.$el.style.width = this.$data.big.width
+                    target.$el.style.height = this.$data.big.height
                 }
 
-                let targetX, targetY;
+                let targetX, targetY
                 Object.keys(values).forEach(value => {
                     if (value === 'width') {
-                       targetX =  parseInt(values[value]) / parseInt(target.$el.style.width);
+                       targetX = parseInt(values[value]) / parseInt(target.$el.style.width)
                     }
                     if (value === 'height') {
-                        targetY =  parseInt(values[value]) / parseInt(target.$el.style.height);
+                        targetY = parseInt(values[value]) / parseInt(target.$el.style.height)
                     }
-                });
-
-                target.$el.style.transform = `scaleX(${targetX}) scaleY(${targetY})`;
-
+                })
+                target.$el.style.transform = `scaleX(${targetX}) scaleY(${targetY})`
                 let origin = {
                     x: 'center',
                     y: 'center'
-                };
+                }
 
                 if (window.innerWidth < 768) {
                     if (Math.floor(index / this.rowSize) === 0) {
-                        index % this.rowSize === 0 ? origin.x = 'left' : origin.x = 'right';
-                        origin.y = 'top';
+                        index % this.rowSize === 0 ? origin.x = 'left' : origin.x = 'right'
+                        origin.y = 'top'
                     } else if (Math.floor(index / this.rowSize === 1)) {
-                        index % this.rowSize === 0 ? origin.x = 'left' : origin.x = 'right';
-                        origin.y = 'center';
+                        index % this.rowSize === 0 ? origin.x = 'left' : origin.x = 'right'
+                        origin.y = 'center'
                     } else {
-                        index % this.rowSize === 0 ? origin.x = 'left' : origin.x = 'right';
-                        origin.y = 'bottom';
+                        index % this.rowSize === 0 ? origin.x = 'left' : origin.x = 'right'
+                        origin.y = 'bottom'
                     }
                 } else {
                     if (index % this.rowSize === 0) {
-                        Math.floor(index / this.rowSize) === 0 ? origin.y = 'top' : origin.y = 'bottom';
+                        Math.floor(index / this.rowSize) === 0 ? origin.y = 'top' : origin.y = 'bottom'
                         origin.x = 'left'
                     } else if (index % this.rowSize === 1) {
-                        Math.floor(index / this.rowSize) === 0 ? origin.y = 'top' : origin.y = 'bottom';
+                        Math.floor(index / this.rowSize) === 0 ? origin.y = 'top' : origin.y = 'bottom'
                         origin.x = 'center'
                     } else {
-                        Math.floor(index / this.rowSize) === 0 ? origin.y = 'top' : origin.y = 'bottom';
+                        Math.floor(index / this.rowSize) === 0 ? origin.y = 'top' : origin.y = 'bottom'
                         origin.x = 'right'
                     }
                 }
-
-                target.$el.style.transformOrigin = `${origin.x} ${origin.y}`;
-
+                target.$el.style.transformOrigin = `${origin.x} ${origin.y}`
+                this.$parent.goSection('projects')
                 Velocity(
                     target.$el,
                     {
@@ -282,31 +295,31 @@
                         easing: 'easeOutQuart',
                         queue: false,
                         complete: () => {
-                            this.playing = false;
-                            target.$el.style.transform = 'translateX(0%) translateY(0%)';
+                            this.playing = false
+                            target.$el.style.transform = 'translateX(0%) translateY(0%)'
                         }
                     }
-                );
+                )
             },
-            transform(index, boxes){
+            transform (index, boxes) {
                 for (let x = 0; x < boxes.length; ++x) {
-                    let tx = 0, ty = 0;
+                    let tx = 0
+                    let ty = 0
                     if (Math.floor(index / this.rowSize) > 0 && this.active && x !== index) {
-                        ty = -1;
+                        ty = -1
                     } else if (this.active && x !== index) {
-                        ty = 1;
+                        ty = 1
                     } else if (x !== index) {
-                        ty = 0;
+                        ty = 0
                     }
                     if (Math.floor(index / this.rowSize) === Math.floor(x / this.rowSize) && x !== index && this.active) {
-                        ty = 0;
+                        ty = 0
                         if (Math.floor(index % this.rowSize) === 1) {
-                            (x > index) ? tx = 1 : tx = -1;
+                            (x > index) ? tx = 1 : tx = -1
                         } else {
-                            (x > index) ? tx = 2 : tx = -2;
+                            (x > index) ? tx = 2 : tx = -2
                         }
                     }
-
                     Velocity(
                         boxes[x],
                         {
@@ -319,28 +332,8 @@
                             queue: false
                         }
                     )
-
                 }
             }
-        },
-        created () {
-            this.chars = this.text + '#!£$&2345678<>/<>/<>/';
-        },
-        mounted(){
-            this.getResizeValues();
-            for (let i = 0; i < this.text.length; ++i) {
-//                this.$refs.title.children[i].style.width = this.$refs.title.children[i].offsetWidth + 'px'
-            }
-
-            window.addEventListener('keydown', e => {
-                let index = this.projects.indexOf(this.active);
-                if(e.key === 'ArrowRight' && index < this.projects.length - 1){
-                    this.$children[index + 1].resizeProject();
-                }
-                if(e.key === 'ArrowLeft' && index > 0){
-                    this.$children[index - 1].resizeProject();
-                }
-            });
         }
     }
 </script>
