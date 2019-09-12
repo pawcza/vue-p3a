@@ -3,7 +3,7 @@ body,html{
   overflow-y: scroll;
   overflow-y: overlay;
   color: #373737;
-  font-family: 'Space Mono', sans-serif;
+  font-family: 'Share Tech Mono', sans-serif;
   font-size: 1em;
   @include media('<phone'){
     font-size: 14px;
@@ -23,10 +23,29 @@ body,html{
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   background-color: #F5F5F5;
 }
-body{
-  &:before{
-    background-image: url('../assets/img/bg.png');
-    background-attachment: fixed;
+.background_container {
+  .preload {
+    background-image: url('../assets/img/bg_preload.png');
+    background-size: cover;
+    background-position: center;
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100vh;
+    opacity: 1;
+    width: 100vw;
+    transition: opacity .25s ease-out;
+    will-change: opacity;
+    @include media('<tablet'){
+      background-image: url('../assets/img/bg_mid_preload.png');
+    }
+    @include media('<phone'){
+      background-image: url('../assets/img/bg_min_preload.png');
+    }
+  }
+  .big {
     background-size: cover;
     background-position: center;
     content: '';
@@ -36,11 +55,16 @@ body{
     z-index: -1;
     height: 100vh;
     width: 100vw;
-    @include media('<tablet'){
-      background-image: url('../assets/img/bg_mid.png');
+    transition: opacity .25s ease-out;
+    will-change: opacity;
+    opacity: 0;
+  }
+  &.bg_loaded {
+    .preload {
+      opacity: 0;
     }
-    @include media('<phone'){
-      background-image: url('../assets/img/bg_min.png');
+    .big {
+      opacity: 1;
     }
   }
 }

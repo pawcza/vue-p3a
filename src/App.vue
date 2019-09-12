@@ -1,5 +1,9 @@
 <template>
     <div class="app_container">
+        <div class="background_container">
+            <div class="preload"></div>
+            <div class="big"></div>
+        </div>
         <nav-component v-on:scroll.native="scrollNav($event)" :sections="sections" @goSection="goSection"></nav-component>
         <div class="puzzle_container">
             <intro ref="intro" class="active" id="intro"></intro>
@@ -16,6 +20,10 @@
     import Intro from './components/pages/Intro.vue'
     import Projects from './components/pages/Projects.vue'
     import Contact from './components/pages/Contact.vue'
+
+    import bgFull from './assets/img/bg.png'
+    import bgMid from './assets/img/bg_mid.png'
+    import bgMin from './assets/img/bg_min.png'
 
     export default {
         components: {
@@ -49,6 +57,15 @@
         },
 
         mounted() {
+            let bgImg = new Image()
+
+            bgImg.src = window.innerWidth < 1024 ? window.innerWidth < 768 ? bgMin : bgMid : bgFull
+            bgImg.onload = () => {
+              document.querySelector('.background_container .preload').style.opacity = '0'
+              document.querySelector('.background_container .big').style.backgroundImage = `url(${bgImg.src})`
+              document.querySelector('.background_container .big').style.opacity = '1'
+            }
+
             this.$data.active = Object.keys(this.$refs).filter(section => {
                 return this.$refs[section].$el.classList.contains('active');
             });
@@ -58,9 +75,6 @@
             window.addEventListener('scroll', this.$children[0].scrollNav, true);
 
             // window.addEventListener('resize', this.$children[2].resizeHandler, true);
-
-            // Set active section in case of page being loaded with id in the slug
-            (window.location.hash !== '') ? this.goSection(window.location.hash) : '';
         }
     }
 </script>

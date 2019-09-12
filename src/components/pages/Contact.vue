@@ -43,7 +43,7 @@
                 info: [
                     {
                         quest: "That's all great but where do we start?",
-                        ans: "Did you like my work? Do you have any questions? Feel free to <a class='contact-link' href='mailto:hello@pawcza.codes'>contact me here</a> or using any of the social sites below.</br></br>Let's create something awesome together :-)"
+                        ans: "Did you like my work? Do you have any questions? Feel free to <a class='contact-link' href='mailto:hello@pawcza.codes?Subject=New%20Exciting%20Opportunity%21%20&Body=Hello%2C%0A'>contact me here</a> or using any of the social sites below.</br></br>Let's create something awesome together :-)"
                     }
                 ],
                 socials: [
@@ -126,8 +126,10 @@
                     }
                     .contact-img{
                         max-width: 300px;
-                        border-radius: 50%;
                         height: auto;
+                        border: 10px solid #373737;
+                        position: relative;
+                        z-index: 1;
                     }
                     .contact-quest{
                         display: block;
@@ -138,13 +140,12 @@
                     }
                     .contact-ans{
                         font-weight: 400;
-                        padding: 15px 20px;
-                        margin-left: -15px;
+                        padding: 20px 25px;
+                        margin-left: -20px;
                         background: #373737;
                         color: white;
                         display: inline-block;
                         position: relative;
-                        border-radius: 5px;
                         line-height: 1.25em;
                         font-size: .85em;
                         /deep/ .contact-link{
@@ -158,12 +159,12 @@
                         }
                         &:before{
                             content: '';
-                            left: 20px;
+                            left: 25px;
                             position: absolute;
-                            top: -5px;
-                            border-left: 5px solid transparent;
-                            border-right: 5px solid transparent;
-                            border-bottom: 5px solid #373737;
+                            top: -10px;
+                            border-left: 10px solid transparent;
+                            border-right: 10px solid transparent;
+                            border-bottom: 10px solid lighten(#373737, 5%);
                         }
                     }
                 }
@@ -180,7 +181,6 @@
                     background-size: 20px;
                     background-position: center;
                     background-repeat: no-repeat;
-                    border-radius: 50%;
                     &.github{
                         background-image: url('../../assets/img/github_icon.svg');
                     }
@@ -203,12 +203,11 @@
                         width: -moz-max-content;
                         transform: translate(-50%, -10px);
                         padding: 10px;
-                        font-family: 'Montserrat';
+                        font-family: 'Share Tech Mono';
                         color: white;
                         font-size: .85em;
                         background: #373737;
                         opacity: 0;
-                        border-radius: 30px;
                         pointer-events: none;
                     }
                     &:hover{
@@ -254,7 +253,7 @@
                             }
                         }
                         .contact-img{
-                            max-width: 150px;
+                            max-width: 200px;
                         }
                     }
                 }

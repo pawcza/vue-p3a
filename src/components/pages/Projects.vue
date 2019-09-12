@@ -24,7 +24,7 @@
         },
         data: function () {
             return {
-                text: 'Projects',
+                text: 'Recent Projects',
                 runningTime: 0,
                 projects: [
                     {
@@ -140,6 +140,19 @@
             this.$children[index - 1].resizeProject()
           }
         })
+        window.onpopstate = () => {
+          if (window.location.hash === '') {
+            let id = this.projects.map((project, index) => project.active === true ? index : '').filter(project => project !== '')[0]
+            this.$children[id] ? this.$children[id].resizeProject() : ''
+          } else if (this.projects.map((project, index) => {
+            return project.content.name.toLowerCase().split(' ').join('-') === window.location.hash
+          })) {
+            let id = this.projects.map((project, index) => {
+              return `#${project.content.name.toLowerCase().split(' ').join('-')}` === window.location.hash ? index : ''
+            }).filter(project => project !== '')[0]
+            this.$children[id].resizeProject()
+          }
+        }
         },
         methods: {
             playText () {
@@ -165,12 +178,13 @@
                     }, 50)
             },
             getResizeValues () {
-                this.$data.small = this.$children[0].$el.getBoundingClientRect();
+                let bounding = this.$el.querySelectorAll('.project-wrapper')[0].getBoundingClientRect()
+                this.$data.small = this.$children[0].$el.getBoundingClientRect()
                 this.$data.big = {
-                    width: this.$el.querySelectorAll('.project-wrapper')[0].offsetWidth + 'px',
-                    height: this.$el.querySelectorAll('.project-wrapper')[0].offsetHeight + 2 + 'px',
-                    left: 0,
-                    top: 0,
+                    width: window.innerWidth < 768 ? `${bounding.width - 70}px` : `${bounding.width + 2}px`,
+                    height: window.innerWidth < 768 ? `${bounding.height - 70}px` : `${bounding.height + 2}px`,
+                    left: window.innerWidth < 768 ? 35 : 0,
+                    top: window.innerWidth < 768 ? 35 : 0,
                     position: 'absolute'
                 }
             },
@@ -211,10 +225,20 @@
                     target.project.active = false
                     this.active = false
                     target.project.classy = target.project.classy.filter(value => value !== 'active')
+                    if (history.pushState) {
+                      history.pushState(null, null, `#`)
+                    } else {
+                      location.hash = ``
+                    }
                 } else {
                     this.active = target.project
                     target.project.active = true
                     target.project.classy.push('active')
+                    if (history.pushState) {
+                    history.pushState(null, null, `#${target.project.content.name.toLowerCase().split(' ').join('-')}`)
+                    } else {
+                    location.hash = `#${target.project.content.name.toLowerCase().split(' ').join('-')}`
+                    }
                 }
             },
             resize (target, index, size) {
@@ -227,21 +251,43 @@
                         width: target.$el.style.width,
                         height: target.$el.style.height
                     }
-                    target.$el.style.left = this.positions[index].left
-                    target.$el.style.top = this.positions[index].top
                     target.$el.style.width = this.positions[index].width
                     target.$el.style.height = this.positions[index].height
+                    if (window.innerWidth < 768) {
+                        Velocity(
+                            target.$el,
+                            {
+                                left: [this.positions[index].left, target.$el.style.left],
+                                top: [this.positions[index].top, target.$el.style.top]
+                            },
+                            { duration: this.delay, easing: 'easeOutQuart' }
+                        )
+                    } else {
+                        target.$el.style.left = this.positions[index].left
+                        target.$el.style.top = this.positions[index].top
+                    }
                 } else {
                     values = {
                         left: target.$el.style.left,
                         top: target.$el.style.top,
                         width: target.$el.style.width,
                         height: target.$el.style.height
-                    };
-                    target.$el.style.left = this.$data.big.left
-                    target.$el.style.top = this.$data.big.top
+                    }
                     target.$el.style.width = this.$data.big.width
                     target.$el.style.height = this.$data.big.height
+                    if (window.innerWidth < 768) {
+                    Velocity(
+                        target.$el,
+                        {
+                            left: [this.$data.big.left, target.$el.style.left],
+                            top: [this.$data.big.top, target.$el.style.top]
+                        },
+                        { duration: this.delay, easing: 'easeOutQuart' }
+                    )
+                    } else {
+                        target.$el.style.left = this.$data.big.left
+                        target.$el.style.top = this.$data.big.top
+                    }
                 }
 
                 let targetX, targetY
@@ -305,20 +351,24 @@
                 for (let x = 0; x < boxes.length; ++x) {
                     let tx = 0
                     let ty = 0
-                    if (Math.floor(index / this.rowSize) > 0 && this.active && x !== index) {
+                    if (window.innerWidth < 768) {
+                      // TODO: Handle sideways boxes transform on mobile
+                    } else {
+                      if (Math.floor(index / this.rowSize) > 0 && this.active && x !== index) {
                         ty = -1
-                    } else if (this.active && x !== index) {
+                      } else if (this.active && x !== index) {
                         ty = 1
-                    } else if (x !== index) {
+                      } else if (x !== index) {
                         ty = 0
-                    }
-                    if (Math.floor(index / this.rowSize) === Math.floor(x / this.rowSize) && x !== index && this.active) {
+                      }
+                      if (Math.floor(index / this.rowSize) === Math.floor(x / this.rowSize) && x !== index && this.active) {
                         ty = 0
                         if (Math.floor(index % this.rowSize) === 1) {
-                            (x > index) ? tx = 1 : tx = -1
+                          (x > index) ? tx = 1 : tx = -1
                         } else {
-                            (x > index) ? tx = 2 : tx = -2
+                          (x > index) ? tx = 2 : tx = -2
                         }
+                      }
                     }
                     Velocity(
                         boxes[x],

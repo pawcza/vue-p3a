@@ -203,7 +203,7 @@
                 transform: translateX(-100%);
                 z-index: 2;
                 background: white;
-                background: linear-gradient(90deg, #ffffff, rgba(255,255,255,.85), transparent);
+                background: linear-gradient(130deg, #ffffff, rgba(255,255,255,.85), transparent);
                 -webkit-clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
                 clip-path: polygon(0% 0%, 100% 0, 75% 100%, 0% 100%);
                 >*{
@@ -269,13 +269,16 @@
                     span{
                         /deep/ .project-link{
                             transition: .2s ease-out;
-                            color: #373737;
+                            background: #373737;
+                            padding: 10px;
+                            color: white;
+                            margin-top: 10px;
+                            display: inline-block;
                             text-decoration: none;
-                            border-bottom: 1px dashed #373737;
                         }
                         &:hover{
                             /deep/ .project-link{
-                                border-bottom: 1px solid #373737;
+                                background: lighten(#373737, 10%);
                             }
                         }
                     }
@@ -427,9 +430,12 @@
             padding: 5px;
 
             &.active {
+                /*width: calc(100% - 70px) !important;*/
+                /*height: calc(100% - 70px) !important;*/
+                /*left: 35px!important;*/
+                /*top: 35px!important;*/
             }
             .project-box{
-                box-shadow: none!important;
                 height: calc(100% - 10px);
                 width: calc(100% - 10px);
                 outline: none;
@@ -463,6 +469,7 @@
                     }
                     .name{
                         padding-right: 30px;
+                        font-size: 1.5em!important;
                     }
                     .tech{
                         span{
@@ -470,7 +477,7 @@
                         }
                     }
                     li:not(.name){
-                        font-size: 1em!important;
+                        font-size: .8em!important;
                     }
                 }
                 .project-controls{
